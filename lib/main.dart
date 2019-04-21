@@ -65,6 +65,8 @@ class Home extends StatelessWidget {
             Icon(Icons.directions_bike, size: 128.0, color: Colors.black12),
           ],
         ),
+        drawer: Text("这是左边抽屉"), //* 默认隐藏的左边的边栏(抽屉), 可以用扫动的手势显示
+        endDrawer: Text("这是右边抽屉"), //* 右边的边栏(抽屉), 可以用扫动的手势显示
       ),
     );
   }
