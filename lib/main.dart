@@ -32,16 +32,11 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100], //* 整体的背景颜色
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: "导航条", //? 长按显示出来
-            onPressed: () => debugPrint("导航条按钮 被点击"),
-          ),
           title: Text('Step_Flutter'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
-              tooltip: "搜索",
+              tooltip: "搜索", //? 长按显示出来
               onPressed: () => debugPrint("搜索框 被点击"),
             ),
           ],
@@ -71,7 +66,7 @@ class Home extends StatelessWidget {
             DrawerHeader( //* 头部
               child: Text("header".toUpperCase()),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.grey[100],
               ),
             ),
             ListTile(
