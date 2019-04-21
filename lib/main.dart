@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'demo/listview_demo.dart';
-import 'demo/hello_demo.dart';
+// import 'demo/listview_demo.dart';
+// import 'demo/hello_demo.dart';
+
 
 void main() =>  runApp(App());
 
@@ -29,7 +30,7 @@ class Home extends StatelessWidget {
         title: Text('Step_Flutter'),
         elevation: 0.0, //* 导航栏设置 下面的阴影为0
       ),
-      body: ListViewDemo(),
+      body: null,
     );
   }
 }
