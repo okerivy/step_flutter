@@ -8,6 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
       home: Home(),
       theme: ThemeData(
         //* 主要样布的颜色
