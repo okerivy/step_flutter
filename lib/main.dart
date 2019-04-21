@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'demo/listview_demo.dart';
-// import 'demo/hello_demo.dart';
+import 'demo/listview_demo.dart';
+import 'demo/hello_demo.dart';
 import 'demo/drawer_demo.dart';
+import 'demo/bottom_navigation_bar_demo.dart';
 
 void main() =>  runApp(App());
 
@@ -56,36 +57,16 @@ class Home extends StatelessWidget {
         ),
         body: TabBarView( //? 3, tabbarView
           children: <Widget>[
-            Icon(Icons.local_florist, size: 128.0, color: Colors.black12),
-            Icon(Icons.change_history, size: 128.0, color: Colors.black12),
+            ListViewDemo(),
+            Hello(),
+            // Icon(Icons.local_florist, size: 128.0, color: Colors.black12),
+            // Icon(Icons.change_history, size: 128.0, color: Colors.black12),
             Icon(Icons.directions_bike, size: 128.0, color: Colors.black12),
           ],
         ),
         drawer: DrawerDemo(),
         // endDrawer: Text("这是右边抽屉"), //* 右边的边栏(抽屉), 可以用扫动的手势显示
-        bottomNavigationBar: BottomNavigationBar(
-          //* 导航栏数目超过等于 4个, 类型会发生变化, 所以 下面是全白色,可以设置下类型修正
-          type: BottomNavigationBarType.fixed, 
-          fixedColor: Colors.black, //* 激活颜色
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              title: Text("Explore"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              title: Text("History"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              title: Text("List"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Person"),
-            ),
-          ],
-        )
+        bottomNavigationBar: BottomNavigationBarDemo()
       ),
     );
   }
