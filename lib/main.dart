@@ -17,6 +17,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.yellow,
         highlightColor: Color.fromRGBO(255, 255, 255, 0.5), //* 按住按钮 高亮背景颜色
         splashColor: Colors.white70, //* 按住时的水波纹的颜色
+        // scaffoldBackgroundColor: Colors.red,
       ),
     );
   }
@@ -62,6 +63,29 @@ class Home extends StatelessWidget {
         ),
         drawer: DrawerDemo(),
         // endDrawer: Text("这是右边抽屉"), //* 右边的边栏(抽屉), 可以用扫动的手势显示
+        bottomNavigationBar: BottomNavigationBar(
+          //* 导航栏数目超过等于 4个, 类型会发生变化, 所以 下面是全白色,可以设置下类型修正
+          type: BottomNavigationBarType.fixed, 
+          fixedColor: Colors.black, //* 激活颜色
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              title: Text("Explore"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              title: Text("History"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              title: Text("List"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text("Person"),
+            ),
+          ],
+        )
       ),
     );
   }
