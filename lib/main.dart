@@ -27,7 +27,19 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100], //* 整体的背景颜色
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: "导航条",
+          onPressed: () => debugPrint("导航条按钮 被点击"),
+        ),
         title: Text('Step_Flutter'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            tooltip: "搜索",
+            onPressed: () => debugPrint("搜索框 被点击"),
+          ),
+        ],
         elevation: 0.0, //* 导航栏设置 下面的阴影为0
       ),
       body: null,
