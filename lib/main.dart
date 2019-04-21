@@ -45,6 +45,10 @@ class Home extends StatelessWidget {
           ],
           elevation: 0.0, //* 导航栏设置 下面的阴影为0
           bottom: TabBar( //? 2, tabbar
+            unselectedLabelColor: Colors.black38, //* 标签未被选中的的颜色
+            indicatorColor: Colors.black54, //* 下面的指示器 横线的颜色
+            indicatorSize: TabBarIndicatorSize.label, //* 指示器 和标签的label 一样长
+            indicatorWeight: 2.0, //* 指示器的高度
             tabs: <Widget>[
               Tab(icon: Icon(Icons.local_florist)),
               Tab(icon: Icon(Icons.change_history)),
