@@ -15,6 +15,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         //* 主要样布的颜色
         primarySwatch: Colors.yellow,
+        highlightColor: Color.fromRGBO(255, 255, 255, 0.5), //* 按住按钮 高亮背景颜色
+        splashColor: Colors.white70, //* 按住时的水波纹的颜色
       ),
     );
   }
@@ -32,7 +34,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.menu),
-            tooltip: "导航条",
+            tooltip: "导航条", //? 长按显示出来
             onPressed: () => debugPrint("导航条按钮 被点击"),
           ),
           title: Text('Step_Flutter'),
