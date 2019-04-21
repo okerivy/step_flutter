@@ -76,20 +76,17 @@ class Home extends StatelessWidget {
                 color: Colors.lightBlue[200], 
                 size: 22.0,
               ),
-              // leading: Icon( //* 左边
-              //   Icons.message, 
-              //   color: Colors.lightBlue[200], 
-              //   size: 22.0,
-              // ),
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               title: Text("Favorite", textAlign: TextAlign.right,),
               trailing: Icon(Icons.favorite, color: Colors.lightBlue[200], size: 22.0),
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               title: Text("Settings", textAlign: TextAlign.right,),
               trailing: Icon(Icons.settings, color: Colors.lightBlue[200], size: 22.0),
-
+              onTap: () => Navigator.pop(context),
             ),
           ],
          
