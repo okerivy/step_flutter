@@ -9,15 +9,20 @@ class BasicDemo extends StatelessWidget {
       color: Colors.green[100],
       //* Container 区域默认是占满可用的区域, 如果想设置尺寸,可以把它放在row或colum里面
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             //* 现在Container的大小就是它包装的 子部件的尺寸
             child: Icon(Icons.check,size: 32.0,color: Colors.white),
-            color: Color.fromRGBO(3, 54, 255, 1.0),
-            padding: EdgeInsets.only(left: 24.0, right: 8.0),
+            // color: Color.fromRGBO(3, 54, 255, 1.0),
+            padding: EdgeInsets.only(left: 34.0, right: 8.0),
             margin: EdgeInsets.all(8.0),
             width: 90.0,
             height: 90.0,
+            //* 盒子装饰 背景颜色, 阴影, 边框之类的
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(3, 54, 255, 1.0),
+            ),
           )
         ],
       ),
