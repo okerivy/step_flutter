@@ -14,6 +14,7 @@ class BasicDemo extends StatelessWidget {
           Container(
             //* 现在Container的大小就是它包装的 子部件的尺寸
             child: Icon(Icons.check,size: 32.0,color: Colors.white),
+            //! Container 颜色 和 decoration颜色冲突
             // color: Color.fromRGBO(3, 54, 255, 1.0),
             padding: EdgeInsets.only(left: 34.0, right: 8.0),
             margin: EdgeInsets.all(8.0),
@@ -23,18 +24,29 @@ class BasicDemo extends StatelessWidget {
             decoration: BoxDecoration(
               color: Color.fromRGBO(3, 54, 255, 1.0),
               //* 边框样式
-              border: Border(
-                top: BorderSide(
-                  color: Colors.indigoAccent[100],
-                  width: 15.0,
-                  style: BorderStyle.solid
-                ),
-                bottom: BorderSide(
-                  color: Colors.cyanAccent[100],
-                  width: 5.0,
-                  style: BorderStyle.solid,
-                ),
+              // border: Border(
+              //   top: BorderSide(
+              //     color: Colors.indigoAccent[100],
+              //     width: 15.0,
+              //     style: BorderStyle.solid
+              //   ),
+              //   bottom: BorderSide(
+              //     color: Colors.cyanAccent[100],
+              //     width: 5.0,
+              //     style: BorderStyle.solid,
+              //   ),
+              // ),
+              border: Border.all(
+                color: Colors.cyanAccent[100],
+                width: 15.0,
+                style: BorderStyle.solid,
               ),
+              //* 如果是分别设置的Border, 不是用的 Border.all ,那么设置完 borderRadius 界面异常
+              borderRadius: BorderRadius.circular(16.0),
+              // borderRadius: BorderRadius.only(
+              //   topLeft: Radius.circular(26.0),
+              //   bottomRight: Radius.circular(50.0)
+              // ),
             ),
           )
         ],
