@@ -22,6 +22,19 @@ class BasicDemo extends StatelessWidget {
             //* 盒子装饰 背景颜色, 阴影, 边框之类的
             decoration: BoxDecoration(
               color: Color.fromRGBO(3, 54, 255, 1.0),
+              //* 边框样式
+              border: Border(
+                top: BorderSide(
+                  color: Colors.indigoAccent[100],
+                  width: 15.0,
+                  style: BorderStyle.solid
+                ),
+                bottom: BorderSide(
+                  color: Colors.cyanAccent[100],
+                  width: 5.0,
+                  style: BorderStyle.solid,
+                ),
+              ),
             ),
           )
         ],
