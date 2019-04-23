@@ -42,7 +42,7 @@ class BasicDemo extends StatelessWidget {
                 style: BorderStyle.solid,
               ),
               //* 如果是分别设置的Border, 不是用的 Border.all ,那么设置完 borderRadius 界面异常
-              borderRadius: BorderRadius.circular(16.0),
+              // borderRadius: BorderRadius.circular(16.0),
               // borderRadius: BorderRadius.only(
               //   topLeft: Radius.circular(26.0),
               //   bottomRight: Radius.circular(50.0)
@@ -54,8 +54,10 @@ class BasicDemo extends StatelessWidget {
                   color: Color.fromRGBO(16, 20, 188, 1.0),
                   blurRadius: 15.0, //* 阴影的模糊程度
                   spreadRadius: 2, //* 阴影的扩散程度
-                )
+                ),
               ],
+              //* 在圆形的盒子上 不能设置圆角效果 borderRadius
+              shape: BoxShape.circle,
             ),
           )
         ],
