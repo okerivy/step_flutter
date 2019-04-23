@@ -6,7 +6,21 @@ class BasicDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green[100],
+      // color: Colors.green[100],
+      //* decoration 和 color不能同时设置
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage('https://resources.ninghao.org/images/say-hello-to-barry.jpg'),
+          alignment: Alignment.topCenter,
+          // repeat: ImageRepeat.repeatY, //* 图像的重复模式
+          fit: BoxFit.cover, //* 图像的填充模式
+          //* 图像的滤镜
+          colorFilter: ColorFilter.mode(
+            Colors.indigoAccent[400].withOpacity(0.5),
+            BlendMode.hardLight, 
+          )
+        ),
+      ),
       //* Container 区域默认是占满可用的区域, 如果想设置尺寸,可以把它放在row或colum里面
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
