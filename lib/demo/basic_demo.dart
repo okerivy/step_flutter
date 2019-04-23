@@ -58,6 +58,23 @@ class BasicDemo extends StatelessWidget {
               ],
               //* 在圆形的盒子上 不能设置圆角效果 borderRadius
               shape: BoxShape.circle,
+              //* 镜像的渐变
+              // gradient: RadialGradient(
+              //   colors: [
+              //     Color.fromRGBO(7, 102, 255, 1.0),
+              //     Color.fromRGBO(3, 28, 128, 1.0),
+              //   ]
+              // ),
+              //* 线性的渐变
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromRGBO(7, 102, 255, 1.0),
+                  Color.fromRGBO(3, 28, 128, 1.0),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter
+              ),
+
             ),
           )
         ],
