@@ -5,6 +5,13 @@ class BasicDemo extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    return RichTextDemo();
+  }
+}
+
+class RichTextDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
         text: "RichText",
