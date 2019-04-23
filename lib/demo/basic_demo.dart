@@ -38,7 +38,7 @@ class BasicDemo extends StatelessWidget {
               // ),
               border: Border.all(
                 color: Colors.cyanAccent[100],
-                width: 15.0,
+                width: 5.0,
                 style: BorderStyle.solid,
               ),
               //* 如果是分别设置的Border, 不是用的 Border.all ,那么设置完 borderRadius 界面异常
@@ -47,6 +47,15 @@ class BasicDemo extends StatelessWidget {
               //   topLeft: Radius.circular(26.0),
               //   bottomRight: Radius.circular(50.0)
               // ),
+              //* 添加阴影
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(6.0, 8.0),
+                  color: Color.fromRGBO(16, 20, 188, 1.0),
+                  blurRadius: 15.0, //* 阴影的模糊程度
+                  spreadRadius: 2, //* 阴影的扩散程度
+                )
+              ],
             ),
           )
         ],
