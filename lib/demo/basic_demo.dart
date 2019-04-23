@@ -5,7 +5,26 @@ class BasicDemo extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return TextDemo();
+    return RichText(
+      text: TextSpan(
+        text: "RichText",
+        style: TextStyle(
+          color: Colors.deepPurpleAccent,
+          fontSize: 34.0,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w100,
+        ),
+        children: [
+          TextSpan(
+            text: ".app",
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.green,
+            )
+          )
+        ],
+      ),
+    );
   }
 }
 
