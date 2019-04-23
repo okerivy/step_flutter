@@ -5,10 +5,32 @@ class BasicDemo extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return RichTextDemo();
+    return Container(
+      color: Colors.green[100],
+      //* Container 区域默认是占满可用的区域, 如果想设置尺寸,可以把它放在row或colum里面
+      child: Row(
+        children: <Widget>[
+          Container(
+            //* 现在Container的大小就是它包装的 子部件的尺寸
+            child: Icon(Icons.check,size: 32.0,color: Colors.white),
+            color: Color.fromRGBO(3, 54, 255, 1.0),
+            padding: EdgeInsets.only(left: 24.0, right: 8.0),
+            margin: EdgeInsets.all(8.0),
+            width: 90.0,
+            height: 90.0,
+          )
+        ],
+      ),
+
+    );
   }
 }
 
+//* Container 一个界面, 需要背景颜色或图像,一定的尺寸,边距,圆角,边框之类的效果
+
+
+
+//* RichText 一行显示多种样式的文本
 class RichTextDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,6 +57,8 @@ class RichTextDemo extends StatelessWidget {
   }
 }
 
+
+//* Text 显示一段文本
 class TextDemo extends StatelessWidget {
   final TextStyle _textStyle = TextStyle(
     fontSize: 16.0,
