@@ -16,8 +16,8 @@ class BasicDemo extends StatelessWidget {
           fit: BoxFit.cover, //* 图像的填充模式
           //* 图像的滤镜
           colorFilter: ColorFilter.mode(
-            Colors.indigoAccent[400].withOpacity(0.5),
-            BlendMode.hardLight, 
+            Colors.indigoAccent[400].withOpacity(0.5), //? 滤镜的颜色
+            BlendMode.hardLight, //? 滤镜的混合模式
           )
         ),
       ),
