@@ -10,9 +10,11 @@ class LayoutDemo extends StatelessWidget {
         //? spaceBetween 把 剩余的空间分配在小部件的中间(上下顶着边)
         //? spaceEvenly 把 剩余的空间平均分配在小部件的之间
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // Fixme: 如何让三个按钮居中, 顶部对齐
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           IconBadge(Icons.pool),
-          IconBadge(Icons.beach_access),
+          IconBadge(Icons.beach_access, size:64.0),
           IconBadge(Icons.airplanemode_active),
         ],
       ),
