@@ -6,6 +6,10 @@ class LayoutDemo extends StatelessWidget {
     //* 使用Column 包装 IconBadge, 会显示成IconBadge的原本设置的尺寸, 不会像Container那样显示全屏
     return Container(
       child: Row(
+        //? spaceAround 把 剩余的空间分配在小部件的周围
+        //? spaceBetween 把 剩余的空间分配在小部件的中间(上下顶着边)
+        //? spaceEvenly 把 剩余的空间平均分配在小部件的之间
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           IconBadge(Icons.pool),
           IconBadge(Icons.beach_access),
