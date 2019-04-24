@@ -12,9 +12,9 @@ class LayoutDemo extends StatelessWidget {
           //? 如果不设置SizeBoxe 大小 width, 那么就是里面子部件的大小
           //? 单独使用 sizebox 可以用来 设置两个部件之间的间隔
           SizedBox(
+            width: 200.0,
+            height: 150.0,
             child: Container(
-              width: 200.0,
-              height: 150.0,
               decoration: BoxDecoration(
                 color: Color.fromRGBO(3, 54, 255, 1.0),
               ),
@@ -23,9 +23,9 @@ class LayoutDemo extends StatelessWidget {
           ),
           SizedBox(height: 32.0,),
           SizedBox(
+            width: 100.0,
+            height: 100.0,
             child: Container(
-              width: 100.0,
-              height: 100.0,
               decoration: BoxDecoration(
                 color: Color.fromRGBO(3, 54, 255, 1.0),
               ),
