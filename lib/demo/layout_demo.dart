@@ -4,9 +4,45 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return LayoutStackDemo();
+    return LayoutAspectRatioDemo();
   }
 }
+
+
+class LayoutTestDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("data"),
+        ]
+      ),
+    );
+  }
+}
+
+
+class LayoutAspectRatioDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: 16.0/9.0,
+            child: Container(
+              color: Color.fromRGBO(3, 54, 255, 1.0),
+            ),
+          ),
+        ]
+      ),
+    );
+  }
+}
+
 
 class LayoutStackDemo extends StatelessWidget {
   @override
