@@ -4,7 +4,74 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return LayoutSizebox();
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //* Stack 可以放一摞小部件, 这些小部件会叠加到一块
+          Stack(
+            //* Stack 第一个sizebox是最大的,相当于成了底板
+            //? stack 里面的部件,可以相对底板进行设置
+            alignment: Alignment.topLeft,
+            children: <Widget>[
+              SizedBox(
+                width: 200.0,
+                height: 250.0,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(3, 54, 255, 1.0),
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  child: Icon(Icons.border_all, color: Colors.white, size: 32.0),
+                ),
+              ),
+              SizedBox(height: 32.0,),
+              SizedBox(
+                width: 100.0,
+                height: 100.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(136, 78, 18, 1.0),
+                    shape: BoxShape.circle, // 圆形
+                    // 镜像渐变
+                    gradient: RadialGradient(
+                      colors: [
+                        Color.fromRGBO(143, 102, 255, 1.0),
+                        Color.fromRGBO(3, 54, 255, 1.0),
+                      ]
+                    )
+                  ),
+                  child: Icon(Icons.brightness_2, color: Colors.white, size: 32.0),
+                ),
+              ),
+              //* Stack 可以用一些 Positioned部件 设置具体的位置
+              //* Positioned部件 设置的位置是相对于 Stack 最大的部件
+              Positioned(
+                right: 20.0,
+                top: 20.0,
+                child: Icon(Icons.ac_unit, color: Colors.white, size: 32.0),
+              ),
+              Positioned(
+                right: 10.0,
+                top: 50.0,
+                child: Icon(Icons.ac_unit, color: Colors.white, size: 32.0),
+              ),
+              Positioned(
+                right: 10.0,
+                top: 90.0,
+                child: Icon(Icons.ac_unit, color: Colors.white, size: 32.0),
+              ),
+              Positioned(
+                right: 50.0,
+                top: 50.0,
+                child: Icon(Icons.ac_unit, color: Colors.white, size: 32.0),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
