@@ -4,7 +4,7 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return LayoutConstrainedBoxDemo();
+    return LayoutRowDemoForAlignment();
   }
 }
 
@@ -17,6 +17,96 @@ class LayoutTestDemo extends StatelessWidget {
         children: <Widget>[
           Text("data"),
         ]
+      ),
+    );
+  }
+}
+
+
+// Fixme: 如何让三个按钮 整体底部偏右, 三个按钮 底部对齐
+class LayoutRowDemoForAlignment extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //* 使用Column 包装 IconBadge, 会显示成IconBadge的原本设置的尺寸, 不会像Container那样显示全屏
+    
+    // 内容 : 绿色大View 里面放 一个红色View,  红色View 里面放三个 蓝色图片Icon
+          // 1. 绿色大View : Container 
+          // 2. 红色View : Row 或者叫做 Container  //! Row是没有颜色的 红色由内部的 Container 决定
+                //? 这里说明一点 因为 Row的 children中只有一个子部件 Container,
+                //? 所以 Row的颜色就是由 子部件 Container 决定的. 
+                //? 这里称 Row 为 红色View 其实是有错误的, 如果 children 设置两个Container 就能知晓了
+                // 使用Row 包装, 会显示成里面内容原本设置的尺寸, 不会像Container那样显示全屏(全行) 
+                //? 也可以放Column (对齐方式会有改变)
+          // 3. 三个蓝色图片整体是 Row 的一行 : Container //! (红色)
+                //? 因为 Container在 Row 的子部件, 所以 Row 是宽度是由 Container决定的. //* 这就是使用Row 包装的好处和目的
+                //? Row 不能设置颜色, 所以 Container的红色 即是 Row的颜色 
+          // 4. 三个蓝色图片: 左右排列 用 Row
+          // 5. 一个蓝色图片: Icon
+    // 对齐1: 红色View 在 绿色父view 底部偏右位置
+          // 1. 底部: 绿色View底部
+                // 绿色 View 的 alignment: Alignment.bottomCenter 
+                //? bottomCenter  bottomLeft  bottomRight 等同 都是Bottom
+          // 2. 偏右: 绿色View 偏右
+                // 因为 红色view 是Row, 默认是整行, 所以 左右的位置 无法用绿色父view的 bottomRight确定 
+                // bottomRight 其实只能确定 Bottom  //? 如果里面是 Column, 那么 bottomLeft 只能确定 Left
+                // 所以 偏右 的位置 只能用 Row的主轴确定 mainAxisAlignment: MainAxisAlignment.end 
+                // 因为 红色view 是Row 里面只有一个Cell ,并且Row 是横排, 所以 end 就是偏右
+    // 对齐2: 三个蓝色图片Icon整体 在红色父view 中间偏左位置
+          // 1. 也是一个 Container 包含一个 Row, //! 分析如上
+          // 2. 红色view是 Container, 三个蓝色图片Icon整体 是一个Row
+          // 3. 中间: 红色View 中间
+                // 红色 View 的 alignment: Alignment.centerRight
+                //? centerRight  centerLeft  center  都等同于 等同 center
+          // 3. 偏左: 红色View 偏左
+              // 因为三个蓝色整体 是Row, 而 Row 默认是横向滚动, 占满整行 
+              // 所以 红色 Container 的 alignment 的左右调整 并不对 Row 起作用
+              // 所以 偏左 的位置 只能用 Row的主轴确定 mainAxisAlignment: MainAxisAlignment.start 决定 
+              // 因为 Row 有三个Icon , 所以 .start就是 在Row 中 偏左开始
+    // 对齐2: 三个蓝色图片Icon 底部对齐, 中间有空隙
+          // 1. 因为 Row 是横排的, 主轴是决定 多个Cell 横向排列, 交叉轴是决定 多个cell 竖直方向的对齐方式
+          // 2. 所以 想要底部对齐, 其实就想 竖直方向对齐 设置  crossAxisAlignment: CrossAxisAlignment.start,
+          // 3. 想要中间有空隙, 可以设置  主轴 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // 但是这样 是整个cell重新分配空间
+          // 4. 也可以 中间加 Sizebox 设置间隙
+    return Container(
+      alignment: Alignment.bottomCenter,
+      color: Colors.green,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        //? 这个交叉轴 没有作用吗? //! 是的在只有一个Cell 这种情况下, 无论是Row 还是 Column 都不起作用
+        //? 如果  children 设置成两个 Container 就起作用了
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            height: 150,
+            width: 220,
+            color: Colors.red,
+            // 外面从中间对齐
+            alignment: Alignment.centerRight,
+            // margin: const EdgeInsets.only(
+            //   right: 10.0,
+            // ),
+            // Todo: 1 三个蓝色图标是Row
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              //? 这个交叉轴 没有作用吗?  //! 有作用, 因为  是多个Cell 高度不同
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                IconBadge(Icons.pool, size:20.0),
+                SizedBox(width: 5.0),
+                IconBadge(Icons.beach_access, size:40.0),
+                SizedBox(width: 5.0),
+                IconBadge(Icons.airplanemode_active, size:30.0),
+              ],
+            ),
+          ),
+          Container(
+            height: 60,
+            width: 20,
+            color: Colors.black,
+          ),
+          
+        ],
       ),
     );
   }
@@ -217,8 +307,8 @@ class IconBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Icon(icon, size:size, color: Colors.white),
-      width: size + 60,
-      height: size + 60,
+      width: size + 20,
+      height: size + 20,
       color: Color.fromRGBO(3, 54, 255, 1.0),
     );
   }
