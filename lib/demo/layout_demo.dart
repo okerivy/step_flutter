@@ -4,10 +4,9 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return LayoutAspectRatioDemo();
+    return LayoutConstrainedBoxDemo();
   }
 }
-
 
 class LayoutTestDemo extends StatelessWidget {
   @override
@@ -24,6 +23,32 @@ class LayoutTestDemo extends StatelessWidget {
 }
 
 
+class LayoutConstrainedBoxDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //* 带限制宽高的盒子
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 100.0,
+              maxWidth: 100.0,
+            ),
+            child: Container(
+              color: Color.fromRGBO(3, 54, 255, 1.0),
+            ),
+          ),
+        ]
+      ),
+    );
+  }
+}
+
+
+
+
 class LayoutAspectRatioDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +56,7 @@ class LayoutAspectRatioDemo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          //* 宽高比的盒子
           AspectRatio(
             aspectRatio: 16.0/9.0,
             child: Container(
