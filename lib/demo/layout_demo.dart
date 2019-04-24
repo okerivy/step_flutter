@@ -15,6 +15,7 @@ class LayoutDemo extends StatelessWidget {
             width: 200.0,
             height: 150.0,
             child: Container(
+              alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 color: Color.fromRGBO(3, 54, 255, 1.0),
               ),
@@ -26,6 +27,7 @@ class LayoutDemo extends StatelessWidget {
             width: 100.0,
             height: 100.0,
             child: Container(
+              alignment: Alignment(1.0, -1.0),
               decoration: BoxDecoration(
                 color: Color.fromRGBO(3, 54, 255, 1.0),
               ),
