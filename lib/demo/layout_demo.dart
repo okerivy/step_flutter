@@ -4,6 +4,13 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
+    return LayoutStackDemo();
+  }
+}
+
+class LayoutStackDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +81,6 @@ class LayoutDemo extends StatelessWidget {
     );
   }
 }
-
 
 class LayoutSizebox extends StatelessWidget {
   @override
