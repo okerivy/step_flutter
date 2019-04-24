@@ -4,10 +4,14 @@ class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //* 使用Column 包装 IconBadge, 会显示成IconBadge的原本设置的尺寸, 不会像Container那样显示全屏
-    return Column(
-      children: <Widget>[
-        IconBadge(Icons.pool, size: 64.0,)
-      ],
+    return Container(
+      child: Row(
+        children: <Widget>[
+          IconBadge(Icons.pool),
+          IconBadge(Icons.beach_access),
+          IconBadge(Icons.airplanemode_active),
+        ],
+      ),
     );
   }
 }
