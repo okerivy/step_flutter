@@ -3,6 +3,17 @@ import 'package:step_flutter/model/post.dart';
 
 class ViewDemo extends StatelessWidget {
 
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewPageViewBuilderDemo();
+  }
+}
+
+
+class ViewPageViewBuilderDemo extends StatelessWidget {
+
   Widget _pageItemBuilder(BuildContext context, int index) {
     return Stack(
       children: <Widget>[
@@ -14,7 +25,7 @@ class ViewDemo extends StatelessWidget {
           ),
         ),
         //? 再叠加显示一些文字内容
-        //! 什么小部件 才能有 color 颜色属性????
+        //Fixme: 什么小部件 才能有 color 颜色属性????
         Positioned(
           bottom: 8.0,
           left: 8.0,
@@ -43,7 +54,6 @@ class ViewDemo extends StatelessWidget {
     );
   }
 }
-
 
 
 
