@@ -1,6 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/model/post.dart';
 
 class ViewDemo extends StatelessWidget {
+
+  Widget _pageItemBuilder(BuildContext context, int index) {
+    return Stack(
+      children: <Widget>[
+        //* SizeBox.expand 会让 SizeBox占满所有可用的空间
+        SizedBox.expand(
+          child: Image.network(
+            posts[index].imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+        //? 再叠加显示一些文字内容
+        //! 什么小部件 才能有 color 颜色属性????
+        Positioned(
+          bottom: 8.0,
+          left: 8.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                posts[index].title,
+                style: TextStyle(fontWeight: FontWeight.bold)
+              ),
+              Text(
+                posts[index].author
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      itemCount: posts.length,
+      itemBuilder: _pageItemBuilder,
+    );
+  }
+}
+
+
+
+
+class ViewPageViewDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
