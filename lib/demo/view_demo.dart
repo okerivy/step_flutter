@@ -25,7 +25,7 @@ class ViewPageViewBuilderDemo extends StatelessWidget {
           ),
         ),
         //? 再叠加显示一些文字内容
-        //Fixme: 什么小部件 才能有 color 颜色属性????
+        // Fixme: 什么小部件 才能有 color 颜色属性 ? 带问号, 就不能显示了图标 
         Positioned(
           bottom: 8.0,
           left: 8.0,
