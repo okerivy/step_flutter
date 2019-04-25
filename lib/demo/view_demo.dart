@@ -7,7 +7,47 @@ class ViewDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewPageViewBuilderDemo();
+    return GridView.count(
+      // GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
+      //* 主轴的方向: 就是滚动的方向
+      crossAxisCount: 3,
+      crossAxisSpacing: 16.0,
+      mainAxisSpacing: 16.0,
+      children: <Widget>[
+        Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        ),
+        Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        ),
+        Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        ),
+        Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        ),
+      ],
+    );
   }
 }
 
