@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:step_flutter/demo/basic_demo.dart';
 import 'package:step_flutter/demo/hello_demo.dart';
 import 'package:step_flutter/demo/layout_demo.dart';
+import 'package:step_flutter/demo/view_demo.dart';
 import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
 import 'demo/bottom_navigation_bar_demo.dart';
@@ -32,7 +33,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     //* 标签 Tab 需要三个东西 TabBar TabView TabController
     return DefaultTabController( //? 1, tabbarController
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: Colors.grey[100], //* 整体的背景颜色
         appBar: AppBar(
@@ -54,6 +55,7 @@ class Home extends StatelessWidget {
               Tab(icon: Icon(Icons.local_florist)),
               Tab(icon: Icon(Icons.change_history)),
               Tab(icon: Icon(Icons.directions_bike)),
+              Tab(icon: Icon(Icons.view_quilt)),
             ],
           ),
         ),
@@ -66,6 +68,7 @@ class Home extends StatelessWidget {
             // Icon(Icons.change_history, size: 128.0, color: Colors.black12),
             // Icon(Icons.directions_bike, size: 128.0, color: Colors.black12),
             LayoutDemo(),
+            ViewDemo(),
           ],
         ),
         drawer: DrawerDemo(),
