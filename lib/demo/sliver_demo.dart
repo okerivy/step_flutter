@@ -44,13 +44,43 @@ class SliverListDemo extends StatelessWidget {
               elevation: 14.0, //? 设置阴影
               clipBehavior: Clip.antiAlias, //? 剪切
               shadowColor: Colors.lightBlueAccent.withOpacity(0.5), //?设置阴影颜色
-              //? 如果相让item的尺寸是一个固定的比例的话, 用 AspectRatio 代替 Container
-              child: AspectRatio(
-                aspectRatio: 16/9,
-                child: Image.network(
-                  posts[index].imageUrl,
-                  fit: BoxFit.cover,
-                ),
+              //? 需要在图片上添加 文字, 所以给AspectRatio 包装一个 Stack
+              child: Stack(
+                children: <Widget>[
+                  //? 如果相让item的尺寸是一个固定的比例的话, 用 AspectRatio 代替 Container
+                  AspectRatio(
+                    aspectRatio: 16/9,
+                    child: Image.network(
+                      posts[index].imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 32.0,
+                    left: 32.0,
+                    //? 里面有两行文字, 所以用个Column 部件
+                    child: Column(
+                      //? 两行文字 左边对齐
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          posts[index].title,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white
+                          )
+                        ),
+                        Text(
+                          posts[index].author,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white
+                          )
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           );
