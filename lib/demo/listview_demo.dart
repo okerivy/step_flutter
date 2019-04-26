@@ -12,7 +12,13 @@ class ListViewDemo extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Image.network(posts[index].imageUrl),
+              AspectRatio(
+                aspectRatio: 16/9,
+                child: Image.network(
+                  posts[index].imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
               SizedBox(height: 16.0), //* 留点空间
               Text(
                 posts[index].title,
