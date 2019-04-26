@@ -11,7 +11,14 @@ class SliverDemo extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverGridDemo(),
+          //* SliverSafeArea 防止顶部被遮挡, 例如电池条或 iphoneX 横线
+          SliverSafeArea(
+            //* 因为 SliverGrid 不像 GridView 那样有 padding 属性, 所以,需要外面包一个 SliverPadding, 增加内 边距
+            sliver: SliverPadding(
+              padding: EdgeInsets.all(8.0),
+              sliver: SliverGridDemo(),
+            ),
+          )
         ],
       ),
     );
