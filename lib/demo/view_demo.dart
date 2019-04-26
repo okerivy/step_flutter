@@ -7,46 +7,26 @@ class ViewDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _buildTiles(int length) {
+      return List.generate(length, (int index) {
+        return Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item $index',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        );
+      });
+    }
     return GridView.count(
-      // GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
+      //? GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
       //* 主轴的方向: 就是滚动的方向
-      crossAxisCount: 3,
+      scrollDirection: Axis.horizontal, // 水平滚动
+      crossAxisCount: 2, //? 交叉轴有几个Item
       crossAxisSpacing: 16.0,
       mainAxisSpacing: 16.0,
-      children: <Widget>[
-        Container(
-          color: Colors.grey[300],
-          alignment: Alignment(0.0, 0.0),
-          child: Text(
-            'Item',
-            style: TextStyle(fontSize: 18.0, color: Colors.grey),
-          ),
-        ),
-        Container(
-          color: Colors.grey[300],
-          alignment: Alignment(0.0, 0.0),
-          child: Text(
-            'Item',
-            style: TextStyle(fontSize: 18.0, color: Colors.grey),
-          ),
-        ),
-        Container(
-          color: Colors.grey[300],
-          alignment: Alignment(0.0, 0.0),
-          child: Text(
-            'Item',
-            style: TextStyle(fontSize: 18.0, color: Colors.grey),
-          ),
-        ),
-        Container(
-          color: Colors.grey[300],
-          alignment: Alignment(0.0, 0.0),
-          child: Text(
-            'Item',
-            style: TextStyle(fontSize: 18.0, color: Colors.grey),
-          ),
-        ),
-      ],
+      children: _buildTiles(100),
     );
   }
 }
