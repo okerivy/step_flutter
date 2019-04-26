@@ -7,6 +7,14 @@ class ViewDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ViewGridCountDemo();
+  }
+}
+
+class ViewGridCountDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
     List<Widget> _buildTiles(int length) {
       return List.generate(length, (int index) {
         return Container(
@@ -19,18 +27,18 @@ class ViewDemo extends StatelessWidget {
         );
       });
     }
+
     return GridView.count(
       //? GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
       //* 主轴的方向: 就是滚动的方向
-      scrollDirection: Axis.horizontal, // 水平滚动
-      crossAxisCount: 2, //? 交叉轴有几个Item
+      // scrollDirection: Axis.horizontal, // 水平滚动
+      crossAxisCount: 3, //? 交叉轴有几个Item
       crossAxisSpacing: 16.0,
       mainAxisSpacing: 16.0,
       children: _buildTiles(100),
     );
   }
 }
-
 
 class ViewPageViewBuilderDemo extends StatelessWidget {
 
