@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:step_flutter/demo/basic_demo.dart';
 import 'package:step_flutter/demo/hello_demo.dart';
 import 'package:step_flutter/demo/layout_demo.dart';
+import 'package:step_flutter/demo/navigator_demo.dart';
 import 'package:step_flutter/demo/sliver_demo.dart';
 import 'package:step_flutter/demo/view_demo.dart';
 import 'demo/listview_demo.dart';
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
-      home: Home(),
+      home: NavigatorDemo(),
       theme: ThemeData(
         //* 主要样布的颜色
         primarySwatch: Colors.yellow,
