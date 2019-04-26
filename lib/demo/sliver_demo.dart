@@ -16,10 +16,34 @@ class SliverDemo extends StatelessWidget {
             //* 因为 SliverGrid 不像 GridView 那样有 padding 属性, 所以,需要外面包一个 SliverPadding, 增加内 边距
             sliver: SliverPadding(
               padding: EdgeInsets.all(8.0),
-              sliver: SliverGridDemo(),
+              sliver: SliverListDemo(),
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+
+class SliverListDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    return SliverList(
+      
+      //* delegate 用来构建网格视图中的项目用的
+      delegate: SliverChildBuilderDelegate(
+        //? 需要提供一个 build 方法, 这里就直接添加到里面了
+        (BuildContext context, int index) {
+          return Container(
+            child: Image.network(
+              posts[index].imageUrl,
+              fit: BoxFit.cover,
+            ),
+          );
+        },
+        childCount: posts.length, //? 网格视图的 item数量
       ),
     );
   }
