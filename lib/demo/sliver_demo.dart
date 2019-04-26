@@ -43,8 +43,10 @@ class SliverListDemo extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0), //? 设置圆角
               elevation: 14.0, //? 设置阴影
               clipBehavior: Clip.antiAlias, //? 剪切
-              shadowColor: Colors.lightBlue.withOpacity(0.5), //?设置阴影颜色
-              child: Container(
+              shadowColor: Colors.lightBlueAccent.withOpacity(0.5), //?设置阴影颜色
+              //? 如果相让item的尺寸是一个固定的比例的话, 用 AspectRatio 代替 Container
+              child: AspectRatio(
+                aspectRatio: 16/9,
                 child: Image.network(
                   posts[index].imageUrl,
                   fit: BoxFit.cover,
