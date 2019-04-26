@@ -31,15 +31,18 @@ class SliverListDemo extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return SliverList(
-      
       //* delegate 用来构建网格视图中的项目用的
       delegate: SliverChildBuilderDelegate(
         //? 需要提供一个 build 方法, 这里就直接添加到里面了
         (BuildContext context, int index) {
-          return Container(
-            child: Image.network(
-              posts[index].imageUrl,
-              fit: BoxFit.cover,
+          //? 在两个 cell之间添加边距, 所以把 Container 包装到 Padding中.
+          return Padding(
+            padding: EdgeInsets.only(bottom: 32.0),
+            child: Container(
+              child: Image.network(
+                posts[index].imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           );
         },
