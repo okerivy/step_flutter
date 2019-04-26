@@ -33,6 +33,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.yellow,
         highlightColor: Color.fromRGBO(255, 255, 255, 0.5), //* 按住按钮 高亮背景颜色
         splashColor: Colors.white70, //* 按住时的水波纹的颜色
+        accentColor: Colors.lightGreen,
         // scaffoldBackgroundColor: Colors.red,
       ),
     );

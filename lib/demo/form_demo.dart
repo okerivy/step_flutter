@@ -6,7 +6,11 @@ class FormDemo extends StatelessWidget {
     return Scaffold(
       body: Theme(
         //* ThemeData 会完全覆盖main 中定义的主题
-        data: ThemeData(
+        // data: ThemeData(
+        //   primaryColor: Colors.lightBlue,
+        // ),
+        //* 如果只是想覆盖 Main中主题的 一个属性 , 就用 Theme.of(context).copyWith
+        data: Theme.of(context).copyWith(
           primaryColor: Colors.lightBlue,
         ),
         child: ThemeDemo(),
@@ -20,7 +24,7 @@ class ThemeDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //* Theme.of(context) 是离这个小部件最近的主题, main.dart定义的主题 会影响
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).accentColor,
     );
   }
 }
