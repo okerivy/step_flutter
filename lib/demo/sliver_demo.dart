@@ -42,7 +42,7 @@ class SliverDemo extends StatelessWidget {
             // * 因为 SliverGrid 不像 GridView 那样有 padding 属性, 所以,需要外面包一个 SliverPadding, 增加内 边距
             sliver: SliverPadding(
               padding: EdgeInsets.all(8.0),
-              sliver: SliverListDemo(),
+              sliver: SliverGridDemo(),
             ),
           )
         ],

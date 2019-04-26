@@ -16,7 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
-      home: SliverDemo(),
+      home: Home(),
       theme: ThemeData(
         //* 主要样布的颜色
         primarySwatch: Colors.yellow,
@@ -69,7 +69,8 @@ class Home extends StatelessWidget {
             // Icon(Icons.change_history, size: 128.0, color: Colors.black12),
             // Icon(Icons.directions_bike, size: 128.0, color: Colors.black12),
             LayoutDemo(),
-            ViewDemo(),
+            // ViewDemo(),
+            SliverDemo()
           ],
         ),
         drawer: DrawerDemo(),
