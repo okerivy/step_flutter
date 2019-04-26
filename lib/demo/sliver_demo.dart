@@ -38,10 +38,17 @@ class SliverListDemo extends StatelessWidget {
           //? 在两个 cell之间添加边距, 所以把 Container 包装到 Padding中.
           return Padding(
             padding: EdgeInsets.only(bottom: 32.0),
-            child: Container(
-              child: Image.network(
-                posts[index].imageUrl,
-                fit: BoxFit.cover,
+            //? 用 Material 添加一些阴影效果
+            child: Material(
+              // Fixme 设置的圆角没有效果
+              borderRadius: BorderRadius.circular(12.0), //? 设置圆角
+              elevation: 14.0, //? 设置阴影
+              shadowColor: Colors.lightBlue.withOpacity(0.5), //?设置阴影颜色
+              child: Container(
+                child: Image.network(
+                  posts[index].imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           );
