@@ -36,6 +36,14 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: (value) {
+        debugPrint('输入: $value');
+      },
+
+      onSubmitted: (value) {
+        debugPrint('完成: $value');
+      },
+
       // Fixme: 光标颜色是 mian中的颜色, 如何修改
       decoration: InputDecoration(
         icon: Icon(Icons.subject),
