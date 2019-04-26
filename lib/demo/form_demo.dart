@@ -35,7 +35,18 @@ class TextFieldDemo extends StatefulWidget {
 class _TextFieldDemoState extends State<TextFieldDemo> {
   @override
   Widget build(BuildContext context) {
-    return TextField();
+    return TextField(
+      // Fixme: 光标颜色是 mian中的颜色, 如何修改
+      decoration: InputDecoration(
+        icon: Icon(Icons.subject),
+        labelText: '头部标签', //? 头部显示个标签
+        hintText: '请输入文本', //? 默认文本
+        // border: InputBorder.none, //? 隐藏下面的线
+        // border: OutlineInputBorder(), //? 四周加边框
+        filled: true,
+        fillColor: Colors.lightBlue[100], //? 填充颜色
+      ),
+    );
   }
 }
 
