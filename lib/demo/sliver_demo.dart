@@ -7,18 +7,37 @@ import 'package:step_flutter/model/post.dart';
 class SliverDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // * Scaffold提供了一个界面的结构
+    //* Scaffold提供了一个界面的结构
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           //? SliverAppBar 和  AppBar 用法差不多
           //? appbar 是一直固定在屏幕的顶部, 而 SliverAppBar 可以根据滚动来配置它的行为
           SliverAppBar(
-            title: Text('step_F'),
+            // title: Text('step_F'),
             // pinned: true, //? 固定在界面顶部, 并会有一个阴影的效果
             floating: true, //? 稍微向下滚动, SliverAppBar 就会显示出来
+
+            //* 带渐进动画的可伸缩空间
+            expandedHeight: 178, //? 伸展出来的高度
+            //* 让它变成弹性空间
+            flexibleSpace: FlexibleSpaceBar(
+              //? 带动画的标题
+              title: Text(
+                'hello flutter'.toUpperCase(), //? 大写
+                style: TextStyle(
+                  fontSize: 15.0,
+                  letterSpacing: 3.0, //? 字间距
+                  fontWeight: FontWeight.w400, //? 细一点
+                ),
+              ),
+              background: Image.network(
+                'https://resources.ninghao.net/images/overkill.png',
+                fit: BoxFit.cover
+              ),
+            ),
           ),
-          // * SliverSafeArea 防止顶部被遮挡, 例如电池条或 iphoneX 横线
+          //* SliverSafeArea 防止顶部被遮挡, 例如电池条或 iphoneX 横线
           SliverSafeArea(
             // * 因为 SliverGrid 不像 GridView 那样有 padding 属性, 所以,需要外面包一个 SliverPadding, 增加内 边距
             sliver: SliverPadding(
