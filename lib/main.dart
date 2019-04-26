@@ -17,9 +17,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
-      home: NavigatorDemo(),
+      // home: NavigatorDemo(),
+      // * 默认的根路由是 home == '/', 但是 可以通过 initialRoute 来定义app启动时进入的初始路由 (可以pop到根路由)
+      initialRoute: '/about',
       //? 注册路由, 根据名字来跳转
       routes: {
+        '/': (context) => NavigatorDemo(),
         '/about': (context) => Page(title: 'About'),
       },
       theme: ThemeData(
