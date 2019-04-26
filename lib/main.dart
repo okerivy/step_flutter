@@ -18,6 +18,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
       home: NavigatorDemo(),
+      //? 注册路由, 根据名字来跳转
+      routes: {
+        '/about': (context) => Page(title: 'About'),
+      },
       theme: ThemeData(
         //* 主要样布的颜色
         primarySwatch: Colors.yellow,
