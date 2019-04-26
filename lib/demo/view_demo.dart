@@ -11,23 +11,26 @@ class ViewDemo extends StatelessWidget {
   }
 }
 
+
 class ViewGridExtentDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     List<Widget> _buildTiles(int length) {
       return List.generate(length, (int index) {
+        var title = posts[index].title;
         return Container(
           color: Colors.grey[300],
           alignment: Alignment(0.0, 0.0),
           child: Text(
-            'Item $index',
+            'Item $index \n$title',
             style: TextStyle(fontSize: 18.0, color: Colors.grey),
           ),
         );
       });
     }
-
+    
+    //* GridView.extent 和 GridView.count 生成的网格视图数量是固定的, 按需生成, 需要用 GridView.build
     return GridView.extent(
       //? GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
       //* 主轴的方向: 就是滚动的方向
@@ -36,7 +39,7 @@ class ViewGridExtentDemo extends StatelessWidget {
       maxCrossAxisExtent: 250.0,
       crossAxisSpacing: 16.0,
       mainAxisSpacing: 16.0,
-      children: _buildTiles(100),
+      children: _buildTiles(posts.length),
     );
   }
 }
