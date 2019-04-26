@@ -31,6 +31,7 @@ class PostShow extends StatelessWidget {
                 Text('${post.title}', style: Theme.of(context).textTheme.title),
                 Text('${post.author}', style: Theme.of(context).textTheme.subhead),
                 SizedBox(height: 16.0),
+                // Fixme: description 过长, 可能超过边界了, 需要修正
                 Text('${post.description}', style: Theme.of(context).textTheme.body1),
               ],
             ),
