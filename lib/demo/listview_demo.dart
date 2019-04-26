@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/demo/post_show.dart';
 import '../model/post.dart';
 
 class ListViewDemo extends StatelessWidget {
@@ -37,11 +38,16 @@ class ListViewDemo extends StatelessWidget {
               //? 溅墨效果, 水波纹
               child: InkWell(
                 //* splashColor 慢慢展开是颜色
-                splashColor: Colors.red.withOpacity(0.3), 
+                splashColor: Colors.white.withOpacity(0.3), 
                 //* highlightColor 高亮的背景颜色
-                highlightColor: Colors.green.withOpacity(0.3), 
+                highlightColor: Colors.white.withOpacity(0.1), 
                 onTap: () {
                   debugPrint('Tap Image');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return PostShow(post: posts[index]);
+                    })
+                  );
                 },
               ),
             ),
