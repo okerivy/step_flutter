@@ -27,6 +27,7 @@ class App extends StatelessWidget {
         '/about': (context) => Page(title: 'About'),
         '/form': (context) => FormDemo(),
       },
+      //* 这里定义的主题在整个App 都是有效的
       theme: ThemeData(
         //* 主要样布的颜色
         primarySwatch: Colors.yellow,
