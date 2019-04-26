@@ -23,10 +23,13 @@ class ViewGridViewBuilderDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      //? 添加内边距
+      padding: EdgeInsets.all(16.0),
       itemCount: posts.length,
       itemBuilder: _gridItemBuilder,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        // crossAxisCount: 3,
+        maxCrossAxisExtent: 100,
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
       ),
