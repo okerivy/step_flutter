@@ -7,7 +7,37 @@ class ViewDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewGridCountDemo();
+    return ViewGridExtentDemo();
+  }
+}
+
+class ViewGridExtentDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    List<Widget> _buildTiles(int length) {
+      return List.generate(length, (int index) {
+        return Container(
+          color: Colors.grey[300],
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            'Item $index',
+            style: TextStyle(fontSize: 18.0, color: Colors.grey),
+          ),
+        );
+      });
+    }
+
+    return GridView.extent(
+      //? GridView 如果是竖直滚动,那么就 主轴就是竖直, 交叉轴就是 横向
+      //* 主轴的方向: 就是滚动的方向
+      // scrollDirection: Axis.horizontal, // 水平滚动
+      // 网格视图 在交叉轴的一个最大的尺寸
+      maxCrossAxisExtent: 250.0,
+      crossAxisSpacing: 16.0,
+      mainAxisSpacing: 16.0,
+      children: _buildTiles(100),
+    );
   }
 }
 
