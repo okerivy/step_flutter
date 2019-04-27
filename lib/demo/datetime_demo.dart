@@ -9,6 +9,7 @@ class DateTimeDemo extends StatefulWidget {
 
 class _DateTimeDemoState extends State<DateTimeDemo> {
   DateTime selectDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay(hour: 9, minute: 30);
 
   void _tapSelectDate() async {
     //? 等待处理好数据以后,再把处理好的数据交给 date
@@ -27,6 +28,17 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     });
   }
 
+  _tapSelectTimeDate() async {
+    final TimeOfDay time = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (time == null) return;
+
+    setState(() {
+      selectedTime = time;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +63,17 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
                       Icon(Icons.arrow_drop_down)
                     ],
                   ),
-                )
+                ),
+                SizedBox(width: 32.0,),
+                InkWell(
+                  onTap: _tapSelectTimeDate,
+                  child: Row(
+                    children: <Widget>[
+                      Text(selectedTime.format(context)),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                ),
               ],
             )
           ],
