@@ -34,9 +34,19 @@ class RegisterFormDemo extends StatefulWidget {
 }
 
 class _RegisterFormDemoState extends State<RegisterFormDemo> {
+  //* 定义一个Key, 然后把这个Key 交给表单, 然后就可以使用这个key来引用表单
+  final registerFormKey = GlobalKey<FormState>();
+  String username, password;
+
+  void _submitRegisterForm () {
+    //? 保存一下 RegisterFormDemo 表单里面的一些数据
+    registerFormKey.currentState.save();
+    debugPrint('username: $username \npassword: $password');
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: registerFormKey,
       //? 包装一层竖排显示的小部件
       child: Column(
         children: <Widget>[
@@ -47,12 +57,20 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
             decoration: InputDecoration(
               labelText: 'Username',
             ),
+
+            //? 因为TextFormField 继承FormField, 所以 有onsave方法
+            onSaved: (value) {
+              username = value;
+            },
           ),
           TextFormField(
             obscureText: true, //* 设置成 密码不可见
             decoration: InputDecoration(
               labelText: 'Password',
             ),
+            onSaved: (value) {
+              password = value;
+            },
           ),
           SizedBox(height: 32.0,),
           Container(
@@ -61,7 +79,7 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
               color: Theme.of(context).accentColor,
               child: Text('注册', style: TextStyle(color: Colors.white)),
               elevation: 0.0, //? 取消阴影
-              onPressed: () => debugPrint("点击了注册"),
+              onPressed: _submitRegisterForm,
             ),
           )
         ],
