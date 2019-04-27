@@ -37,12 +37,20 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
   //* 定义一个Key, 然后把这个Key 交给表单, 然后就可以使用这个key来引用表单
   final registerFormKey = GlobalKey<FormState>();
   String username, password;
+  bool _autovalidate = false;
 
+  //* 在点击提交的时候 根据需要打开表单的自动验证功能
   void _submitRegisterForm () {
-    //? 保存一下 RegisterFormDemo 表单里面的一些数据
-    registerFormKey.currentState.save();
-    registerFormKey.currentState.validate();
-    debugPrint('username: $username \npassword: $password');
+
+    if (registerFormKey.currentState.validate()) {
+      //? 保存一下 RegisterFormDemo 表单里面的一些数据
+      registerFormKey.currentState.save();
+      debugPrint('username: $username \npassword: $password');
+    } else {
+      setState(() {
+        _autovalidate = true;
+      });
+    }
   }
 
   String _validatorUsername (value) {
@@ -74,14 +82,13 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
               labelText: 'Username',
               helperText: '', //? 默认的帮助信息, 会占用空间, 当错误提示时, 会很自然
             ),
-
             //? 因为TextFormField 继承FormField, 所以 有onsave方法
             onSaved: (value) {
               username = value;
             },
-
             //? 验证表单里面的数据是否合法
             validator: _validatorUsername,
+            autovalidate: _autovalidate, //* 自动验证功能
           ),
           TextFormField(
             obscureText: true, //* 设置成 密码不可见
@@ -93,6 +100,7 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
               password = value;
             },
             validator: _validatorPassword,
+            autovalidate: _autovalidate,
           ),
           SizedBox(height: 32.0,),
           Container(
