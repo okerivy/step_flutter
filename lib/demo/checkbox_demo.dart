@@ -6,6 +6,9 @@ class CheckboxDemo extends StatefulWidget {
 }
 
 class _CheckboxDemoState extends State<CheckboxDemo> {
+  // Fixme: 什么时候 变量添加到 Class 中, 什么时候 添加 到Build 中, setState不起作用
+  bool _checkboxItemA = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,16 @@ class _CheckboxDemoState extends State<CheckboxDemo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('CheckboxDemo 文本')
+                Checkbox(
+                  value: _checkboxItemA,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkboxItemA = value;
+                    });
+                  },
+                  checkColor: Colors.yellow,
+                  activeColor: Colors.black,
+                )
               ],
             )
           ],
