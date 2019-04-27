@@ -46,6 +46,14 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
       //? 保存一下 RegisterFormDemo 表单里面的一些数据
       registerFormKey.currentState.save();
       debugPrint('username: $username \npassword: $password');
+
+      //* 在屏幕底部弹出动画提示栏
+      //? 找到最近的 Scaffold, 执行它的 showSnackBar 方法
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('正在注册中...'),
+        )
+      );
     } else {
       setState(() {
         _autovalidate = true;
