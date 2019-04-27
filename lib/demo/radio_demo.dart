@@ -24,6 +24,28 @@ class _RadioDemoState extends State<RadioDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('RadioGroupValue $_radioGroupA'),
+            SizedBox(height: 32),
+            //? RadioListTile 其实就是 ListTile 里面包装了一个  Radio
+            RadioListTile(
+              value: 0,
+              groupValue: _radioGroupA,
+              onChanged: _handleRadioValueChanged,
+              title: Text('Option A'),
+              subtitle: Text('Description'),
+              secondary: Icon(Icons.filter_1),
+              // Fixme: 如何才能拿到 控件内部的值  _radioGroupA == this.value
+              selected: _radioGroupA == 0,
+            ),
+            RadioListTile(
+              value: 1,
+              groupValue: _radioGroupA,
+              onChanged: _handleRadioValueChanged,
+              title: Text('Option B'),
+              subtitle: Text('Description'),
+              secondary: Icon(Icons.filter_2),
+              selected: _radioGroupA == 1,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
