@@ -4,6 +4,7 @@ import 'package:step_flutter/demo/checkbox_demo.dart';
 import 'package:step_flutter/demo/floating_action_button_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
 import 'package:step_flutter/demo/popup_menu_button_demo.dart';
+import 'package:step_flutter/demo/radio_demo.dart';
 
 class MaterialComponents extends StatelessWidget {
   @override
@@ -15,11 +16,12 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          MCListItem(title: 'Checkbox', page: CheckboxDemo(),),
-          MCListItem(title: 'Form', page: FormDemo(),),
-          MCListItem(title: 'PopupMenuButton', page: PopupMenuButtonDemo(),),
-          MCListItem(title: 'Button', page: ButtonDemo(),),
-          MCListItem(title: 'FloatingActionButton', page: FloatingActionButtonDemo(),)
+          MCListItem(title: 'Radio 单选框', page: RadioDemo(),),
+          MCListItem(title: 'Checkbox 复选框', page: CheckboxDemo(),),
+          MCListItem(title: 'Form 表单', page: FormDemo(),),
+          MCListItem(title: 'PopupMenuButton 弹出菜单', page: PopupMenuButtonDemo(),),
+          MCListItem(title: 'Button 各种按钮', page: ButtonDemo(),),
+          MCListItem(title: 'FloatingActionButton 浮动按钮', page: FloatingActionButtonDemo(),)
         ],
       ),
     );
