@@ -147,6 +147,46 @@ class ButtonDemo extends StatelessWidget {
       ],
     );
 
+    //? 有固定宽度的按钮
+    final Widget FixedWidthButton = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        OutlineButton(
+          child: Text('自动适应宽度'),
+          onPressed: () {},
+          splashColor: Colors.lightGreen[300],
+          color: Theme.of(context).accentColor,
+          textColor: Colors.brown,
+          // textTheme: ButtonTextTheme.accent,
+          //? 描边的颜色
+          borderSide: BorderSide(
+            color: Colors.deepOrange
+          ),
+          //? 高亮的颜色
+          highlightedBorderColor: Colors.purple,
+        ),
+        SizedBox(width: 16.0,),
+        Container(
+          width: 160.0,
+          child: OutlineButton(
+            child: Text('固定宽度'),
+            onPressed: () {},
+            splashColor: Colors.lightGreen[300],
+            color: Theme.of(context).accentColor,
+            textColor: Colors.brown,
+            // textTheme: ButtonTextTheme.accent,
+            //? 描边的颜色
+            borderSide: BorderSide(
+              color: Colors.blue
+            ),
+            //? 高亮的颜色
+            highlightedBorderColor: Colors.purple,
+          ),
+        )
+      ],
+    );
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ButtonDemo'),
@@ -160,6 +200,7 @@ class ButtonDemo extends StatelessWidget {
             FlatButtonDemo,
             RaisedButtonDemo,
             OutlineButtonDemo,
+            FixedWidthButton,
           ],
         ),
       ),
