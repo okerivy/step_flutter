@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:step_flutter/demo/button_demo.dart';
+import 'package:step_flutter/demo/checkbox_demo.dart';
 import 'package:step_flutter/demo/floating_action_button_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
 import 'package:step_flutter/demo/popup_menu_button_demo.dart';
@@ -14,6 +15,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'Checkbox', page: CheckboxDemo(),),
           MCListItem(title: 'Form', page: FormDemo(),),
           MCListItem(title: 'PopupMenuButton', page: PopupMenuButtonDemo(),),
           MCListItem(title: 'Button', page: ButtonDemo(),),
