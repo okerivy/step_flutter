@@ -11,7 +11,22 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
   DateTime selectDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay(hour: 9, minute: 30);
 
-  void _tapSelectDate() async {
+  //? 如果代码中有 异步事件, 例如 请求接口, 读取文件, 一般不会让程序一直等待结果
+  //? 而是 返回一个  future 对象, 完成以后,再返回一个真正的值
+  //* 这就是异步编程
+  //? 1. 如果方法里面包含一些异步动作, 这里是选择日期: 需要弹框等待用户选择结果
+  //? 2. 需要把方法标记个为 `async`,
+  //? 3. 然后把方法里面等待异步动作的 前面 添加一个 `await`, 等待异步动作执行的结果
+  //? 4. 然后把异步交给一个变量 `date`
+  //? 5. 这样我们就可以在方法的其他地方 使用这个异步动作返回的值了
+  //? 6. dart 看到 _tapSelectDate 是一个  `async` 方法, 
+  //?    它会在执行到第应该 `await` 时,就把showDatePicker加到一个等待处理的队列里面
+  //?    然后会返回一个 未完成的 future 对象
+  //?    等待异步动作完成以后, 这个future 对象会带着一个返回的值,如果失败就会带着错误
+  //? 7. 所以一般会对方法用 future 标记一下, 来说明方法会返回一个 future对象 
+  //?    Future<String> : 表示返回一个 String 的Future 对象
+
+  Future<void> _tapSelectDate() async {
     //? 等待处理好数据以后,再把处理好的数据交给 date
     final DateTime date = await showDatePicker(
       context: context,
@@ -28,7 +43,7 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     });
   }
 
-  _tapSelectTimeDate() async {
+  Future<void> _tapSelectTimeDate() async {
     final TimeOfDay time = await showTimePicker(
       context: context,
       initialTime: selectedTime,
