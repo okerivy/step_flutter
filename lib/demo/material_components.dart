@@ -6,6 +6,7 @@ import 'package:step_flutter/demo/floating_action_button_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
 import 'package:step_flutter/demo/popup_menu_button_demo.dart';
 import 'package:step_flutter/demo/radio_demo.dart';
+import 'package:step_flutter/demo/simple_dialog_demo.dart';
 import 'package:step_flutter/demo/slider_demo.dart';
 import 'package:step_flutter/demo/switch_demo.dart';
 
@@ -19,6 +20,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'SimpleDialog 对话框', page: SimpleDialogDemo(),),
           MCListItem(title: 'DateTime 日期选择器', page: DateTimeDemo(),),
           MCListItem(title: 'Slider 滑动选择器', page: SliderDemo(),),
           MCListItem(title: 'Switch 开关', page: SwitchDemo(),),
@@ -75,6 +77,7 @@ class MCListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      
       title: Text(title),
       onTap: () {
         Navigator.of(context).push(
