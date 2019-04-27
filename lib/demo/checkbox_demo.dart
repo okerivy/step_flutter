@@ -21,6 +21,19 @@ class _CheckboxDemoState extends State<CheckboxDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //? CheckboxListTile 其实就是 在ListTile里面包装了一个 Checkbox
+            CheckboxListTile(
+              value: _checkboxItemA,
+              onChanged: (value) {
+                setState(() {
+                  _checkboxItemA = value;
+                });
+              },
+              title: Text('Checkbox Item A'), //? 标题
+              subtitle: Text('Description'), //? 描述
+              secondary: Icon(Icons.alarm), //? 左边图标
+              selected: _checkboxItemA, //? 选中后 标题颜色变化
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
