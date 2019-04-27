@@ -48,6 +48,38 @@ class ButtonDemo extends StatelessWidget {
       ],
     );
 
+    //*  RaisedButton 默认有个背景颜色  和 阴影效果
+    final Widget RaisedButtonDemo = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+          child: Text('禁用按钮'),
+          //*  onPressed: null的时候  按钮就被禁用了
+          onPressed: null,
+          splashColor: Colors.grey,
+          textColor: Theme.of(context).accentColor,
+        ),
+        SizedBox(width: 16.0,),
+        RaisedButton(
+          child: Text('可点击'),
+          onPressed: () {},
+          splashColor: Colors.grey, //? 溅墨效果的颜色
+          textColor: Theme.of(context).accentColor, //? 文字颜色
+          elevation: 12.0,
+        ),
+        SizedBox(width: 16.0,),
+        RaisedButton.icon(
+          icon: Icon(Icons.vertical_align_center),
+          label: Text('图标按钮'),
+          onPressed: () {},
+          splashColor: Colors.blue,
+          textColor: Theme.of(context).accentColor,
+          elevation: 0.0,
+        )
+      ],
+    );
+
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('ButtonDemo'),
@@ -59,6 +91,7 @@ class ButtonDemo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FlatButtonDemo,
+            RaisedButtonDemo,
           ],
         ),
       ),
