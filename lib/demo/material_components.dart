@@ -53,19 +53,36 @@ class ButtonDemo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         RaisedButton(
-          child: Text('禁用按钮'),
+          child: Text('按钮'),
           //*  onPressed: null的时候  按钮就被禁用了
-          onPressed: null,
+          onPressed: () {},
           splashColor: Colors.grey,
-          textColor: Theme.of(context).accentColor,
+          elevation: 0.0,
+          color: Theme.of(context).accentColor,
+          textColor: Colors.brown,
+          // textTheme: ButtonTextTheme.accent,
         ),
         SizedBox(width: 16.0,),
-        RaisedButton(
-          child: Text('可点击'),
-          onPressed: () {},
-          splashColor: Colors.grey, //? 溅墨效果的颜色
-          textColor: Theme.of(context).accentColor, //? 文字颜色
-          elevation: 12.0,
+        Theme(
+          data: Theme.of(context).copyWith(
+            buttonColor: Theme.of(context).accentColor,
+            buttonTheme: ButtonThemeData(
+              textTheme: ButtonTextTheme.primary,
+              //? 正方形
+              // shape: BeveledRectangleBorder(
+              //   borderRadius: BorderRadius.circular(10.0),
+              // ),
+              //? 像球场之类的
+              shape: StadiumBorder()
+            )
+          ),
+          child: RaisedButton(
+            child: Text('主题按钮'),
+            onPressed: () {},
+            splashColor: Colors.grey, //? 溅墨效果的颜色
+            textColor: Theme.of(context).accentColor, //? 文字颜色
+            elevation: 12.0,
+          ),
         ),
         SizedBox(width: 16.0,),
         RaisedButton.icon(
@@ -79,7 +96,7 @@ class ButtonDemo extends StatelessWidget {
       ],
     );
 
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ButtonDemo'),
