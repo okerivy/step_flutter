@@ -251,38 +251,48 @@ class ButtonDemo extends StatelessWidget {
     final Widget ButttonBarDemo = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        ButtonBar(
-          children: <Widget>[
-            OutlineButton(
-              child: Text('ButtonBar'),
-              onPressed: () {},
-              splashColor: Colors.lightGreen[300],
-              color: Theme.of(context).accentColor,
-              textColor: Colors.brown,
-              // textTheme: ButtonTextTheme.accent,
-              //? 描边的颜色
-              borderSide: BorderSide(
-                color: Colors.blue
-              ),
-              //? 高亮的颜色
-              highlightedBorderColor: Colors.purple,
+        Theme(
+          //? 根据 ButtonBar 源码, 调整 Theme的padding间距
+          data: Theme.of(context).copyWith(
+            buttonTheme: ButtonThemeData(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
             ),
-            OutlineButton(
-              child: Text('ButtonBar'),
-              onPressed: () {},
-              splashColor: Colors.lightGreen[300],
-              color: Theme.of(context).accentColor,
-              textColor: Colors.brown,
-              // textTheme: ButtonTextTheme.accent,
-              //? 描边的颜色
-              borderSide: BorderSide(
-                color: Colors.deepOrange
+          ),
+          child:ButtonBar(
+            //* ButtonBar 源码 其实就是Row 包含了一个 Padding 
+            children: <Widget>[
+              OutlineButton(
+                child: Text('ButtonBar'),
+                onPressed: () {},
+                splashColor: Colors.lightGreen[300],
+                color: Theme.of(context).accentColor,
+                textColor: Colors.brown,
+                // textTheme: ButtonTextTheme.accent,
+                //? 描边的颜色
+                borderSide: BorderSide(
+                  color: Colors.blue
+                ),
+                //? 高亮的颜色
+                highlightedBorderColor: Colors.purple,
               ),
-              //? 高亮的颜色
-              highlightedBorderColor: Colors.purple,
-            ),
-          ],
+              OutlineButton(
+                child: Text('ButtonBar'),
+                onPressed: () {},
+                splashColor: Colors.lightGreen[300],
+                color: Theme.of(context).accentColor,
+                textColor: Colors.brown,
+                // textTheme: ButtonTextTheme.accent,
+                //? 描边的颜色
+                borderSide: BorderSide(
+                  color: Colors.deepOrange
+                ),
+                //? 高亮的颜色
+                highlightedBorderColor: Colors.purple,
+              ),
+            ],
+          ),
         )
+
       ],
     );
 
