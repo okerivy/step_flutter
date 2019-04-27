@@ -20,11 +20,34 @@ class MaterialComponents extends StatelessWidget {
 class FloatingActionButtonDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    //? 带小图标的漂浮按钮
+    final Widget _floatingActionButton = FloatingActionButton(
+      onPressed: () {},
+      child: Icon(Icons.trending_up),
+      elevation: 0.0,
+      backgroundColor: Colors.deepOrange,
+      //? 设置成正方形
+      shape: BeveledRectangleBorder(
+        //? 角度, 正八边形
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+    );
+
+    final Widget _floatingActionButtonExtended = FloatingActionButton.extended(
+      onPressed: () {},
+      icon: Icon(Icons.turned_in_not),
+      label: Text('标签'),
+      backgroundColor: Colors.deepOrange,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('FloatingActionButtonDemo'),
         elevation: 0.0,
       ),
+      // floatingActionButton: _floatingActionButton,
+      floatingActionButton: _floatingActionButtonExtended,
     );
   }
 }
