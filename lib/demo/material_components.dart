@@ -21,6 +21,33 @@ class MaterialComponents extends StatelessWidget {
 class ButtonDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final Widget FlatButtonDemo = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FlatButton(
+          child: Text('禁用按钮'),
+          //*  onPressed: null的时候  按钮就被禁用了
+          onPressed: null,
+          splashColor: Colors.grey,
+          textColor: Theme.of(context).accentColor,
+        ),
+        FlatButton(
+          child: Text('可点击'),
+          onPressed: () {},
+          splashColor: Colors.grey, //? 溅墨效果的颜色
+          textColor: Theme.of(context).accentColor, //? 文字颜色
+        ),
+        FlatButton.icon(
+          icon: Icon(Icons.vertical_align_center),
+          label: Text('图标按钮'),
+          onPressed: () {},
+          splashColor: Colors.blue,
+          textColor: Theme.of(context).accentColor,
+        )
+      ],
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ButtonDemo'),
@@ -31,12 +58,7 @@ class ButtonDemo extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("data")
-              ],
-            )
+            FlatButtonDemo,
           ],
         ),
       ),
