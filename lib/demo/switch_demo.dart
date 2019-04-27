@@ -6,6 +6,8 @@ class SwitchDemo extends StatefulWidget {
 }
 
 class _SwitchDemoState extends State<SwitchDemo> {
+  bool _switchItemA = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,15 @@ class _SwitchDemoState extends State<SwitchDemo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('SwitchDemo 文本'),
+                Text(_switchItemA ? '😄' : '😢', style: TextStyle(fontSize: 32.0),),
+                Switch(
+                  value: _switchItemA,
+                  onChanged: (value) {
+                    setState(() {
+                      _switchItemA = value;
+                    });
+                  },
+                )
               ],
             )
           ],
