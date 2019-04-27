@@ -187,6 +187,66 @@ class ButtonDemo extends StatelessWidget {
     );
 
 
+    //? 占满可用空间的按钮
+    final Widget ExpandedWidthButton = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+       Expanded(
+          flex: 2,
+          child: OutlineButton(
+            child: Text('比例2'),
+            onPressed: () {},
+            splashColor: Colors.lightGreen[300],
+            color: Theme.of(context).accentColor,
+            textColor: Colors.brown,
+            // textTheme: ButtonTextTheme.accent,
+            //? 描边的颜色
+            borderSide: BorderSide(
+              color: Colors.blue
+            ),
+            //? 高亮的颜色
+            highlightedBorderColor: Colors.purple,
+          ),
+        ),
+        SizedBox(width: 16.0,),
+        Expanded(
+          flex: 4,
+          child: OutlineButton(
+            child: Text('比例4'),
+            onPressed: () {},
+            splashColor: Colors.lightGreen[300],
+            color: Theme.of(context).accentColor,
+            textColor: Colors.brown,
+            // textTheme: ButtonTextTheme.accent,
+            //? 描边的颜色
+            borderSide: BorderSide(
+              color: Colors.deepOrange
+            ),
+            //? 高亮的颜色
+            highlightedBorderColor: Colors.purple,
+          ),
+        ),
+        SizedBox(width: 16.0,),
+        Expanded(
+          flex: 3,
+          child: OutlineButton(
+            child: Text('比例3'),
+            onPressed: () {},
+            splashColor: Colors.lightGreen[300],
+            color: Theme.of(context).accentColor,
+            textColor: Colors.brown,
+            // textTheme: ButtonTextTheme.accent,
+            //? 描边的颜色
+            borderSide: BorderSide(
+              color: Colors.deepPurple
+            ),
+            //? 高亮的颜色
+            highlightedBorderColor: Colors.purple,
+          ),
+        ),
+      ],
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ButtonDemo'),
@@ -201,6 +261,7 @@ class ButtonDemo extends StatelessWidget {
             RaisedButtonDemo,
             OutlineButtonDemo,
             FixedWidthButton,
+            ExpandedWidthButton,
           ],
         ),
       ),
