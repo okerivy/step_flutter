@@ -96,6 +96,56 @@ class ButtonDemo extends StatelessWidget {
       ],
     );
 
+    //*  OutlineButton 有描边的按钮
+    final Widget OutlineButtonDemo = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        OutlineButton(
+          child: Text('按钮'),
+          //*  onPressed: null的时候  按钮就被禁用了
+          onPressed: () {},
+          splashColor: Colors.lightGreen[300],
+          color: Theme.of(context).accentColor,
+          textColor: Colors.brown,
+          // textTheme: ButtonTextTheme.accent,
+          //? 描边的颜色
+          borderSide: BorderSide(
+            color: Colors.deepOrange
+          ),
+          //? 高亮的颜色
+          highlightedBorderColor: Colors.purple,
+        ),
+        SizedBox(width: 16.0,),
+        Theme(
+          data: Theme.of(context).copyWith(
+            buttonColor: Theme.of(context).accentColor,
+            buttonTheme: ButtonThemeData(
+              textTheme: ButtonTextTheme.primary,
+              //? 正方形
+              // shape: BeveledRectangleBorder(
+              //   borderRadius: BorderRadius.circular(10.0),
+              // ),
+              //? 像球场之类的
+              shape: StadiumBorder()
+            )
+          ),
+          child: OutlineButton(
+            child: Text('主题按钮'),
+            onPressed: () {},
+            splashColor: Colors.grey, //? 溅墨效果的颜色
+            textColor: Theme.of(context).accentColor, //? 文字颜色
+          ),
+        ),
+        SizedBox(width: 16.0,),
+        OutlineButton.icon(
+          icon: Icon(Icons.vertical_align_center),
+          label: Text('图标按钮'),
+          onPressed: () {},
+          splashColor: Colors.blue,
+          textColor: Theme.of(context).accentColor,
+        )
+      ],
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -109,6 +159,7 @@ class ButtonDemo extends StatelessWidget {
           children: <Widget>[
             FlatButtonDemo,
             RaisedButtonDemo,
+            OutlineButtonDemo,
           ],
         ),
       ),
