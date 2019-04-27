@@ -5,6 +5,7 @@ import 'package:step_flutter/demo/floating_action_button_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
 import 'package:step_flutter/demo/popup_menu_button_demo.dart';
 import 'package:step_flutter/demo/radio_demo.dart';
+import 'package:step_flutter/demo/slider_demo.dart';
 import 'package:step_flutter/demo/switch_demo.dart';
 
 class MaterialComponents extends StatelessWidget {
@@ -17,6 +18,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'Slider 滑动选择器', page: SliderDemo(),),
           MCListItem(title: 'Switch 开关', page: SwitchDemo(),),
           MCListItem(title: 'Radio 单选框', page: RadioDemo(),),
           MCListItem(title: 'Checkbox 复选框', page: CheckboxDemo(),),
