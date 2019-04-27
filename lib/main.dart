@@ -25,7 +25,8 @@ class App extends StatelessWidget {
       initialRoute: '/mdc',
       //? 注册路由, 根据名字来跳转
       routes: {
-        '/': (context) => Home(),
+        // '/': (context) => Home(),
+        '/': (context) => MaterialComponents(),
         '/about': (context) => Page(title: 'About'),
         '/form': (context) => FormDemo(),
         '/mdc': (context) => MaterialComponents(),
