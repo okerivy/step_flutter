@@ -20,6 +20,19 @@ class _SwitchDemoState extends State<SwitchDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //? SwitchListTile 就是 ListTile 包装了一个 Switch
+            SwitchListTile(
+              value: _switchItemA,
+              onChanged: (value) {
+                setState(() {
+                  _switchItemA = value;
+                });
+              },
+              title: Text('Switch Item A'),
+              subtitle: Text('Description'),
+              secondary: Icon(_switchItemA ? Icons.visibility : Icons.visibility_off),
+              selected: _switchItemA,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
