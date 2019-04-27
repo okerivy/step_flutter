@@ -3,12 +3,14 @@ import 'package:step_flutter/demo/basic_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
 import 'package:step_flutter/demo/hello_demo.dart';
 import 'package:step_flutter/demo/layout_demo.dart';
+import 'package:step_flutter/demo/material_components.dart';
 import 'package:step_flutter/demo/navigator_demo.dart';
 import 'package:step_flutter/demo/sliver_demo.dart';
 import 'package:step_flutter/demo/view_demo.dart';
 import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
 import 'demo/bottom_navigation_bar_demo.dart';
+
 
 void main() =>  runApp(App());
 
@@ -20,12 +22,13 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
       // home: NavigatorDemo(),
       // * 默认的根路由是 home == '/', 但是 可以通过 initialRoute 来定义app启动时进入的初始路由 (可以pop到根路由)
-      initialRoute: '/form',
+      initialRoute: '/mdc',
       //? 注册路由, 根据名字来跳转
       routes: {
         '/': (context) => Home(),
         '/about': (context) => Page(title: 'About'),
         '/form': (context) => FormDemo(),
+        '/mdc': (context) => MaterialComponents(),
       },
       //* 这里定义的主题在整个App 都是有效的
       theme: ThemeData(
