@@ -18,10 +18,53 @@ class FormDemo extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFieldDemo(),
+              RegisterFormDemo(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+//? 在form 中可以包装一些表单字段, 每一个表单字段都可以放在 formfield里面
+class RegisterFormDemo extends StatefulWidget {
+  @override
+  _RegisterFormDemoState createState() => _RegisterFormDemoState();
+}
+
+class _RegisterFormDemoState extends State<RegisterFormDemo> {
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      //? 包装一层竖排显示的小部件
+      child: Column(
+        children: <Widget>[
+          //? 表单字段 都是 FormField
+          //? 如果你需要一个文本字段, 需要一个 FormFied , 里面添加一个  TextField 
+          //? 你也可以用系统提供的 TextFormField, 就是上面的包装好的
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: 'Username',
+            ),
+          ),
+          TextFormField(
+            obscureText: true, //* 设置成 密码不可见
+            decoration: InputDecoration(
+              labelText: 'Password',
+            ),
+          ),
+          SizedBox(height: 32.0,),
+          Container(
+            width: double.infinity,
+            child: RaisedButton(
+              color: Theme.of(context).accentColor,
+              child: Text('注册', style: TextStyle(color: Colors.white)),
+              elevation: 0.0, //? 取消阴影
+              onPressed: () => debugPrint("点击了注册"),
+            ),
+          )
+        ],
       ),
     );
   }
