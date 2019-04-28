@@ -6,6 +6,33 @@ class AlertDialogDemo extends StatefulWidget {
 }
 
 class _AlertDialogDemoState extends State<AlertDialogDemo> {
+
+  _openAlertDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false, //? 不允许点击背景 消失对话框
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog'),
+          content: Text('是否允许?'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancle'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +48,10 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('AlertDialogDemo 文本'),
+                RaisedButton(
+                  child: Text('Open Alert Dialog'),
+                  onPressed: _openAlertDialog,
+                )
               ],
             )
           ],
