@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
+
+enum Option {
+  A, B, C
+}
 class SimpleDialogDemo extends StatefulWidget {
   @override
   _SimpleDialogDemoState createState() => _SimpleDialogDemoState();
 }
 
 class _SimpleDialogDemoState extends State<SimpleDialogDemo> {
+  String _choice = 'Nothing';
 
-  _openSimpleDialog() {
-    showDialog(
+  Future _openSimpleDialog() async {
+    final option = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
@@ -17,25 +23,30 @@ class _SimpleDialogDemoState extends State<SimpleDialogDemo> {
             SimpleDialogOption(
               child: Text('Option A'),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, Option.A);
               },
             ),
             SimpleDialogOption(
               child: Text('Option B'),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, Option.B);
               },
             ),
             SimpleDialogOption(
               child: Text('Option C'),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, Option.C);
               },
             ),
           ],
         );
       }
     );
+
+    // if (option == null) return;
+    setState(() {
+      _choice = '${option.toString()}';
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -49,6 +60,8 @@ class _SimpleDialogDemoState extends State<SimpleDialogDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('You 选择了 $_choice'),
+            SizedBox(height: 32.0,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
