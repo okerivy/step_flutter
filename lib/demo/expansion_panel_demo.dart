@@ -6,6 +6,8 @@ class ExpansionPanelDemo extends StatefulWidget {
 }
 
 class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
+  bool _isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +21,12 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ExpansionPanelList(
+              expansionCallback: (int panelIndex, bool isExpanded) {
+                setState(() {
+                  _isExpanded = !isExpanded;
+                  debugPrint('index: $panelIndex, 展开 $_isExpanded');
+                });
+              },
               children: [
                 //? 每个面板需要一个头部, 一个主题, 和一个表示收缩状态的属性
                 ExpansionPanel(
@@ -39,7 +47,7 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
                     child: Text('Content for Panel A'),
                   ),
                   //? 收缩属性
-                  isExpanded: true
+                  isExpanded: _isExpanded
 
                 )
               ],
