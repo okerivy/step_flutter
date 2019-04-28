@@ -10,6 +10,7 @@ import 'package:step_flutter/demo/popup_menu_button_demo.dart';
 import 'package:step_flutter/demo/radio_demo.dart';
 import 'package:step_flutter/demo/simple_dialog_demo.dart';
 import 'package:step_flutter/demo/slider_demo.dart';
+import 'package:step_flutter/demo/snack_bar_demo.dart';
 import 'package:step_flutter/demo/switch_demo.dart';
 
 class MaterialComponents extends StatelessWidget {
@@ -22,6 +23,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'SnackBar 操作提示栏', page:SnackBarDemo(),),
           MCListItem(title: 'BottomSheet 底部滑动窗口', page:BottomSheetDemo(),),
           MCListItem(title: 'AlertDialog 对话框', page:AlertDialogDemo(),),
           MCListItem(title: 'SimpleDialog 对话框', page: SimpleDialogDemo(),),
