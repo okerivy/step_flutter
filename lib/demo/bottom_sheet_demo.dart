@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+
 
 class BottomSheetDemo extends StatefulWidget {
   @override
@@ -36,9 +39,9 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
       });
   }
   
-  _openModalBottomSheet() {
+  Future _openModalBottomSheet() async {
     // Fixme: maxHeight: constraints.maxHeight * 9.0 / 16.0  怎么设置成全屏
-    showModalBottomSheet(
+    final option = await showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -47,18 +50,29 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             children: <Widget>[
               ListTile(
                 title: Text('Option A'),
+                onTap: () {
+                  Navigator.pop(context, 'A');
+                },
               ),
               ListTile(
                 title: Text('Option B'),
+                onTap: () {
+                  Navigator.pop(context, 'B');
+                },
               ),
               ListTile(
                 title: Text('Option C'),
+                onTap: () {
+                  Navigator.pop(context, 'C');
+                },
               ),
             ],
           ),
         );
       }
     );
+
+    debugPrint(option);
   }
   @override
   Widget build(BuildContext context) {
