@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/demo/bottom_sheet_fix.dart';
 import 'dart:async';
 import 'package:step_flutter/demo/full_bottom_sheet.dart';
 
@@ -117,7 +118,46 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 1600.0,
+          height: 500.0,
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text('Option A'),
+                onTap: () {
+                  Navigator.pop(context, 'A');
+                },
+              ),
+              ListTile(
+                title: Text('Option B'),
+                onTap: () {
+                  Navigator.pop(context, 'B');
+                },
+              ),
+              ListTile(
+                title: Text('Option C'),
+                onTap: () {
+                  Navigator.pop(context, 'C');
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    );
+
+    debugPrint(option);
+  }
+
+  
+  Future _showSignupModalSheet() async { 
+        
+    // Fixme: showModalBottomSheetApp 点击背景能取消吗
+
+    final option = await showModalBottomSheetApp(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 500.0,
           child: Column(
             children: <Widget>[
               ListTile(
@@ -177,6 +217,11 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             FlatButton(
               child: Text('Full Modal BottomSheet 全屏'),
               onPressed: _openFullModalBottomSheet,
+            ),
+            SizedBox(width: 16.0),
+            FlatButton(
+              child: Text('Modal BottomSheet 全屏 三方写的'),
+              onPressed: _showSignupModalSheet,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
