@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/demo/alert_dialog_demo.dart';
 import 'package:step_flutter/demo/button_demo.dart';
 import 'package:step_flutter/demo/checkbox_demo.dart';
 import 'package:step_flutter/demo/datetime_demo.dart';
@@ -20,6 +21,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'AlertDialog 对话框', page:AlertDialogDemo(),),
           MCListItem(title: 'SimpleDialog 对话框', page: SimpleDialogDemo(),),
           MCListItem(title: 'DateTime 日期选择器', page: DateTimeDemo(),),
           MCListItem(title: 'Slider 滑动选择器', page: SliderDemo(),),
