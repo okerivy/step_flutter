@@ -18,10 +18,30 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('ExpansionPanelDemo 文本'),
+            ExpansionPanelList(
+              children: [
+                //? 每个面板需要一个头部, 一个主题, 和一个表示收缩状态的属性
+                ExpansionPanel(
+                  //? 头部
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        'Panel A',
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                    );
+                  },
+                  //? 内容
+                  body: Container(
+                    padding: EdgeInsets.all(16.0),
+                    width: double.infinity,
+                    child: Text('Content for Panel A'),
+                  ),
+                  //? 收缩属性
+                  isExpanded: true
+
+                )
               ],
             )
           ],

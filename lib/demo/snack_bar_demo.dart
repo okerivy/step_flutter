@@ -38,6 +38,7 @@ class SnackBarButton extends StatelessWidget {
     return FlatButton(
       child: Text('Open SnackBar'),
       onPressed: () {
+        //? Scaffold -> showSnackBar -> SnackBar -> SnackBarAction
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Processing...'),
