@@ -41,13 +41,13 @@ const double _kCloseProgressThreshold = 0.5;
 ///  * [showModalBottomSheet], which can be used to display a modal bottom
 ///    sheet.
 ///  * <https://material.io/design/components/sheets-bottom.html>
-class BottomSheet extends StatefulWidget {
+class FullBottomSheet extends StatefulWidget {
   /// Creates a bottom sheet.
   ///
   /// Typically, bottom sheets are created implicitly by
   /// [ScaffoldState.showBottomSheet], for persistent bottom sheets, or by
   /// [showModalBottomSheet], for modal bottom sheets.
-  const BottomSheet({
+  const FullBottomSheet({
     Key key,
     this.animationController,
     this.enableDrag = true,
@@ -93,21 +93,21 @@ class BottomSheet extends StatefulWidget {
   final double elevation;
 
   @override
-  _BottomSheetState createState() => _BottomSheetState();
+  _FullBottomSheetState createState() => _FullBottomSheetState();
 
   /// Creates an animation controller suitable for controlling a [BottomSheet].
   static AnimationController createAnimationController(TickerProvider vsync) {
     return AnimationController(
       duration: _kBottomSheetDuration,
-      debugLabel: 'BottomSheet',
+      debugLabel: 'FullBottomSheet',
       vsync: vsync,
     );
   }
 }
 
-class _BottomSheetState extends State<BottomSheet> {
+class _FullBottomSheetState extends State<FullBottomSheet> {
 
-  final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheet child');
+  final GlobalKey _childKey = GlobalKey(debugLabel: 'FullBottomSheet child');
 
   double get _childHeight {
     final RenderBox renderBox = _childKey.currentContext.findRenderObject();
@@ -163,8 +163,8 @@ class _BottomSheetState extends State<BottomSheet> {
 
 // MODAL BOTTOM SHEETS
 
-class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
-  _ModalBottomSheetLayout(this.progress);
+class _ModalFullBottomSheetLayout extends SingleChildLayoutDelegate {
+  _ModalFullBottomSheetLayout(this.progress);
 
   final double progress;
 
@@ -174,7 +174,7 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
       minWidth: constraints.maxWidth,
       maxWidth: constraints.maxWidth,
       minHeight: 0.0,
-      maxHeight: constraints.maxHeight * 9.0 / 16.0
+      maxHeight: constraints.maxHeight * 16.0 / 16.0
     );
   }
 
@@ -184,21 +184,21 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(_ModalBottomSheetLayout oldDelegate) {
+  bool shouldRelayout(_ModalFullBottomSheetLayout oldDelegate) {
     return progress != oldDelegate.progress;
   }
 }
 
-class _ModalBottomSheet<T> extends StatefulWidget {
-  const _ModalBottomSheet({ Key key, this.route }) : super(key: key);
+class _ModalFullBottomSheet<T> extends StatefulWidget {
+  const _ModalFullBottomSheet({ Key key, this.route }) : super(key: key);
 
-  final _ModalBottomSheetRoute<T> route;
+  final _ModalFullBottomSheetRoute<T> route;
 
   @override
-  _ModalBottomSheetState<T> createState() => _ModalBottomSheetState<T>();
+  _ModalFullBottomSheetState<T> createState() => _ModalFullBottomSheetState<T>();
 }
 
-class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
+class _ModalFullBottomSheetState<T> extends State<_ModalFullBottomSheet<T>> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -230,8 +230,8 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
             explicitChildNodes: true,
             child: ClipRect(
               child: CustomSingleChildLayout(
-                delegate: _ModalBottomSheetLayout(animationValue),
-                child: BottomSheet(
+                delegate: _ModalFullBottomSheetLayout(animationValue),
+                child: FullBottomSheet(
                   animationController: widget.route._animationController,
                   onClosing: () => Navigator.pop(context),
                   builder: widget.route.builder,
@@ -245,8 +245,8 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   }
 }
 
-class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
-  _ModalBottomSheetRoute({
+class _ModalFullBottomSheetRoute<T> extends PopupRoute<T> {
+  _ModalFullBottomSheetRoute({
     this.builder,
     this.theme,
     this.barrierLabel,
@@ -273,7 +273,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController = BottomSheet.createAnimationController(navigator.overlay);
+    _animationController = FullBottomSheet.createAnimationController(navigator.overlay);
     return _animationController;
   }
 
@@ -284,7 +284,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       removeTop: true,
-      child: _ModalBottomSheet<T>(route: this),
+      child: _ModalFullBottomSheet<T>(route: this),
     );
     if (theme != null)
       bottomSheet = Theme(data: theme, child: bottomSheet);
@@ -318,14 +318,14 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
 ///  * [showBottomSheet] and [ScaffoldState.showBottomSheet], for showing
 ///    non-modal bottom sheets.
 ///  * <https://material.io/design/components/sheets-bottom.html#modal-bottom-sheet>
-Future<T> showModalBottomSheet<T>({
+Future<T> showModalFullBottomSheet<T>({
   @required BuildContext context,
   @required WidgetBuilder builder,
 }) {
   assert(context != null);
   assert(builder != null);
   assert(debugCheckHasMaterialLocalizations(context));
-  return Navigator.push(context, _ModalBottomSheetRoute<T>(
+  return Navigator.push(context, _ModalFullBottomSheetRoute<T>(
     builder: builder,
     theme: Theme.of(context, shadowThemeOnly: true),
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -369,7 +369,7 @@ Future<T> showModalBottomSheet<T>({
 ///    sheet.
 ///  * [Scaffold.of], for information about how to obtain the [BuildContext].
 ///  * <https://material.io/design/components/sheets-bottom.html#standard-bottom-sheet>
-PersistentBottomSheetController<T> showBottomSheet<T>({
+PersistentBottomSheetController<T> showFullBottomSheet<T>({
   @required BuildContext context,
   @required WidgetBuilder builder,
 }) {
