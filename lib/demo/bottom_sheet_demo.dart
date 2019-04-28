@@ -35,6 +35,31 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
         );
       });
   }
+  
+  _openModalBottomSheet() {
+    // Fixme: maxHeight: constraints.maxHeight * 9.0 / 16.0  怎么设置成全屏
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200.0,
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text('Option A'),
+              ),
+              ListTile(
+                title: Text('Option B'),
+              ),
+              ListTile(
+                title: Text('Option C'),
+              ),
+            ],
+          ),
+        );
+      }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,12 +76,17 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('BottomSheetDemo 文本'),
-                SizedBox(width: 16.0),
+                // Text('BottomSheetDemo 文本'),
+                // SizedBox(width: 16.0),
                 FlatButton(
                   child: Text('Open BottomSheet'),
                   onPressed: _openBottomSheet,
-                )
+                ),
+                SizedBox(width: 16.0),
+                FlatButton(
+                  child: Text('Modal BottomSheet'),
+                  onPressed: _openModalBottomSheet,
+                ),
               ],
             )
           ],
