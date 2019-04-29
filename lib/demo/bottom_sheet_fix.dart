@@ -2,6 +2,9 @@
 //Modified by Suvadeep Das
 //Based on https://gist.github.com/andrelsmoraes/9e4af0133bff8960c1feeb0ead7fd749
 
+
+// https://gist.github.com/crimsonsuv/b25d5ebd04236f9be2aa66accba19446
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -59,6 +62,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
                   child: new CustomSingleChildLayout(
                       delegate: new _ModalBottomSheetLayout(widget.route.animation.value, bottomInset),
                       child: new BottomSheet(
+                          enableDrag: widget.route.enableDrag,
                           animationController: widget.route._animationController,
                           onClosing: () => Navigator.pop(context),
                           builder: widget.route.builder
@@ -79,12 +83,15 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     RouteSettings settings,
     this.resizeToAvoidBottomPadding,
     this.dismissOnTap,
+    this.enableDrag,
   }) : super(settings: settings);
 
   final WidgetBuilder builder;
   final ThemeData theme;
-  final bool resizeToAvoidBottomPadding;
-  final bool dismissOnTap;
+  final bool resizeToAvoidBottomPadding; //? 好像是底部的工具栏
+  final bool dismissOnTap;  //? 是否要点击下面白色背景 消失
+  final bool enableDrag; //? 是否允许 拖拽关闭
+  // Fixme: 点击背景如何消失
   
   @override
   Duration get transitionDuration => _kBottomSheetDuration;
@@ -152,6 +159,7 @@ Future<T> showModalBottomSheetApp<T>({
   @required BuildContext context,
   @required WidgetBuilder builder,
   bool dismissOnTap: false,
+  bool enableDrag: true,
   bool resizeToAvoidBottomPadding : true,
 }) {
   assert(context != null);
@@ -162,5 +170,6 @@ Future<T> showModalBottomSheetApp<T>({
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
     dismissOnTap: dismissOnTap,
+    enableDrag: enableDrag,
   ));
 }

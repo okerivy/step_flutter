@@ -156,6 +156,9 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
 
     final option = await showModalBottomSheetApp(
       context: context,
+      dismissOnTap: true, //? 是否要点击下面白色背景 消失
+      enableDrag: false, //? 是否允许 拖拽关闭
+      resizeToAvoidBottomPadding: true, //? 好像是底部的工具栏
       builder: (BuildContext context) {
         return Container(
           height: 500.0,
