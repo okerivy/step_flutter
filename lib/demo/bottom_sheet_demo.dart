@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/Route/semi_transparent.dart';
 import 'package:step_flutter/demo/bottom_sheet_fix.dart';
 import 'dart:async';
 import 'package:step_flutter/demo/full_bottom_sheet.dart';
@@ -222,6 +223,16 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             FlatButton(
               child: Text('Modal BottomSheet 全屏 三方写的'),
               onPressed: _showSignupModalSheet,
+            ),
+            SizedBox(width: 16.0),
+            FlatButton(
+              child: Text('透明的 Route'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TransparentTestPage()),
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
