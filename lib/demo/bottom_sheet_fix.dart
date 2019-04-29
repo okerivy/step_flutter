@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 const Duration _kBottomSheetDuration = const Duration(milliseconds: 200);
+const Color _kBottomSheetBarrierColor = Colors.black54;
 
 class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
   _ModalBottomSheetLayout(this.progress, this.bottomInset);
@@ -85,6 +86,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.dismissOnTap,
     this.enableDrag,
     this.dismissOnTapBarrier,
+    this.bottomSheetDuration,
+    this.bottomSheetBarrierColor,
   }) : super(settings: settings);
 
   final WidgetBuilder builder;
@@ -94,9 +97,11 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   final bool enableDrag; //? 是否允许 拖拽关闭
   // Fixme: 点击背景如何消失
   final bool dismissOnTapBarrier;  //? 是否要点击 上面半透明背景 消失
+  final Duration bottomSheetDuration; //? 动画时间
+  final Color bottomSheetBarrierColor; //? 背景颜色
 
   @override
-  Duration get transitionDuration => _kBottomSheetDuration;
+  Duration get transitionDuration => bottomSheetDuration ?? _kBottomSheetDuration;
 
   @override
   bool get barrierDismissible => dismissOnTapBarrier;
@@ -105,14 +110,20 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   final String barrierLabel;
 
   @override
-  Color get barrierColor => Colors.black54;
+  Color get barrierColor => bottomSheetBarrierColor ?? _kBottomSheetBarrierColor;
 
   AnimationController _animationController;
 
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController = BottomSheet.createAnimationController(navigator.overlay);
+    //? 以前是访问的 BottomSheet 的静态方法 static
+    // _animationController = BottomSheet.createAnimationController(navigator.overlay);
+    _animationController = AnimationController(
+      duration: bottomSheetDuration ?? _kBottomSheetDuration,
+      debugLabel: 'BottomSheet',
+      vsync: navigator.overlay,
+    );
     return _animationController;
   }
 
@@ -164,6 +175,8 @@ Future<T> showModalBottomSheetApp<T>({
   bool dismissOnTapBarrier: true,
   bool enableDrag: true,
   bool resizeToAvoidBottomPadding : true,
+  Duration bottomSheetDuration: _kBottomSheetDuration,
+  Color bottomSheetBarrierColor: _kBottomSheetBarrierColor,
 }) {
   assert(context != null);
   assert(builder != null);
@@ -175,5 +188,7 @@ Future<T> showModalBottomSheetApp<T>({
     dismissOnTap: dismissOnTap,
     enableDrag: enableDrag,
     dismissOnTapBarrier: dismissOnTapBarrier,
+    bottomSheetBarrierColor: bottomSheetBarrierColor,
+    bottomSheetDuration: bottomSheetDuration,
   ));
 }

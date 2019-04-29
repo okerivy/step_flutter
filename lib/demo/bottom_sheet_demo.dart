@@ -157,11 +157,15 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
     final option = await showModalBottomSheetApp(
       context: context,
       dismissOnTap: true, //? 是否要点击下面白色背景 消失
-      dismissOnTapBarrier: false, //? 是否要点击 上面半透明背景 消失
+      dismissOnTapBarrier: true, //? 是否要点击 上面半透明背景 消失
       enableDrag: false, //? 是否允许 拖拽关闭
-      resizeToAvoidBottomPadding: true, //? 好像是底部的工具栏
+      resizeToAvoidBottomPadding: true, //? 好像是计算底部的工具栏
+      bottomSheetBarrierColor: Colors.deepPurple.withOpacity(0.5), //? 背景颜色
+      bottomSheetDuration: Duration(milliseconds: 1500), //? 动画时间
       builder: (BuildContext context) {
         return Container(
+          // Fixme: 这个颜色 怎么设置成 半透明
+          color: Colors.blueGrey.withOpacity(0.5),
           height: 500.0,
           child: Column(
             children: <Widget>[
