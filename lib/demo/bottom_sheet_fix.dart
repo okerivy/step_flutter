@@ -84,6 +84,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.resizeToAvoidBottomPadding,
     this.dismissOnTap,
     this.enableDrag,
+    this.dismissOnTapBarrier,
   }) : super(settings: settings);
 
   final WidgetBuilder builder;
@@ -92,12 +93,13 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   final bool dismissOnTap;  //? 是否要点击下面白色背景 消失
   final bool enableDrag; //? 是否允许 拖拽关闭
   // Fixme: 点击背景如何消失
-  
+  final bool dismissOnTapBarrier;  //? 是否要点击 上面半透明背景 消失
+
   @override
   Duration get transitionDuration => _kBottomSheetDuration;
 
   @override
-  bool get barrierDismissible => false;
+  bool get barrierDismissible => dismissOnTapBarrier;
 
   @override
   final String barrierLabel;
@@ -159,6 +161,7 @@ Future<T> showModalBottomSheetApp<T>({
   @required BuildContext context,
   @required WidgetBuilder builder,
   bool dismissOnTap: false,
+  bool dismissOnTapBarrier: true,
   bool enableDrag: true,
   bool resizeToAvoidBottomPadding : true,
 }) {
@@ -171,5 +174,6 @@ Future<T> showModalBottomSheetApp<T>({
     resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
     dismissOnTap: dismissOnTap,
     enableDrag: enableDrag,
+    dismissOnTapBarrier: dismissOnTapBarrier,
   ));
 }
