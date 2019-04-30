@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 const Duration _kBottomSheetDuration = const Duration(milliseconds: 200);
-const Color _kBottomSheetBarrierColor = Colors.black54;
+const Color _kBottomSheetBarrierColor = Colors.black54; //? 上面的背景颜色
+const Color _kBottomSheetBgColor = Colors.white; //? 下面的背景颜色
 
 const double _kMinFlingVelocity = 700.0;
 const double _kCloseProgressThreshold = 0.5;
@@ -33,7 +34,7 @@ const double _kCloseProgressThreshold = 0.5;
 ///    sheets can be created and displayed with the [showModalBottomSheet]
 ///    function.
 ///
-/// The [BottomSheet] widget itself is rarely used directly. Instead, prefer to
+/// The [BottomSheetApp] widget itself is rarely used directly. Instead, prefer to
 /// create a persistent bottom sheet with [ScaffoldState.showBottomSheet] or
 /// [Scaffold.bottomSheet], and a modal bottom sheet with [showModalBottomSheet].
 ///
@@ -44,17 +45,19 @@ const double _kCloseProgressThreshold = 0.5;
 ///  * [showModalBottomSheet], which can be used to display a modal bottom
 ///    sheet.
 ///  * <https://material.io/design/components/sheets-bottom.html>
-class BottomSheet extends StatefulWidget {
+class BottomSheetApp extends StatefulWidget {
   /// Creates a bottom sheet.
   ///
   /// Typically, bottom sheets are created implicitly by
   /// [ScaffoldState.showBottomSheet], for persistent bottom sheets, or by
   /// [showModalBottomSheet], for modal bottom sheets.
-  const BottomSheet({
+  const BottomSheetApp({
     Key key,
     this.animationController,
     this.enableDrag = true,
     this.elevation = 0.0,
+    this.isTransparency = false,
+    this.bottomSheetBgColor,
     @required this.onClosing,
     @required this.builder
   }) : assert(enableDrag != null),
@@ -65,7 +68,7 @@ class BottomSheet extends StatefulWidget {
 
   /// The animation that controls the bottom sheet's position.
   ///
-  /// The BottomSheet widget will manipulate the position of this animation, it
+  /// The BottomSheetApp widget will manipulate the position of this animation, it
   /// is not just a passive observer.
   final AnimationController animationController;
 
@@ -95,27 +98,46 @@ class BottomSheet extends StatefulWidget {
   /// Defaults to 0. The value is non-negative.
   final double elevation;
 
-  @override
-  _BottomSheetState createState() => _BottomSheetState();
+  //? 最后的背景是否透明
+  final bool isTransparency;
 
-  /// Creates an animation controller suitable for controlling a [BottomSheet].
-  static AnimationController createAnimationController(TickerProvider vsync) {
+  //? 如果不透明的话,设置背景颜色
+  final Color bottomSheetBgColor; 
+
+  @override
+  _BottomSheetAppState createState() => _BottomSheetAppState();
+
+  /// Creates an animation controller suitable for controlling a [BottomSheetApp].
+  static AnimationController createAnimationController(TickerProvider vsync, {Duration duration = _kBottomSheetDuration}) {
     return AnimationController(
-      duration: _kBottomSheetDuration,
-      debugLabel: 'BottomSheet',
+      duration: duration,
+      debugLabel: 'BottomSheetApp',
       vsync: vsync,
     );
   }
 }
 
-class _BottomSheetState extends State<BottomSheet> {
+class _BottomSheetAppState extends State<BottomSheetApp> {
 
-  final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheet child');
+  final GlobalKey _childKey = GlobalKey(debugLabel: 'BottomSheetApp child');
 
   double get _childHeight {
     final RenderBox renderBox = _childKey.currentContext.findRenderObject();
     return renderBox.size.height;
   }
+  
+  // 获取背景颜色
+  Color get _bgColor {
+    Color typeColor = Theme.of(context).canvasColor;
+    typeColor = widget.bottomSheetBgColor ?? (typeColor ?? _kBottomSheetBgColor);
+    return widget.isTransparency ? null : typeColor;
+  }
+
+  MaterialType get _type {
+    return widget.isTransparency 
+    ? MaterialType.transparency 
+    : MaterialType.canvas;
+  } 
 
   bool get _dismissUnderway => widget.animationController.status == AnimationStatus.reverse;
 
@@ -146,6 +168,8 @@ class _BottomSheetState extends State<BottomSheet> {
   @override
   Widget build(BuildContext context) {
     final Widget bottomSheet = Material(
+      type: _type,
+      color: _bgColor,
       key: _childKey,
       elevation: widget.elevation,
       child: widget.builder(context),
@@ -216,9 +240,11 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
               return new ClipRect(
                   child: new CustomSingleChildLayout(
                       delegate: new _ModalBottomSheetLayout(widget.route.animation.value, bottomInset),
-                      child: new BottomSheet(
+                      child: new BottomSheetApp(
                           enableDrag: widget.route.enableDrag,
                           animationController: widget.route._animationController,
+                          isTransparency: widget.route.isTransparency,
+                          bottomSheetBgColor: widget.route.bottomSheetBgColor,
                           onClosing: () => Navigator.pop(context),
                           builder: widget.route.builder
                       )
@@ -242,6 +268,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.dismissOnTapBarrier,
     this.bottomSheetDuration,
     this.bottomSheetBarrierColor,
+    this.isTransparency = false,
+    this.bottomSheetBgColor,
   }) : super(settings: settings);
 
   final WidgetBuilder builder;
@@ -252,7 +280,9 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   // Fixme: 点击背景如何消失
   final bool dismissOnTapBarrier;  //? 是否要点击 上面半透明背景 消失
   final Duration bottomSheetDuration; //? 动画时间
-  final Color bottomSheetBarrierColor; //? 背景颜色
+  final Color bottomSheetBarrierColor; //? 上面背景颜色
+  final bool isTransparency; //? 下面背景是否透明
+  final Color bottomSheetBgColor; //? 如果不透明的话,设置背景颜色
 
   @override
   Duration get transitionDuration => bottomSheetDuration ?? _kBottomSheetDuration;
@@ -271,12 +301,10 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    //? 以前是访问的 BottomSheet 的静态方法 static
-    // _animationController = BottomSheet.createAnimationController(navigator.overlay);
-    _animationController = AnimationController(
+    //? 以前是访问的 BottomSheetApp 的静态方法 static
+    _animationController = BottomSheetApp.createAnimationController(
+      navigator.overlay,
       duration: bottomSheetDuration ?? _kBottomSheetDuration,
-      debugLabel: 'BottomSheet',
-      vsync: navigator.overlay,
     );
     return _animationController;
   }
@@ -317,7 +345,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
 ///
 /// See also:
 ///
-///  * [BottomSheet], which is the widget normally returned by the function
+///  * [BottomSheetApp], which is the widget normally returned by the function
 ///    passed as the `builder` argument to [showModalBottomSheet].
 ///  * [showBottomSheet] and [ScaffoldState.showBottomSheet], for showing
 ///    non-modal bottom sheets.
@@ -331,6 +359,8 @@ Future<T> showModalBottomSheetApp<T>({
   bool resizeToAvoidBottomPadding : true,
   Duration bottomSheetDuration: _kBottomSheetDuration,
   Color bottomSheetBarrierColor: _kBottomSheetBarrierColor,
+  bool isTransparency: false,
+  Color bottomSheetBgColor,
 }) {
   assert(context != null);
   assert(builder != null);
@@ -344,5 +374,7 @@ Future<T> showModalBottomSheetApp<T>({
     dismissOnTapBarrier: dismissOnTapBarrier,
     bottomSheetBarrierColor: bottomSheetBarrierColor,
     bottomSheetDuration: bottomSheetDuration,
+    isTransparency: isTransparency,
+    bottomSheetBgColor: bottomSheetBgColor
   ));
 }

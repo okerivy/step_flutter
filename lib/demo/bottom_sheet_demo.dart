@@ -158,38 +158,14 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
       context: context,
       dismissOnTap: true, //? 是否要点击下面白色背景 消失
       dismissOnTapBarrier: true, //? 是否要点击 上面半透明背景 消失
-      enableDrag: false, //? 是否允许 拖拽关闭
+      enableDrag: true, //? 是否允许 拖拽关闭
       resizeToAvoidBottomPadding: true, //? 好像是计算底部的工具栏
-      bottomSheetBarrierColor: Colors.deepPurple.withOpacity(0.5), //? 背景颜色
-      bottomSheetDuration: Duration(milliseconds: 1500), //? 动画时间
+      bottomSheetBarrierColor: Colors.yellow.withOpacity(0.5), //? 上面背景颜色
+      bottomSheetDuration: Duration(milliseconds: 500), //? 动画时间
+      bottomSheetBgColor: Colors.red.withOpacity(0.5), //? 下面背景颜色
+      isTransparency: false, //? 是否透明
       builder: (BuildContext context) {
-        return Container(
-          // Fixme: 这个颜色 怎么设置成 半透明
-          color: Colors.blueGrey.withOpacity(0.5),
-          height: 500.0,
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                title: Text('Option A'),
-                onTap: () {
-                  Navigator.pop(context, 'A');
-                },
-              ),
-              ListTile(
-                title: Text('Option B'),
-                onTap: () {
-                  Navigator.pop(context, 'B');
-                },
-              ),
-              ListTile(
-                title: Text('Option C'),
-                onTap: () {
-                  Navigator.pop(context, 'C');
-                },
-              ),
-            ],
-          ),
-        );
+        return SheetStackDemo();
       }
     );
 
@@ -252,6 +228,123 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+//? 普通的一个 Container 透明
+class SheetContainDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // Fixme: 这个颜色 怎么设置成 半透明
+      // color: Colors.lightGreen.withOpacity(0.5),
+      height: 400.0,
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text('Option A'),
+            onTap: () {
+              Navigator.pop(context, 'A');
+            },
+          ),
+          ListTile(
+            title: Text('Option B'),
+            onTap: () {
+              Navigator.pop(context, 'B');
+            },
+          ),
+          ListTile(
+            title: Text('Option C'),
+            onTap: () {
+              Navigator.pop(context, 'C');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//? 让背景图片也透明
+class SheetStackDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.green.withOpacity(0.3),
+      margin: EdgeInsets.all(16.0),
+      child: Stack(
+        children: <Widget>[
+          Opacity(
+            opacity: 0.5,
+            child: Container(
+              // Fixme: 这个颜色 怎么设置成 半透明
+              // color: Colors.blue.withOpacity(0.5),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage('https://resources.ninghao.org/images/say-hello-to-barry.jpg'),
+                  alignment: Alignment.topCenter,
+                  // repeat: ImageRepeat.repeatY, 
+                  fit: BoxFit.cover, 
+                  
+                  colorFilter: ColorFilter.mode(
+                    Colors.indigoAccent[400].withOpacity(0.5), //? 滤镜的颜色
+                    BlendMode.hardLight, //? 滤镜的混合模式
+                  )
+                ),
+              ),
+              margin: EdgeInsets.all(16.0),
+              height: 400.0,
+            ),
+          ),
+          Container(
+            // Fixme: 这个颜色 怎么设置成 半透明
+            // color: Colors.blue.withOpacity(0.5),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: NetworkImage('https://resources.ninghao.org/images/say-hello-to-barry.jpg'),
+            //     alignment: Alignment.topCenter,
+            //     // repeat: ImageRepeat.repeatY, 
+            //     fit: BoxFit.cover, 
+                
+            //     colorFilter: ColorFilter.mode(
+            //       Colors.indigoAccent[400].withOpacity(0.5), //? 滤镜的颜色
+            //       BlendMode.hardLight, //? 滤镜的混合模式
+            //     )
+            //   ),
+            // ),
+            margin: EdgeInsets.all(32.0),
+            height: 400.0,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.blue.withOpacity(1),
+                  height: 100,
+                  child: ListTile(
+                    title: Text('Option A'),
+                    onTap: () {
+                      Navigator.pop(context, 'A');
+                    },
+                  ),
+                ),
+                ListTile(
+                  title: Text('Option B'),
+                  onTap: () {
+                    Navigator.pop(context, 'B');
+                  },
+                ),
+                ListTile(
+                  title: Text('Option C'),
+                  onTap: () {
+                    Navigator.pop(context, 'C');
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
