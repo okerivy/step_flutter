@@ -49,6 +49,13 @@ class _ChipDemoState extends State<ChipDemo> {
                     ),
                   ),
                 ),
+                Chip(
+                  label: Text('City'),
+                  onDeleted: () {},
+                  deleteIcon: Icon(Icons.delete_sweep), //? 删除按钮图片
+                  deleteIconColor: Colors.deepOrange, //? 删除按钮颜色
+                  deleteButtonTooltipMessage: '这是删除!', //? 长按时的提示
+                ),
                 //? 分隔线
                 Divider(
                   color: Colors.grey,
