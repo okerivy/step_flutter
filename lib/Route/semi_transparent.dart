@@ -33,6 +33,7 @@ class TutorialOverlay extends ModalRoute<void> {
       ) {
     // This makes sure that text and other content follows the material style
     return Material(
+      //* 这句话是关键, 可以让 背景透明 MaterialType.transparency,
       type: MaterialType.transparency,
       // make sure that the overlay content is not cut off
       child: SafeArea(
