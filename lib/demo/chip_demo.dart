@@ -49,6 +49,12 @@ class _ChipDemoState extends State<ChipDemo> {
                     ),
                   ),
                 ),
+                //? 分隔线
+                Divider(
+                  color: Colors.grey,
+                  height: 32.0, //? 不是线宽, 而是 线占用的空白宽度
+                  indent: 32.0, //? 缩进
+                ), 
               ],
             )
           ],
