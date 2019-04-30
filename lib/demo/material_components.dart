@@ -9,6 +9,7 @@ import 'package:step_flutter/demo/datetime_demo.dart';
 import 'package:step_flutter/demo/expansion_panel_demo.dart';
 import 'package:step_flutter/demo/floating_action_button_demo.dart';
 import 'package:step_flutter/demo/form_demo.dart';
+import 'package:step_flutter/demo/paginated_data_table_demo.dart';
 import 'package:step_flutter/demo/popup_menu_button_demo.dart';
 import 'package:step_flutter/demo/radio_demo.dart';
 import 'package:step_flutter/demo/simple_dialog_demo.dart';
@@ -26,6 +27,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'PaginatedDataTable 分页数据表格', page:PaginatedDataTableDemo(),),
           MCListItem(title: 'DataTable 数据表格', page:DataTableDemo(),),
           MCListItem(title: 'Chip 小标签', page:ChipDemo(),),
           MCListItem(title: 'ExpansionPanel 收缩面板', page:ExpansionPanelDemo(),),
