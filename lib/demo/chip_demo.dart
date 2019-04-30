@@ -7,6 +7,12 @@ class ChipDemo extends StatefulWidget {
 }
 
 class _ChipDemoState extends State<ChipDemo> {
+  List<String> _tags = [
+    "Apple",
+    "Banana",
+    "Lemon"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,10 +68,38 @@ class _ChipDemoState extends State<ChipDemo> {
                   height: 32.0, //? 不是线宽, 而是 线占用的空白宽度
                   indent: 32.0, //? 缩进
                 ), 
+                Wrap(
+                  spacing: 8.0,
+                  children: _tags.map(
+                    (String tag) {
+                      return Chip(
+                        label: Text(tag),
+                        onDeleted: () {
+                          setState(() {
+                            _tags.remove(tag);
+                          });
+                        },
+                      );
+                    }
+                  ).toList(),
+                )
               ],
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.restore),
+        onPressed: () {
+          setState(() {
+            _tags = [
+              "Apple",
+              "Banana",
+              "Lemon"
+            ];
+          });
+        },
+
       ),
     );
   }
