@@ -19,18 +19,19 @@ class _ChipDemoState extends State<ChipDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            //? Wrap 是换行布局 
+            Wrap(
+              direction: Axis.horizontal,  //? 排列方向
+              spacing: 16.0, //? 水平方向的间隔
+              runSpacing: 16.0, //? 竖直方向的间隔
               children: <Widget>[
                 Chip(
                   label: Text('Life'),
                 ),
-                SizedBox(width: 16.0),
                 Chip(
                   label: Text('Sunset'),
                   backgroundColor: Colors.orange,
                 ),
-                SizedBox(width: 16.0),
                 Chip(
                   label: Text('LU YA'),
                   //? 符号 头像
@@ -39,7 +40,6 @@ class _ChipDemoState extends State<ChipDemo> {
                     child: Text('陆'),
                   ),
                 ),
-                SizedBox(width: 16.0),
                 Chip(
                   label: Text('V for Vendetta'),
                   //? 符号 头像
