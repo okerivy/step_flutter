@@ -13,6 +13,7 @@ class _ChipDemoState extends State<ChipDemo> {
     "Lemon"
   ];
 
+  String _action = 'Nothing';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class _ChipDemoState extends State<ChipDemo> {
             Wrap(
               direction: Axis.horizontal,  //? 排列方向
               spacing: 16.0, //? 水平方向的间隔
-              runSpacing: 16.0, //? 竖直方向的间隔
+              runSpacing: 8.0, //? 竖直方向的间隔
               children: <Widget>[
                 Chip(
                   label: Text('Life'),
@@ -65,7 +66,7 @@ class _ChipDemoState extends State<ChipDemo> {
                 //? 分隔线
                 Divider(
                   color: Colors.grey,
-                  height: 32.0, //? 不是线宽, 而是 线占用的空白宽度
+                  height: 16.0, //? 不是线宽, 而是 线占用的空白宽度
                   indent: 32.0, //? 缩进
                 ), 
                 Wrap(
@@ -82,7 +83,31 @@ class _ChipDemoState extends State<ChipDemo> {
                       );
                     }
                   ).toList(),
-                )
+                ),
+                Divider(
+                  color: Colors.grey,
+                  height: 16.0, //? 不是线宽, 而是 线占用的空白宽度
+                  indent: 32.0, //? 缩进
+                ), 
+                Container(
+                  width: double.infinity,
+                  child: Text('ActionChip: $_action'),
+                ),
+                Wrap(
+                  spacing: 8.0,
+                  children: _tags.map(
+                    (String tag) {
+                      return ActionChip(
+                        label: Text(tag),
+                        onPressed: () {
+                          setState(() {
+                            _action = tag;
+                          });
+                        },
+                      );
+                    }
+                  ).toList(),
+                ),
               ],
             )
           ],
