@@ -79,6 +79,17 @@ class _DataTableDemoTestFromPostsState extends State<DataTableDemoTestFromPosts>
           rows: posts.map(
             (Post item) {
               return DataRow(
+                selected: item.selected,
+                onSelectChanged: (bool value) {
+                  setState(() {
+                    // Fixme: 为啥 返回到上个页面, 选中的状态 还存在???
+
+                    print('item.selected ${item.selected}, value $value');
+                    if (item.selected != value) {
+                      item.selected = value;
+                    }
+                  });
+                },
                 cells: [
                   DataCell(Text(item.title)),
                   DataCell(Text(item.author)),
