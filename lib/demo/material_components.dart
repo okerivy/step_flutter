@@ -4,6 +4,7 @@ import 'package:step_flutter/demo/bottom_sheet_demo.dart';
 import 'package:step_flutter/demo/button_demo.dart';
 import 'package:step_flutter/demo/checkbox_demo.dart';
 import 'package:step_flutter/demo/chip_demo.dart';
+import 'package:step_flutter/demo/data_table_demo.dart';
 import 'package:step_flutter/demo/datetime_demo.dart';
 import 'package:step_flutter/demo/expansion_panel_demo.dart';
 import 'package:step_flutter/demo/floating_action_button_demo.dart';
@@ -25,6 +26,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'DataTable 数据表格', page:DataTableDemo(),),
           MCListItem(title: 'Chip 小标签', page:ChipDemo(),),
           MCListItem(title: 'ExpansionPanel 收缩面板', page:ExpansionPanelDemo(),),
           MCListItem(title: 'SnackBar 操作提示栏', page:SnackBarDemo(),),
