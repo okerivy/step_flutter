@@ -14,6 +14,9 @@ class _ChipDemoState extends State<ChipDemo> {
   ];
 
   String _action = 'Nothing';
+
+  List<String> _selected = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,11 +100,42 @@ class _ChipDemoState extends State<ChipDemo> {
                   spacing: 8.0,
                   children: _tags.map(
                     (String tag) {
+                      //? 有动作的碎片
                       return ActionChip(
                         label: Text(tag),
                         onPressed: () {
                           setState(() {
                             _action = tag;
+                          });
+                        },
+                      );
+                    }
+                  ).toList(),
+                ),
+                Divider(
+                  color: Colors.grey,
+                  height: 16.0, //? 不是线宽, 而是 线占用的空白宽度
+                  indent: 32.0, //? 缩进
+                ), 
+                Container(
+                  width: double.infinity,
+                  child: Text('FilterChip: ${_selected.toString()}'),
+                ),
+                Wrap(
+                  spacing: 8.0,
+                  children: _tags.map(
+                    (String tag) {
+                      //? 过滤碎片 和 CheckBox 像, 有选中和未选中状态
+                      return FilterChip(
+                        label: Text(tag),
+                        selected: _selected.contains(tag),
+                        onSelected: (value) {
+                          setState(() {
+                            if (_selected.contains(tag)) {
+                              _selected.remove(tag);
+                            } else {
+                              _selected.add(tag);
+                            }
                           });
                         },
                       );
@@ -122,6 +156,7 @@ class _ChipDemoState extends State<ChipDemo> {
               "Banana",
               "Lemon"
             ];
+            _selected = [];
           });
         },
 
