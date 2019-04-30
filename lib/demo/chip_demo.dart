@@ -17,6 +17,8 @@ class _ChipDemoState extends State<ChipDemo> {
 
   List<String> _selected = [];
 
+  String _choice = 'Nothing';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,6 +144,33 @@ class _ChipDemoState extends State<ChipDemo> {
                     }
                   ).toList(),
                 ),
+                Divider(
+                  color: Colors.grey,
+                  height: 16.0, //? 不是线宽, 而是 线占用的空白宽度
+                  indent: 32.0, //? 缩进
+                ), 
+                Container(
+                  width: double.infinity,
+                  child: Text('ChoiceChip: $_choice'),
+                ),
+                Wrap(
+                  spacing: 8.0,
+                  children: _tags.map(
+                    (String tag) {
+                      //? 选择碎片 单选状态
+                      return ChoiceChip(
+                        label: Text(tag),
+                        selected: _choice == tag,
+                        selectedColor: Colors.black,
+                        onSelected: (value) {
+                          setState(() {
+                            _choice = tag;
+                          });
+                        },
+                      );
+                    }
+                  ).toList(),
+                ),
               ],
             )
           ],
@@ -157,6 +186,7 @@ class _ChipDemoState extends State<ChipDemo> {
               "Lemon"
             ];
             _selected = [];
+            _choice = 'Nothing';
           });
         },
 
