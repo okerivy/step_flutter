@@ -31,11 +31,22 @@ class RxDartDemoHome extends StatefulWidget {
 }
 
 class _RxDartDemoHomeState extends State<RxDartDemoHome> {
+  PublishSubject<String> _textFieldSubjext;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textFieldSubjext.close();
+  }
 
   @override
   void initState() { 
     super.initState();
     
+    _textFieldSubjext = PublishSubject<String>();
+
+    _textFieldSubjext.listen((data) => print('TextField: $data'));
+
     //? 把一个 Stream 交给 Observable构造方法,可以变成 Observable
     // Observable<String> _observable = 
     //     // Observable(Stream.fromIterable(['Hello', '你好']));
@@ -53,38 +64,43 @@ class _RxDartDemoHomeState extends State<RxDartDemoHome> {
     // BehaviorSubject<String> _subject = BehaviorSubject<String>();
 
     //? ReplaySubject 它可以把添加到 Controll 或者 Subject的所有数据交给监听器
-    ReplaySubject<String> _subject = ReplaySubject<String>(maxSize: 1);
+    // ReplaySubject<String> _subject = ReplaySubject<String>(maxSize: 1);
 
     //? 用创建的 Subject 监听 Observable 或者 Stream
     //? 相当于给 Observablet 添加了一个订阅,或者监听了 Observable
 
-    _subject.add('No 01');
-    _subject.add('No 02');
-    _subject.listen((data) => print('监听者 1: $data'));
-    _subject.add('one hha');
-    _subject.add('Hello');
-    _subject.listen((data) => print('监听者 2: ${data.toUpperCase()}'));
+    // _subject.add('No 01');
+    // _subject.add('No 02');
+    // _subject.listen((data) => print('监听者 1: $data'));
+    // _subject.add('one hha');
+    // _subject.add('Hello');
+    // _subject.listen((data) => print('监听者 2: ${data.toUpperCase()}'));
 
-    _subject.add('hola');
+    // _subject.add('hola');
 
-    //? 对于 不需要的subject 需要关闭掉
-    _subject.close();
+    // //? 对于 不需要的subject 需要关闭掉
+    // _subject.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('RxDartDemoHome 文本'),
-            ],
-          )
-        ],
+    return Theme(
+      data: Theme.of(context).copyWith(
+        primaryColor: Colors.deepOrange,
+      ),
+      child: TextField(
+        //? 修改光标颜色
+        cursorColor: Colors.blue,
+        onChanged: (value) {
+          _textFieldSubjext.add('input: $value');
+        },
+        onSubmitted: (value) {
+          _textFieldSubjext.add('submit: $value');
+        },
+        decoration: InputDecoration(
+          labelText: 'Title',
+          filled: true,
+        ),
       ),
     );
   }
