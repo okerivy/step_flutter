@@ -81,7 +81,7 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
   void onDone() {
     print('Stream完成');
   }
-  //? 使用 SteamBuild 可以根据Stream上面的数据构建小部件
+  //? 使用 StreamBuilder 可以根据Stream上面的数据构建小部件
   //? Stream 上面的数据有变化以后, 会重新构建小部件,
   //? 就不需要 再手动的通过 setState 方法了
   void onData(String data) {
