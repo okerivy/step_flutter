@@ -40,11 +40,7 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
         title: Text('StateManagementDemo'),
         elevation: 0.0,
       ),
-      body: Center(
-        child: Chip(
-          label: Text('$_count'),
-        ),
-      ),
+      body: CounterDemo(_count,),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -58,7 +54,26 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
   }
 }
 
+/**
+ * `StateManagementDemo` 小部件的状态 是[自己管理]的, 有时候小部件的状态,可以由[父辈管理]
+ * 下面我们把 `body`抽取出来 变成 `CounterDemo`, 这样 `StateManagementDemo` 就是`父辈`, `CounterDemo` 就是`儿子`
+ * 儿子`CounterDemo` 的状态 由 父亲 `StateManagementDemo` 管理, 当数据[状态]变化时,小部件会重新创建
+ * [注意:] 重建的小部件 这里是指 父亲`StateManagementDemo` , 因为 `setState` 这个方法在父亲那里.
+ */
+class CounterDemo extends StatelessWidget {
+  final int count;
+  //? 构造方法
+  CounterDemo(this.count);
 
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Chip(
+        label: Text('$count'),
+      ),
+    );
+  }
+}
 
 /**
  * StatelessWidget 不包含可以变化的状态, 状态就是state
