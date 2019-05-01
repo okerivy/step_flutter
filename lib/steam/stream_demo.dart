@@ -40,7 +40,8 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
 
   StreamSubscription _streamDemoSubscription;
   StreamController<String> _streamController;
-
+  //? 水槽, 水池
+  StreamSink _sinkDemo;
 
   @override
   void dispose() {
@@ -60,6 +61,8 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     print('创建 Stream 流');
     // Stream<String> _streamDemo = Stream.fromFuture(fetchData());
     _streamController = StreamController<String>();
+    _sinkDemo = _streamController.sink;
+
     print('开始监听 Stream');
 
     //? listen 可以订阅多个事件 StreamSubscription
@@ -91,7 +94,11 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     //? 创建的 _streamController 支持的数据类型的 就是 String
     String data = await fetchData();
     //? 给 Controller 添加一个数据
-    _streamController.add(data);
+    // _streamController.add(data);
+
+    //? 使用Sink 往 Stream 中添加数据
+    _sinkDemo.add(data);
+
   }
 
   void _pauseStream() {
