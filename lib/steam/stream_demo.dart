@@ -50,8 +50,17 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     print('创建 Stream 流');
     Stream<String> _streamDemo = Stream.fromFuture(fetchData());
     print('开始监听 Stream');
-    _streamDemo.listen(onData);
+
+    //? listen 可以订阅多个事件 StreamSubscription
+    _streamDemo.listen(onData, onError: onError, onDone: onDone);
     print('初始化完成 initState');
+  }
+
+  void onError(error) {
+    print('收到Stream错误 $error');
+  }
+  void onDone() {
+    print('Stream完成');
   }
 
   void onData(String data) {
@@ -59,7 +68,9 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
   }
   Future<String> fetchData() async {
     await Future.delayed(Duration(seconds: 3));
+    // throw '提示信息: SomeThing Error';
     return 'Hello ~';
+    
   }
 
   @override
