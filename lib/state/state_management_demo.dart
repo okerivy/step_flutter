@@ -47,7 +47,7 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
         title: Text('StateManagementDemo'),
         elevation: 0.0,
       ),
-      body: CounterDemo(_count, _increaseCount),
+      body: ConterWrapperDemo(_count, _increaseCount),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -57,6 +57,26 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
           print('count = $_count 变化,调用 setState方法后 页面也变化');
         },
       ),
+    );
+  }
+}
+
+/**
+ * 现在数据传递的方向是 
+ * `StateManagementDemo` -> `ConterWrapperDemo` -> `CounterDemo`
+ * 因为 子部件 `CounterDemo`需要数据, 所以 这样一级 一级 往下传,有个问题, 就是 
+ * `ConterWrapperDemo` 其实并不需要 这些数据: `count` 和  `increaseCount`
+ * 如果层级很深, 就会很麻烦
+ */
+class ConterWrapperDemo extends StatelessWidget {
+  final int count;
+  final VoidCallback increaseCount;
+  ConterWrapperDemo(this.count, this.increaseCount);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CounterDemo(count, increaseCount),
     );
   }
 }
@@ -78,12 +98,10 @@ class CounterDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ActionChip(
-        label: Text('$count'),
-        //? 执行的是从 爸爸那里传递过来的回调, 回调的 方法体 在爸爸 哪里.
-        onPressed: increaseCount,
-      ),
+    return ActionChip(
+      label: Text('$count'),
+      //? 执行的是从 爸爸那里传递过来的回调, 回调的 方法体 在爸爸 哪里.
+      onPressed: increaseCount,
     );
   }
 }
