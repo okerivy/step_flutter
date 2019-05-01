@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
  * 小部件可以自己去管理所需要的数据
  * 这些数据也可以通过小部件的构造函数从它的父辈那里 传递过来
  * 
- * scoptedModel 更有效的把数据传给小部件
+ * scopedModel 更有效的把数据传给小部件
  */
 
 /**
@@ -50,7 +50,7 @@ class _StateManagerInheritedDemoState extends State<StateManagerInheritedDemo> {
       increaseCount: _increaseCount,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('StateManagementDemo'),
+          title: Text('StateManagerInheritedDemo'),
           elevation: 0.0,
         ),
         body: ConterWrapperDemo(),

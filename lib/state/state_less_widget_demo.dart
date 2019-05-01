@@ -21,7 +21,7 @@ class StateLessWidgetDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('StateManagementDemo'),
+        title: Text('StateLessWidgetDemo'),
         elevation: 0.0,
       ),
       body: Center(
