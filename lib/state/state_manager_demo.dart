@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:step_flutter/state/state_ful_widget_demo.dart';
 import 'package:step_flutter/state/state_less_widget_demo.dart';
+import 'package:step_flutter/state/state_manager_inherited_demo.dart';
 import 'package:step_flutter/state/state_manager_nomal_demo.dart';
 
 
@@ -52,6 +53,14 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => StateManagerNomalDemo())
+                );
+              },
+            ),
+            OutlineButton(
+              child: Text('state_manager_inherited_demo'),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => StateManagerInheritedDemo())
                 );
               },
             ),
