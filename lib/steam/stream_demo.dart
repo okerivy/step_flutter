@@ -60,7 +60,7 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     //? 就是等 Stream 有数据的时候, 我们可以决定怎么样使用这个数据
     print('创建 Stream 流');
     // Stream<String> _streamDemo = Stream.fromFuture(fetchData());
-    _streamController = StreamController<String>();
+    _streamController = StreamController.broadcast();
     _sinkDemo = _streamController.sink;
 
     print('开始监听 Stream');
@@ -68,6 +68,9 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     //? listen 可以订阅多个事件 StreamSubscription
     // _streamDemoSubscription = _streamDemo.listen(onData, onError: onError, onDone: onDone);
     _streamDemoSubscription = _streamController.stream.listen(onData, onError: onError, onDone: onDone);
+    
+    //? 多次订阅
+    _streamController.stream.listen(onDataTwo, onError: onError, onDone: onDone);
     print('初始化完成 initState');
   }
 
@@ -80,6 +83,9 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
 
   void onData(String data) {
     print('收到Stream数据 $data');
+  }
+  void onDataTwo(String data) {
+    print('收到Stream数据 onDataTwo: $data');
   }
   Future<String> fetchData() async {
     await Future.delayed(Duration(seconds: 5));
