@@ -16,6 +16,7 @@ import 'package:step_flutter/demo/radio_demo.dart';
 import 'package:step_flutter/demo/simple_dialog_demo.dart';
 import 'package:step_flutter/demo/slider_demo.dart';
 import 'package:step_flutter/demo/snack_bar_demo.dart';
+import 'package:step_flutter/demo/stepper_demo.dart';
 import 'package:step_flutter/demo/switch_demo.dart';
 
 class MaterialComponents extends StatelessWidget {
@@ -28,6 +29,7 @@ class MaterialComponents extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
+          MCListItem(title: 'Stepper 步骤', page:StepperDemo(),),
           MCListItem(title: 'Card 卡片', page:CardDemo(),),
           MCListItem(title: 'PaginatedDataTable 分页数据表格', page:PaginatedDataTableDemo(),),
           MCListItem(title: 'DataTable 数据表格', page:DataTableDemo(),),
