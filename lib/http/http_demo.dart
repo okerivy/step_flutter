@@ -47,6 +47,9 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
     //? json 转成 map
     final postJsonConverted = convert.json.decode(postJson);
     print(postJsonConverted is Map);
+
+    final postModel = Post.fromJson(postJsonConverted);
+    print('Title: ${postModel.title}, description: ${postModel.description}');
   }
 
   fetchPost() async {
@@ -61,4 +64,21 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
   Widget build(BuildContext context) {
     return Container();
   }
+}
+
+class Post {
+  final String title;
+  final String description;
+
+  Post(
+    this.title,
+    this.description,
+  );
+
+  // Fixme: 冒号 这是什么写法?
+  //? 构造函数大括号前还可用冒号指明初始化字段表，常用来设置final字段
+  // http://wiki.jikexueyuan.com/project/dart-language-tour/classes.html
+  Post.fromJson(Map json)
+    : title = json['title'],
+      description = json['description'];
 }
