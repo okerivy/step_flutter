@@ -6,6 +6,8 @@ class StepperDemo extends StatefulWidget {
 }
 
 class _StepperDemoState extends State<StepperDemo> {
+  int _currentStep = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,24 +26,40 @@ class _StepperDemoState extends State<StepperDemo> {
                 primaryColor: Colors.green,
               ),
               child: Stepper(
+                currentStep: _currentStep,
+                onStepTapped: (value) {
+                  setState(() {
+                    _currentStep = value;
+                  });
+                },
+                onStepContinue: () {
+                  setState(() {
+                    _currentStep = _currentStep < 2 ? _currentStep + 1 : 0;
+                  });
+                },
+                onStepCancel: () {
+                  setState(() {
+                    _currentStep = _currentStep > 0 ? _currentStep - 1 : 0;
+                  });
+                },
                 steps: [
                   Step(
                     title: Text('Login'),
                     subtitle: Text('Login first'),
                     content: Text('Ut ullamco minim excepteur dolor amet proident ea deserunt.'),
-                    isActive: true,
+                    isActive: _currentStep == 0,
                   ),
                   Step(
                     title: Text('Choose Plan'),
                     subtitle: Text('Choose you plan'),
                     content: Text('Duis fugiat adipisicing ex cupidatat amet ut deserunt sint occaecat ullamco dolor dolor eu.'),
-                    isActive: true,
+                    isActive: _currentStep == 1,
                   ),
                   Step(
                     title: Text('Confirm payment'),
                     subtitle: Text('Comfirm you payment method.'),
                     content: Text('Culpa fugiat anim amet commodo pariatur proident Lorem.'),
-                    isActive: true,
+                    isActive: _currentStep == 2,
                   ),
                 ],
               ),
