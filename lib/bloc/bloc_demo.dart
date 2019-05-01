@@ -21,13 +21,17 @@ import 'package:step_flutter/bloc/counter_bloc_demo.dart';
 class BlockDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('BlockDemo'),
-        elevation: 0.0,
+    //? 设置 CounterProvider 的值
+    return CounterProvider(
+      bloc: CounterBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('BlockDemo'),
+          elevation: 0.0,
+        ),
+        body: CounterHome(),
+        floatingActionButton: CounterActionButton(),
       ),
-      body: CounterHome(),
-      floatingActionButton: CounterActionButton(),
     );
   }
 }
