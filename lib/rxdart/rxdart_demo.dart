@@ -45,7 +45,9 @@ class _RxDartDemoHomeState extends State<RxDartDemoHome> {
     
     _textFieldSubjext = PublishSubject<String>();
 
-    _textFieldSubjext.listen((data) => print('TextField: $data'));
+    _textFieldSubjext
+      .map((item) => 'Item: $item')
+      .listen((data) => print('TextField: $data'));
 
     //? 把一个 Stream 交给 Observable构造方法,可以变成 Observable
     // Observable<String> _observable = 
