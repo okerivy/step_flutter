@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 /**
  * state management 
  * state 状态, 就是小部件里面的数据
@@ -7,9 +9,6 @@
  * 
  * scoptedModel 更有效的把数据传给小部件
  */
-
-
-import 'package:flutter/material.dart';
 
 /**
  * 如果我们创建的小部件, 需要根据用户的行为发生变化, 那么我们需要创建 StatefulWidget
@@ -34,6 +33,13 @@ class StateManagerNomalDemo extends StatefulWidget {
 class _StateManagerNomalDemoState extends State<StateManagerNomalDemo> {
   //? 内部属性 需要加 下划线 _
   int _count = 0;
+  void _increaseCount() {
+    setState(() {
+      _count += 1;
+    });
+    print('这是儿子内部点击: count = $_count ');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +47,7 @@ class _StateManagerNomalDemoState extends State<StateManagerNomalDemo> {
         title: Text('StateManagerNomalDemo'),
         elevation: 0.0,
       ),
-      body: CounterDemo(_count,),
+      body: CounterDemo(_count, _increaseCount),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -63,14 +69,20 @@ class _StateManagerNomalDemoState extends State<StateManagerNomalDemo> {
  */
 class CounterDemo extends StatelessWidget {
   final int count;
+  //? 从父辈那里传递过来一个回调, 来改变状态
+  //? 这个这个 小部件 是 StatelessWidget, 它内部的 onPress 方法并不能刷新 小部件的状态
+  //? 所以还是由父辈来刷新
+  final VoidCallback increaseCount;
   //? 构造方法
-  CounterDemo(this.count);
+  CounterDemo(this.count, this.increaseCount);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Chip(
+      child: ActionChip(
         label: Text('$count'),
+        //? 执行的是从 爸爸那里传递过来的回调, 回调的 方法体 在爸爸 哪里.
+        onPressed: increaseCount,
       ),
     );
   }
