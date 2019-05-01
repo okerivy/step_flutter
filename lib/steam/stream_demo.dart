@@ -42,6 +42,7 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
   StreamController<String> _streamController;
   //? 水槽, 水池
   StreamSink _sinkDemo;
+  String _data = '----';
 
   @override
   void dispose() {
@@ -82,6 +83,9 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
   }
 
   void onData(String data) {
+    setState(() {
+      _data = data;
+    });
     print('收到Stream数据 $data');
   }
   void onDataTwo(String data) {
@@ -127,6 +131,7 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Text('$_data'),
           FlatButton(
             child: Text('添加'), 
             onPressed: _addDataToStream,
