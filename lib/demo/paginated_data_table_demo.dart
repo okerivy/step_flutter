@@ -49,6 +49,34 @@ class PostDataSource extends DataTableSource {
       ]
     );
   }
+
+  //! 为什么这里是 _sort ,外界还是可以调用
+  //? 第一个参数是一个方法参数, 其实应该是相当于回调之类的 
+  //? getField(post) 接收一个 方法参数 post, 然后方法体 是由调用者来实现
+  //? 这样外界调用的时候, 需要传一个 闭包 有参数, 有方法体的实现,
+  //? 传进来以后, 在 _sort 内部 可以 随时调用 这个 外界写好的闭包.
+  void _sort(getField(post), bool ascending) {
+    _posts.sort((a, b) {
+      if (!ascending) {
+        final c = a;
+        a = b;
+        b = c;
+      }
+
+      //?  调用外界的闭包
+      final aValue = getField(a);
+      final bValue = getField(b);
+
+      //? 外界排序, 其实就是想要一个 int 值, -1 0 +1 
+      //? 至于这个 int值怎么生成, 甚至可以与 需要排序的两个item 无关. 也可以写死.
+      //? 怎么合乎你的逻辑, 怎么比较
+      return Comparable.compare(aValue, bValue);
+    });
+
+    //? 排序完成以后 执行这个干啥...
+    notifyListeners();
+
+  }
 }
 
 //? 通过列表生成数据表格
@@ -82,24 +110,18 @@ class _PaginatedDataTableDemoTestFromPostsState extends State<PaginatedDataTable
               //   child: Text("Title"),
               // )
               label: Text("Title"),
-              onSort: (int index, bool ascending) {
+              // Fixme: 怎么感觉这 上下 箭头 图标不对啊
+              onSort: (int columnIndex, bool ascending) {
                 setState(() {
-                  _sortColumnIndex = index;
+                  _sortColumnIndex = columnIndex;
                   _sortAscending = ascending;
-                  print('index $index, ascending $ascending');
+                  print('index $columnIndex, ascending $ascending');
 
-                  posts.sort((a, b) {
-                    if (!ascending) {
-                      final c = a;
-                      a = b;
-                      b = c;
-                    }
-                    // sort 的交换是按 升序排的 
-                    // 因为是升序, 如果 a.len < b.len 符合sort升序规则, 不交换
-                    // 如果是降序, 因为 a.len < b.len 符合sort升序规则, 不交换, 
-                    //    但是 因为是降序, 需要交换, 所以 先搞 两个假数据, 符合交换规则, 所以就先让 a 和 b 交换大小了, 然后根据 假a 假b 来判断交换
-                    return a.title.length.compareTo(b.title.length);
-                  });
+                  //? _sort 有两个参数, 第一个参数是接受一个方法
+                  //?     这个方法接收一个 参数 post, 然后返回一个 结果 post.title.length
+                  //?     意思是用一下文章标题的长度来作为 排序的依据
+                  //?     第二个参数是表示 是否是升序排列
+                  _postDataSource._sort((post) => post.title.length, ascending);
                 });
               }
             ),
