@@ -7,7 +7,7 @@ import 'package:step_flutter/demo/material_components.dart';
 import 'package:step_flutter/demo/navigator_demo.dart';
 import 'package:step_flutter/demo/sliver_demo.dart';
 import 'package:step_flutter/demo/view_demo.dart';
-import 'package:step_flutter/state/state_management_demo.dart';
+import 'package:step_flutter/state/state_manager_demo.dart';
 import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
 import 'demo/bottom_navigation_bar_demo.dart';
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
         '/about': (context) => Page(title: 'About'),
         '/form': (context) => FormDemo(),
         '/mdc': (context) => MaterialComponents(),
-        '/state-management': (context) => StateManagementDemo(),
+        '/state-management': (context) => StateManagerDemo(),
       },
       //* 这里定义的主题在整个App 都是有效的
       theme: ThemeData(
