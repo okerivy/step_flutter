@@ -46,16 +46,21 @@ class _RxDartDemoHomeState extends State<RxDartDemoHome> {
 
     // _observable.listen(print);
 
-    PublishSubject<String> _subject = PublishSubject<String>();
+    // PublishSubject<String> _subject = PublishSubject<String>();
+
+    //? 这种BehaviorSubject 可以把最后一次添加的数据,作为第一项交给新来的监听者
+    //? 以前  新来的监听者 只能监听以后的, 现在还能获得一次 以前的剩饭
+    BehaviorSubject<String> _subject = BehaviorSubject<String>();
 
     //? 用创建的 Subject 监听 Observable 或者 Stream
     //? 相当于给 Observablet 添加了一个订阅,或者监听了 Observable
     _subject.listen((data) => print('监听者 1: $data'));
+    _subject.add('one hha');
     _subject.add('Hello');
     _subject.listen((data) => print('监听者 2: ${data.toUpperCase()}'));
 
     _subject.add('hola');
-    
+
     //? 对于 不需要的subject 需要关闭掉
     _subject.close();
   }
