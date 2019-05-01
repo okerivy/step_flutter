@@ -39,7 +39,15 @@ class StreamDemoHome extends StatefulWidget {
 class _StreamDemoHomeState extends State<StreamDemoHome> {
 
   StreamSubscription _streamDemoSubscription;
+  StreamController<String> _streamController;
 
+
+  @override
+  void dispose() {
+    //? 关掉不需要的Stream
+    _streamController.close();
+    super.dispose();
+  }
   @override
   //? initState 表示初始化的一些数据
   void initState() { 
@@ -50,11 +58,13 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     //? 我们需要用到 Stream 出现的数据, 需要监听一下 Stream,
     //? 就是等 Stream 有数据的时候, 我们可以决定怎么样使用这个数据
     print('创建 Stream 流');
-    Stream<String> _streamDemo = Stream.fromFuture(fetchData());
+    // Stream<String> _streamDemo = Stream.fromFuture(fetchData());
+    _streamController = StreamController<String>();
     print('开始监听 Stream');
 
     //? listen 可以订阅多个事件 StreamSubscription
-    _streamDemoSubscription = _streamDemo.listen(onData, onError: onError, onDone: onDone);
+    // _streamDemoSubscription = _streamDemo.listen(onData, onError: onError, onDone: onDone);
+    _streamDemoSubscription = _streamController.stream.listen(onData, onError: onError, onDone: onDone);
     print('初始化完成 initState');
   }
 
@@ -73,6 +83,15 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     // throw '提示信息: SomeThing Error';
     return 'Hello ~';
     
+  }
+  
+  void _addDataToStream() async {
+    print('Add Data to Stream');
+
+    //? 创建的 _streamController 支持的数据类型的 就是 String
+    String data = await fetchData();
+    //? 给 Controller 添加一个数据
+    _streamController.add(data);
   }
 
   void _pauseStream() {
@@ -95,9 +114,14 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          FlatButton(
+            child: Text('添加'), 
+            onPressed: _addDataToStream,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              
               FlatButton(
                 child: Text('暂停'), 
                 onPressed: _pauseStream,
