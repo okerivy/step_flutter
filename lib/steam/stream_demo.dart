@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+
 
 /**
  * https://www.dartlang.org/tutorials/language/streams
@@ -35,6 +37,31 @@ class StreamDemoHome extends StatefulWidget {
 }
 
 class _StreamDemoHomeState extends State<StreamDemoHome> {
+
+  @override
+  //? initState 表示初始化的一些数据
+  void initState() { 
+    super.initState();
+
+    //? 创建一个 Stream, 这个Stream 是根据 Future 生成的
+    //? 数据类型是 String, 具体数据 就是 'Hello ~'
+    //? 我们需要用到 Stream 出现的数据, 需要监听一下 Stream,
+    //? 就是等 Stream 有数据的时候, 我们可以决定怎么样使用这个数据
+    print('创建 Stream 流');
+    Stream<String> _streamDemo = Stream.fromFuture(fetchData());
+    print('开始监听 Stream');
+    _streamDemo.listen(onData);
+    print('初始化完成 initState');
+  }
+
+  void onData(String data) {
+    print('收到Stream数据 $data');
+  }
+  Future<String> fetchData() async {
+    await Future.delayed(Duration(seconds: 3));
+    return 'Hello ~';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
