@@ -35,7 +35,12 @@ class _RxDartDemoHomeState extends State<RxDartDemoHome> {
     super.initState();
     
     //? 把一个 Stream 交给 Observable构造方法,可以变成 Observable
-    Observable<String> _observable = Observable(Stream.fromIterable(['Hello', '你好']));
+    Observable<String> _observable = 
+        // Observable(Stream.fromIterable(['Hello', '你好']));
+        // Observable.fromFuture(Future.value('Hello ~'));
+        // Observable.fromIterable(['迭代', 'Iterable']);
+        // Observable.just('Hello  just');
+        Observable.periodic(Duration(seconds: 3), (x) => '第几次: $x');
 
     _observable.listen(print);
   }
