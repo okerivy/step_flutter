@@ -47,7 +47,10 @@ class _RxDartDemoHomeState extends State<RxDartDemoHome> {
 
     _textFieldSubjext
       // .map((item) => 'Item: $item')
-      .where((item) => item.length > 10)
+      // .where((item) => item.length > 10)
+      //? 如果数据有变化的时候, 请求接口 (例如搜索框), 那么时时的请求接口会浪费
+      //? debounce 可以设置一个间隔的时间 当停止输入 几秒以后,才会让当前数据通过
+      .debounce(Duration(milliseconds: 500))
       .listen((data) => print('TextField: $data'));
 
     //? 把一个 Stream 交给 Observable构造方法,可以变成 Observable
