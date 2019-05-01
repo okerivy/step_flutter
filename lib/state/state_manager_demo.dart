@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_flutter/state/state_less_widget_demo.dart';
 
 class StateManagerDemo extends StatefulWidget {
   @override
@@ -18,12 +19,14 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('StateManagerDemo 文本'),
-              ],
-            )
+            OutlineButton(
+              child: Text('state_less_widget_demo'),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => StateLessWidgetDemo())
+                );
+              },
+            ),
           ],
         ),
       ),
