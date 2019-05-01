@@ -38,6 +38,8 @@ class StreamDemoHome extends StatefulWidget {
 
 class _StreamDemoHomeState extends State<StreamDemoHome> {
 
+  StreamSubscription _streamDemoSubscription;
+
   @override
   //? initState 表示初始化的一些数据
   void initState() { 
@@ -52,7 +54,7 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     print('开始监听 Stream');
 
     //? listen 可以订阅多个事件 StreamSubscription
-    _streamDemo.listen(onData, onError: onError, onDone: onDone);
+    _streamDemoSubscription = _streamDemo.listen(onData, onError: onError, onDone: onDone);
     print('初始化完成 initState');
   }
 
@@ -67,10 +69,23 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
     print('收到Stream数据 $data');
   }
   Future<String> fetchData() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 5));
     // throw '提示信息: SomeThing Error';
     return 'Hello ~';
     
+  }
+
+  void _pauseStream() {
+    print('pause subscription');
+    _streamDemoSubscription.pause();
+  }
+  void _resumeStream() {
+    print('resume subscription');
+    _streamDemoSubscription.resume();
+  }
+  void _cancleStream() {
+      print('cancel subscription');
+    _streamDemoSubscription.cancel();
   }
 
   @override
@@ -83,7 +98,18 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('StreamDemoHome 文本'),
+              FlatButton(
+                child: Text('暂停'), 
+                onPressed: _pauseStream,
+              ),
+              FlatButton(
+                child: Text('恢复'), 
+                onPressed: _resumeStream,
+              ),
+              FlatButton(
+                child: Text('取消'), 
+                onPressed: _cancleStream,
+              ),
             ],
           )
         ],
