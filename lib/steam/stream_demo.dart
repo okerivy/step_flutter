@@ -81,7 +81,9 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
   void onDone() {
     print('Stream完成');
   }
-
+  //? 使用 SteamBuild 可以根据Stream上面的数据构建小部件
+  //? Stream 上面的数据有变化以后, 会重新构建小部件,
+  //? 就不需要 再手动的通过 setState 方法了
   void onData(String data) {
     setState(() {
       _data = data;
@@ -132,6 +134,13 @@ class _StreamDemoHomeState extends State<StreamDemoHome> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text('$_data'),
+          StreamBuilder(
+            stream: _streamController.stream,
+            initialData: '===',
+            builder: (context, snapshot) {
+              return Text('${snapshot.data}');
+            },
+          ),
           FlatButton(
             child: Text('添加'), 
             onPressed: _addDataToStream,
