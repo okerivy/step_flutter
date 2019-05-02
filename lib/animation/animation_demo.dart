@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-
-class AnaimationDemo extends StatelessWidget {
+class AnimationDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AnaimationDemo'),
+        title: Text('AnimationDemo'),
         elevation: 0.0,
       ),
-      body: AnaimationDemoHome(),
+      body: AnimationDemoHome(),
     );
   }
 }
 
 
-class AnaimationDemoHome extends StatefulWidget {
+class AnimationDemoHome extends StatefulWidget {
   @override
-  _AnaimationDemoHomeState createState() => _AnaimationDemoHomeState();
+  _AnimationDemoHomeState createState() => _AnimationDemoHomeState();
 }
 
-class _AnaimationDemoHomeState extends State<AnaimationDemoHome> {
+class _AnimationDemoHomeState extends State<AnimationDemoHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +29,7 @@ class _AnaimationDemoHomeState extends State<AnaimationDemoHome> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('AnaimationDemoHome 文本'),
+              Text('AnimationDemoHome 文本'),
             ],
           )
         ],
