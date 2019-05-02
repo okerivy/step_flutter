@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:step_flutter/animation/animation_heart.dart';
-class AnimationDemo extends StatelessWidget {
+
+class AnimationHeart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AnimationDemo'),
+        title: Text('AnimationHeart'),
         elevation: 0.0,
       ),
-      body: AnimationDemoHome(),
+      body: AnimationHeartHome(),
     );
   }
 }
 
 
-class AnimationDemoHome extends StatefulWidget {
+class AnimationHeartHome extends StatefulWidget {
   @override
-  _AnimationDemoHomeState createState() => _AnimationDemoHomeState();
+  _AnimationHeartHomeState createState() => _AnimationHeartHomeState();
 }
 
-class _AnimationDemoHomeState extends State<AnimationDemoHome> {
+class _AnimationHeartHomeState extends State<AnimationHeartHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,16 +30,16 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('AnimationDemoHome 文本'),
+              Text('AnimationHeartHome 文本'),
             ],
           ),
           FlatButton(
             child: Text('FlatButton'),
             onPressed: () {
               print('Button onPressed');
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AnimationHeart())
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (context) => Page())
+              // );
             },
           ),
         ],
