@@ -29,10 +29,10 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
   @override
   void initState() { 
     super.initState();
-    fetchPost()
-      // .then((value) => print(value));
-      //? 也可以直接调用 Print 方法, 因为参数和 返回结果都和 Print一样
-      .then(print);
+    // fetchPost()
+    //   // .then((value) => print(value));
+    //   //? 也可以直接调用 Print 方法, 因为参数和 返回结果都和 Print一样
+    //   .then(print);
 
     // localJson();
   }
@@ -78,7 +78,7 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
         await http.get('https://resources.ninghao.net/demo/posts.json');
     
     print('statusCode: ${response.statusCode}');
-    print('body: ${response.body}');
+    // print('body: ${response.body}');
 
     if (response.statusCode == 200) {
       
@@ -97,7 +97,36 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FutureBuilder(
+      //? fetchPost 返回的数据(转好的模型) 交给 future
+      future: fetchPost(),
+      //? snapshot 里面会带着 future的数据, 已经是转好的模型
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        print('data: ${snapshot.data}');
+        print('connectionState: ${snapshot.connectionState}');
+        
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: Text('loading.....'),);
+        }
+        return ListView(
+          children: snapshot.data.map<Widget>((Post item) {
+            return ListTile(
+              title: Text(item.title),
+              subtitle: Text(item.author),
+              leading: CircleAvatar(
+                // Fixme:  NetworkImage 和 Image.network 区别是什么??
+                //?  backgroundImage。它需要一个ImageProvider: 提供图像数据的对象, 而不是图像
+                //? NetworkImage 它不是小部件，不会将图像输出到屏幕, 而是一个  供应者.
+                backgroundImage: NetworkImage(item.imageUrl),
+                // backgroundImage: Image.network(item.imageUrl),
+                //? Image.network 返回一个 image, 是一个小部件　
+                // child: Image.network(item.imageUrl),
+              ),
+            );
+          }).toList(),
+        );
+      },
+    );
   }
 }
 
