@@ -1,7 +1,7 @@
 import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
-//? 起个名字?? 以前是调用 get, 现在需要用 http.get 可能是为了好看
+//? 起个名字?? 以前是调用 get, 现在需要用 http.get 可能是为了好看. 应该是 包名.
 import 'package:http/http.dart' as http; 
 import 'dart:async';
 
@@ -36,21 +36,33 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
       'title': 'hello ~',
       'description': 'nice to meet you',
     };
-    print(post);
     print(post['title']);
     print(post['description']);
+    print(post);
+    print('Map 类型 --> ${post is Map}');
+    
 
     //? map 转 json [String postJson]  可以发送到应用的后台
     final postJson = convert.json.encode(post);
     print(postJson);
+    print('Map 类型 --> ${postJson is Map}');
 
     //? 请求接口返回的数据, 需要转换以后才能在fltter 中使用
     //? json 转成 map
     final postJsonConverted = convert.json.decode(postJson);
-    print(postJsonConverted is Map);
+    print(postJsonConverted);
+    print('Map 类型 --> ${postJsonConverted is Map}');
 
     final postModel = Post.fromJson(postJsonConverted);
-    print('Title: ${postModel.title}, description: ${postModel.description}');
+    print('postModel 类型: Title: ${postModel.title}, description: ${postModel.description}');
+
+    //? json.encode 会自动调用  postModel 的 toJson 方法
+    /// calling `.toJson()` on the unencodable object.
+    String jsonMap = convert.json.encode(postModel);
+    print(jsonMap);
+    print('Map 类型 --> ${jsonMap is Map}');
+
+    
   }
 
   fetchPost() async {
@@ -98,6 +110,12 @@ class Post {
   Post.fromJson(Map json)
     : title = json['title'],
       description = json['description'];
-  
-  
+
+  //? 这个方法返回的是 map 类型的数据, 而不是能直接发给 后台的 json
+  //? 但是因为这个方法是 被 convert.json.encode(postModel) 内部调用 的
+  //? 所以通过  json.encode 返回的是真正的 json
+  Map toJson() => {
+    'title': title,
+    'description': description
+  };
 }
