@@ -29,7 +29,16 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
   @override
   void initState() { 
     super.initState();
-    // fetchPost();
+    fetchPost()
+      // .then((value) => print(value));
+      //? 也可以直接调用 Print 方法, 因为参数和 返回结果都和 Print一样
+      .then(print);
+
+    // localJson();
+  }
+
+
+  localJson() {
 
     //? map 类型的数据 Map<String, String> 
     final post = {
@@ -62,17 +71,30 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
     print(jsonMap);
     print('Map 类型 --> ${jsonMap is Map}');
 
-    
   }
 
-  fetchPost() async {
+  Future<List<Post>> fetchPost() async {
     final response = 
         await http.get('https://resources.ninghao.net/demo/posts.json');
     
     print('statusCode: ${response.statusCode}');
     print('body: ${response.body}');
 
+    if (response.statusCode == 200) {
+      
+      final responseBody = convert.json.decode(response.body);
+      List<Post> posts = responseBody['posts']
+        //? map 处理后的结果 返回的是 Post对象
+        //? map 接收的参数是 json字典
+        .map<Post>((item) => Post.fromJson(item))
+        .toList();
+
+      return posts;
+    } else {
+      throw Exception('失败: Failed to fetch posts');
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -82,10 +104,16 @@ class _HttpDemoHomeState extends State<HttpDemoHome> {
 class Post {
   final String title;
   final String description;
+  final int id;
+  final String author;
+  final String imageUrl;
 
   Post(
     this.title,
     this.description,
+    this.id,
+    this.author,
+    this.imageUrl,
   );
 
  
@@ -109,6 +137,9 @@ class Post {
   //? 把json 转成 Model, 准备的说应该是把map 转成model,而不是服务器返回的原始json
   Post.fromJson(Map json)
     : title = json['title'],
+      id = json['id'],
+      author = json['author'],
+      imageUrl = json['imageUrl'],
       description = json['description'];
 
   //? 这个方法返回的是 map 类型的数据, 而不是能直接发给 后台的 json
@@ -116,6 +147,9 @@ class Post {
   //? 所以通过  json.encode 返回的是真正的 json
   Map toJson() => {
     'title': title,
-    'description': description
+    'description': description,
+    'id': id,
+    'author': author,
+    'imageUrl': imageUrl,
   };
 }
