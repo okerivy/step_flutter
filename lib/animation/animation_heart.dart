@@ -21,6 +21,8 @@ class AnimationHeartHome extends StatefulWidget {
 
 class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProviderStateMixin{
   AnimationController animationHeartController;
+  Animation sizeAnimation;
+  Animation colorAnimation;
 
   @override
   void initState() { 
@@ -34,13 +36,23 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     /// `frame 就是帧`, 一帧可以理解成一个画面, 一般 1秒可以显示 60帧,
     /// 也就是 1秒的动作可以分解成 60个画面
     animationHeartController = AnimationController(
-      value: 32.0, //? 初始值
-      lowerBound: 32.0, //? 最小值
-      upperBound: 100.0, //? 最大值
+      // value: 32.0, //? 初始值
+      // lowerBound: 32.0, //? 最小值
+      // upperBound: 100.0, //? 最大值
       duration: Duration(milliseconds: 3000),
       //? 这样我们就可以把 vsync设置成当前对象  this
       vsync: this,
     );
+
+    //? Tween 是 in between 简写, 指两者之间, 用来设置动画的 范围值 颜色等
+    sizeAnimation = Tween(begin: 32.0, end: 100.0)
+      /// 可以接着使用  `tween` 的  `animate` 方法, 
+      /// 需要提供一个 参数 `parent` 就是 `AnimationController`
+      /// 返回一个 `Animation`
+      .animate(animationHeartController);
+
+    colorAnimation = ColorTween(begin: Colors.red[200], end: Colors.red[800])
+      .animate(animationHeartController);
 
     int index = 0;
     animationHeartController.addListener((){
@@ -86,7 +98,8 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
           ),
           IconButton(
             icon: Icon(Icons.favorite),
-            iconSize: animationHeartController.value,
+            color: colorAnimation.value,
+            iconSize: sizeAnimation.value,
             onPressed: () {
               switch (animationHeartController.status) {
                 case AnimationStatus.completed:
