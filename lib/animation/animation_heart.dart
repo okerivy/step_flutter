@@ -35,7 +35,7 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     /// 也就是 1秒的动作可以分解成 60个画面
     animationHeartController = AnimationController(
       value: 32.0, //? 初始值
-      lowerBound: 0.0, //? 最小值
+      lowerBound: 32.0, //? 最小值
       upperBound: 100.0, //? 最大值
       duration: Duration(milliseconds: 3000),
       //? 这样我们就可以把 vsync设置成当前对象  this
@@ -45,10 +45,14 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     int index = 0;
     animationHeartController.addListener((){
       index += 1;
-      print('$index : ${animationHeartController.value}');
+      // print('$index : ${animationHeartController.value}');
       //? 动画改变以后, 刷新重建界面
       setState(() {
       });
+    });
+
+    animationHeartController.addStatusListener((AnimationStatus status) {
+      print('status: $status');
     });
 
     // animationHeartController.forward();
@@ -73,20 +77,24 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
               Text('AnimationHeartHome 文本'),
             ],
           ),
-          FlatButton(
-            child: Text('FlatButton'),
-            onPressed: () {
-              print('Button onPressed');
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(builder: (context) => Page())
-              // );
-            },
-          ),
           ActionChip(
             //? toStringAsFixed 保留2位小数
             label: Text('${animationHeartController.value.toStringAsFixed(2)}'),
             onPressed: () {
               animationHeartController.forward();
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.favorite),
+            iconSize: animationHeartController.value,
+            onPressed: () {
+              switch (animationHeartController.status) {
+                case AnimationStatus.completed:
+                  animationHeartController.reverse(); // end --> begin
+                  break;
+                default:
+                  animationHeartController.forward(); // begin --> end
+              }
             },
           ),
         ],
