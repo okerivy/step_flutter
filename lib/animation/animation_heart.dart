@@ -23,6 +23,8 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
   AnimationController animationHeartController;
   Animation sizeAnimation;
   Animation colorAnimation;
+  //? 默认动画是直线的, Curved 表示动画是曲线的
+  CurvedAnimation curve;
 
   @override
   void initState() { 
@@ -44,15 +46,21 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
       vsync: this,
     );
 
+    curve = CurvedAnimation(
+      parent: animationHeartController, 
+      curve: Curves.bounceInOut,
+    );
+
     //? Tween 是 in between 简写, 指两者之间, 用来设置动画的 范围值 颜色等
     sizeAnimation = Tween(begin: 32.0, end: 100.0)
       /// 可以接着使用  `tween` 的  `animate` 方法, 
       /// 需要提供一个 参数 `parent` 就是 `AnimationController`
       /// 返回一个 `Animation`
-      .animate(animationHeartController);
+      /// 如果参数 `parent` 设置成  `CurvedAnimation`, 那么动画值的变化会使用 `curve`
+      .animate(curve);
 
     colorAnimation = ColorTween(begin: Colors.red[200], end: Colors.red[800])
-      .animate(animationHeartController);
+      .animate(curve);
 
     int index = 0;
     animationHeartController.addListener((){
