@@ -34,7 +34,10 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     /// `frame 就是帧`, 一帧可以理解成一个画面, 一般 1秒可以显示 60帧,
     /// 也就是 1秒的动作可以分解成 60个画面
     animationHeartController = AnimationController(
-      duration: Duration(milliseconds: 1000),
+      value: 32.0, //? 初始值
+      lowerBound: 0.0, //? 最小值
+      upperBound: 100.0, //? 最大值
+      duration: Duration(milliseconds: 3000),
       //? 这样我们就可以把 vsync设置成当前对象  this
       vsync: this,
     );
@@ -43,9 +46,12 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     animationHeartController.addListener((){
       index += 1;
       print('$index : ${animationHeartController.value}');
+      //? 动画改变以后, 刷新重建界面
+      setState(() {
+      });
     });
 
-    animationHeartController.forward();
+    // animationHeartController.forward();
   }
 
   @override
@@ -74,6 +80,13 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
               // Navigator.of(context).push(
               //   MaterialPageRoute(builder: (context) => Page())
               // );
+            },
+          ),
+          ActionChip(
+            //? toStringAsFixed 保留2位小数
+            label: Text('${animationHeartController.value.toStringAsFixed(2)}'),
+            onPressed: () {
+              animationHeartController.forward();
             },
           ),
         ],
