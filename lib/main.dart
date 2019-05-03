@@ -1,5 +1,6 @@
 //* 导入相关的控件 / 小部件
 import 'package:flutter/material.dart';
+import 'package:step_flutter/Route/quick_list.dart';
 import 'package:step_flutter/animation/animation_demo.dart';
 import 'package:step_flutter/bloc/bloc_demo.dart';
 import 'package:step_flutter/demo/basic_demo.dart';
@@ -33,13 +34,16 @@ class App extends StatelessWidget {
       //? 不过好像不管用???
       title: 'Futter_Step',
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
-      // home: NavigatorDemo(),
+      // home: QuickList(),
       // * 默认的根路由是 home == '/', 但是 可以通过 initialRoute 来定义app启动时进入的初始路由 (可以pop到根路由)
-      initialRoute: '/animation',
+      initialRoute: '/',
       //? 注册路由, 根据名字来跳转
       routes: {
-        '/': (context) => Home(),
-        // '/': (context) => MaterialComponents(),
+        /// 这个 `/` 根路由 和上面的 `home:` 属性, 不能同时存在,必须注释掉一个
+        '/': (context) => QuickList(),
+
+        '/home': (context) => Home(),
+        '/Navigator': (context) => NavigatorDemo(),
         '/about': (context) => Page(title: 'About'),
         '/form': (context) => FormDemo(),
         '/mdc': (context) => MaterialComponents(),
@@ -110,7 +114,13 @@ class Home extends StatelessWidget {
         ),
         drawer: DrawerDemo(),
         // endDrawer: Text("这是右边抽屉"), //* 右边的边栏(抽屉), 可以用扫动的手势显示
-        bottomNavigationBar: BottomNavigationBarDemo()
+        bottomNavigationBar: BottomNavigationBarDemo(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }
