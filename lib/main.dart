@@ -1,3 +1,4 @@
+//* 导入相关的控件 / 小部件
 import 'package:flutter/material.dart';
 import 'package:step_flutter/animation/animation_demo.dart';
 import 'package:step_flutter/bloc/bloc_demo.dart';
@@ -17,14 +18,20 @@ import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
 import 'demo/bottom_navigation_bar_demo.dart';
 
-
+//* 入口函数 
 void main() =>  runApp(App());
 
 
 class App extends StatelessWidget {
   @override
+  //* Build 用来 渲染相关控件的  UI结构的
   Widget build(BuildContext context) {
+    //* 每个项目 最外层必须有一个  MaterialApp,
     return MaterialApp(
+      //* 在切换后台时会显示在顶部, 默认是app的名字
+      //? 应用内名称，当应用处于切换状态时，展示的为 title 名称，而此时桌面应用名称未改变
+      //? 不过好像不管用???
+      title: 'Futter_Step',
       debugShowCheckedModeBanner: false, //* 去掉手机上的 Debug图标
       // home: NavigatorDemo(),
       // * 默认的根路由是 home == '/', 但是 可以通过 initialRoute 来定义app启动时进入的初始路由 (可以pop到根路由)
@@ -66,7 +73,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100], //* 整体的背景颜色
         appBar: AppBar(
-          title: Text('Step_Flutter'),
+          title: Text('1Step_Flutter'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
