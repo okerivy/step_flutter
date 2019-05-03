@@ -41,14 +41,14 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
       // value: 32.0, //? 初始值
       // lowerBound: 32.0, //? 最小值
       // upperBound: 100.0, //? 最大值
-      duration: Duration(milliseconds: 3000),
+      duration: Duration(milliseconds: 1000),
       //? 这样我们就可以把 vsync设置成当前对象  this
       vsync: this,
     );
 
     curve = CurvedAnimation(
       parent: animationHeartController, 
-      curve: Curves.bounceInOut,
+      curve: Curves.bounceOut,
     );
 
     //? Tween 是 in between 简写, 指两者之间, 用来设置动画的 范围值 颜色等
@@ -62,14 +62,14 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
     colorAnimation = ColorTween(begin: Colors.red[200], end: Colors.red[800])
       .animate(curve);
 
-    int index = 0;
-    animationHeartController.addListener((){
-      index += 1;
-      // print('$index : ${animationHeartController.value}');
-      //? 动画改变以后, 刷新重建界面
-      setState(() {
-      });
-    });
+    // int index = 0;
+    // animationHeartController.addListener((){
+    //   index += 1;
+    //   // print('$index : ${animationHeartController.value}');
+    //   //? 动画改变以后, 刷新重建界面
+    //   setState(() {
+    //   });
+    // });
 
     animationHeartController.addStatusListener((AnimationStatus status) {
       print('status: $status');
@@ -104,6 +104,7 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
               animationHeartController.forward();
             },
           ),
+          //! 因为动画已经不监听了 animationHeartController.addListener 所以这个 图标不会变化
           IconButton(
             icon: Icon(Icons.favorite),
             color: colorAnimation.value,
@@ -118,8 +119,49 @@ class _AnimationHeartHomeState extends State<AnimationHeartHome> with TickerProv
               }
             },
           ),
+          //? 这个图标会变化, 内部监听了
+          AnimatedHeart(
+            animations: [
+              sizeAnimation,
+              colorAnimation,
+            ],
+            controller: animationHeartController,
+          )
         ],
       ),
+    );
+  }
+}
+
+/// `AnimatedWidget` 这种小部件,会在值有变化的时候 重建 它自己
+/// 不用 setState
+class AnimatedHeart extends AnimatedWidget {
+  // Fixme: 如何让这个动画 内部写, 而不用外面传, 因为外面 还监听着 controller.addStatusListener
+
+  final List animations; //? 一组动画
+  final AnimationController controller; //? 动画控制器
+  //? 构造方法
+  AnimatedHeart({
+    this.animations,
+    this.controller,
+    //? listenable 表示 监听的东西
+  }):super(listenable: controller);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.favorite),
+      iconSize: animations[0].value,
+      color: animations[1].value,
+      onPressed: () {
+        switch (controller.status) {
+          case AnimationStatus.completed:
+            controller.reverse(); // end --> begin
+            break;
+          default:
+            controller.forward(); // begin --> end
+        }
+      },
     );
   }
 }
