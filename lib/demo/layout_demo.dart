@@ -71,6 +71,7 @@ class LayoutRowDemoForAlignment extends StatelessWidget {
     return Container(
       alignment: Alignment.bottomCenter,
       color: Colors.green,
+      //! 如果想限制 这个红色框正好包裹着里面的东西, 可以 在row外面再包一个  Column, 然后设置  mainAxisSize: MainAxisSize.min, 并且取消里面的 height: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         //? 这个交叉轴 没有作用吗? //! 是的在只有一个Cell 这种情况下, 无论是Row 还是 Column 都不起作用
@@ -91,6 +92,8 @@ class LayoutRowDemoForAlignment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               //? 这个交叉轴 没有作用吗?  //! 有作用, 因为  是多个Cell 高度不同
               crossAxisAlignment: CrossAxisAlignment.end,
+              //? 这个MainAxisSize.min 可以限制最小的范围, 包裹 限制为最小宽度,使Container自动为最小的
+              // mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 IconBadge(Icons.pool, size:20.0),
                 SizedBox(width: 5.0),
