@@ -19,7 +19,6 @@ class NavigatorDemo extends StatelessWidget {
                 Navigator.pushNamed(context, '/about');
               },
             ),
-
           ],
         ),
       ),
@@ -33,12 +32,10 @@ class NavigatorDemo extends StatelessWidget {
   }
 }
 
-class Page extends StatelessWidget {
+class PageTest extends StatelessWidget {
   final String title;
 
-  Page({
-    this.title
-  });
+  PageTest({this.title});
 
   @override
   Widget build(BuildContext context) {

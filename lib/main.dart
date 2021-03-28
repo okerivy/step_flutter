@@ -19,9 +19,8 @@ import 'demo/listview_demo.dart';
 import 'demo/drawer_demo.dart';
 import 'demo/bottom_navigation_bar_demo.dart';
 
-//* 入口函数 
-void main() =>  runApp(App());
-
+//* 入口函数
+void main() => runApp(App());
 
 class App extends StatelessWidget {
   @override
@@ -44,7 +43,7 @@ class App extends StatelessWidget {
 
         '/home': (context) => Home(),
         '/Navigator': (context) => NavigatorDemo(),
-        '/about': (context) => Page(title: 'About'),
+        '/about': (context) => PageTest(title: 'About'),
         '/form': (context) => FormDemo(),
         '/mdc': (context) => MaterialComponents(),
         '/state-management': (context) => StateManagerDemo(),
@@ -66,13 +65,14 @@ class App extends StatelessWidget {
     );
   }
 }
+
 // 显示列表
 class Home extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     //* 标签 Tab 需要三个东西 TabBar TabView TabController
-    return DefaultTabController( //? 1, tabbarController
+    return DefaultTabController(
+      //? 1, tabbarController
       length: 4,
       child: Scaffold(
         backgroundColor: Colors.grey[100], //* 整体的背景颜色
@@ -86,7 +86,8 @@ class Home extends StatelessWidget {
             ),
           ],
           elevation: 0.0, //* 导航栏设置 下面的阴影为0
-          bottom: TabBar( //? 2, tabbar
+          bottom: TabBar(
+            //? 2, tabbar
             unselectedLabelColor: Colors.black38, //* 标签未被选中的的颜色
             indicatorColor: Colors.black54, //* 下面的指示器 横线的颜色
             indicatorSize: TabBarIndicatorSize.label, //* 指示器 和标签的label 一样长
@@ -99,7 +100,8 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView( //? 3, tabbarView
+        body: TabBarView(
+          //? 3, tabbarView
           children: <Widget>[
             ListViewDemo(),
             // Hello(),
@@ -125,4 +127,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
