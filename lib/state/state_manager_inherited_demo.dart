@@ -115,7 +115,7 @@ class CounterProvider extends InheritedWidget {
 
   //? 类方法 静态方法, 用它可以得到小部件里面就state, 也就是数据 count 和 increaseCount
   static CounterProvider of(BuildContext context) => 
-    context.inheritFromWidgetOfExactType(CounterProvider);
+    context.dependOnInheritedWidgetOfExactType<CounterProvider>();
 
   @override
   //? 决定是否通知: 继承自这个小部件的 小部件

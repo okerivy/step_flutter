@@ -60,7 +60,7 @@ class _CardDemoState extends State<CardDemo> {
                     ),
                   ),
                   Divider(height: 0,),
-                  ButtonTheme.bar(
+                  ButtonBarTheme(
                     child: ButtonBar(
                       children: <Widget>[
                         FlatButton(

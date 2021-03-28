@@ -64,7 +64,7 @@ class CounterProvider extends InheritedWidget {
 
   //? 使用这个方法, 可以让外界得到 在 CounterProvider 设置的值
   static CounterProvider of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(CounterProvider);
+      context.dependOnInheritedWidgetOfExactType<CounterProvider>();
 
   @override
   bool updateShouldNotify(CounterProvider oldWidget) {

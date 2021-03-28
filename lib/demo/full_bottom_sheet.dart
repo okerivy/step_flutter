@@ -327,7 +327,7 @@ Future<T> showModalFullBottomSheet<T>({
   assert(debugCheckHasMaterialLocalizations(context));
   return Navigator.push(context, _ModalFullBottomSheetRoute<T>(
     builder: builder,
-    theme: Theme.of(context, shadowThemeOnly: true),
+    theme: Theme.of(context),
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
   ));
 }
