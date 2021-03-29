@@ -29,19 +29,19 @@ class _BottomNavigationBarDemoState extends State<BottomNavigationBarDemo> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.explore),
-          title: Text("Explore"),
+          label: "Explore",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.history),
-          title: Text("History"),
+          label: "History",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.list),
-          title: Text("List"),
+          label: "List",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text("Person"),
+          label: "Person",
         ),
       ],
 

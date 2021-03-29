@@ -19,6 +19,7 @@ class FloatingActionButtonDemo extends StatelessWidget {
       // ),
     );
 
+    // ignore: unused_local_variable
     final Widget _floatingActionButtonExtended = FloatingActionButton.extended(
       onPressed: () {},
       icon: Icon(Icons.turned_in_not),

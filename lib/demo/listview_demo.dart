@@ -23,11 +23,11 @@ class ListViewDemo extends StatelessWidget {
               SizedBox(height: 16.0), //* 留点空间
               Text(
                 posts[index].title,
-                style: Theme.of(context).textTheme.title, //* 文字主题
+                style: Theme.of(context).textTheme.headline6, //* 文字主题
               ),
               Text(
                 posts[index].author,
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
               SizedBox(height: 16.0),
             ],

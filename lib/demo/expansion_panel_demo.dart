@@ -90,7 +90,7 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
                         padding: EdgeInsets.all(16.0),
                         child: Text(
                           item.headerText,
-                          style: Theme.of(context).textTheme.title,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                       );
                     }

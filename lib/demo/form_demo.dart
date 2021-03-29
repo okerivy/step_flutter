@@ -41,11 +41,10 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
   //* 定义一个Key, 然后把这个Key 交给表单, 然后就可以使用这个key来引用表单
   final registerFormKey = GlobalKey<FormState>();
   String username, password;
-  bool _autovalidate = false;
+  AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
   //* 在点击提交的时候 根据需要打开表单的自动验证功能
-  void _submitRegisterForm () {
-
+  void _submitRegisterForm() {
     if (registerFormKey.currentState.validate()) {
       //? 保存一下 RegisterFormDemo 表单里面的一些数据
       registerFormKey.currentState.save();
@@ -53,26 +52,24 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
 
       //* 在屏幕底部弹出动画提示栏
       //? 找到最近的 Scaffold, 执行它的 showSnackBar 方法
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('正在注册中...'),
-        )
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('正在注册中...'),
+      ));
     } else {
       setState(() {
-        _autovalidate = true;
+        _autovalidate = AutovalidateMode.always;
       });
     }
   }
 
-  String _validatorUsername (value) {
+  String _validatorUsername(value) {
     if (value.isEmpty) {
       return 'Username is Required.';
     }
     return null;
   }
 
-  String _validatorPassword (value) {
+  String _validatorPassword(value) {
     if (value.isEmpty) {
       return 'Password is Required.';
     }
@@ -87,7 +84,7 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
       child: Column(
         children: <Widget>[
           //? 表单字段 都是 FormField
-          //? 如果你需要一个文本字段, 需要一个 FormFied , 里面添加一个  TextField 
+          //? 如果你需要一个文本字段, 需要一个 FormFied , 里面添加一个  TextField
           //? 你也可以用系统提供的 TextFormField, 就是上面的包装好的
           TextFormField(
             decoration: InputDecoration(
@@ -100,7 +97,7 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
             },
             //? 验证表单里面的数据是否合法
             validator: _validatorUsername,
-            autovalidate: _autovalidate, //* 自动验证功能
+            autovalidateMode: _autovalidate, //* 自动验证功能
           ),
           TextFormField(
             obscureText: true, //* 设置成 密码不可见
@@ -112,9 +109,11 @@ class _RegisterFormDemoState extends State<RegisterFormDemo> {
               password = value;
             },
             validator: _validatorPassword,
-            autovalidate: _autovalidate,
+            autovalidateMode: _autovalidate,
           ),
-          SizedBox(height: 32.0,),
+          SizedBox(
+            height: 32.0,
+          ),
           Container(
             width: double.infinity,
             child: RaisedButton(
@@ -136,7 +135,6 @@ class TextFieldDemo extends StatefulWidget {
 }
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
-
   final textEditingController = TextEditingController();
 
   @override
@@ -146,14 +144,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     textEditingController.text = 'hi'; //? 设置初始文本
-    textEditingController.addListener(
-      () {
-        debugPrint('输入了: ${textEditingController.text}');
-      }
-    );
+    textEditingController.addListener(() {
+      debugPrint('输入了: ${textEditingController.text}');
+    });
   }
 
   @override

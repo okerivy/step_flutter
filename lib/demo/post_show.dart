@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:step_flutter/model/post.dart';
 
@@ -28,15 +27,17 @@ class PostShow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('${post.title}', style: Theme.of(context).textTheme.title),
-                Text('${post.author}', style: Theme.of(context).textTheme.subhead),
+                Text('${post.title}',
+                    style: Theme.of(context).textTheme.headline6),
+                Text('${post.author}',
+                    style: Theme.of(context).textTheme.subtitle1),
                 SizedBox(height: 16.0),
                 // Fixme: description 过长, 可能超过边界了, 需要修正
-                Text('${post.description}', style: Theme.of(context).textTheme.body1),
+                Text('${post.description}',
+                    style: Theme.of(context).textTheme.bodyText2),
               ],
             ),
           ),
-
         ],
       ),
     );
