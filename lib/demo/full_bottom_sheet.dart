@@ -9,7 +9,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter/material.dart';
 
-
 const Duration _kBottomSheetDuration = Duration(milliseconds: 200);
 const double _kMinFlingVelocity = 700.0;
 const double _kCloseProgressThreshold = 0.5;
@@ -47,18 +46,18 @@ class FullBottomSheet extends StatefulWidget {
   /// Typically, bottom sheets are created implicitly by
   /// [ScaffoldState.showBottomSheet], for persistent bottom sheets, or by
   /// [showModalBottomSheet], for modal bottom sheets.
-  const FullBottomSheet({
-    Key key,
-    this.animationController,
-    this.enableDrag = true,
-    this.elevation = 0.0,
-    @required this.onClosing,
-    @required this.builder
-  }) : assert(enableDrag != null),
-       assert(onClosing != null),
-       assert(builder != null),
-       assert(elevation != null && elevation >= 0.0),
-       super(key: key);
+  const FullBottomSheet(
+      {Key key,
+      this.animationController,
+      this.enableDrag = true,
+      this.elevation = 0.0,
+      @required this.onClosing,
+      @required this.builder})
+      : assert(enableDrag != null),
+        assert(onClosing != null),
+        assert(builder != null),
+        assert(elevation != null && elevation >= 0.0),
+        super(key: key);
 
   /// The animation that controls the bottom sheet's position.
   ///
@@ -106,7 +105,6 @@ class FullBottomSheet extends StatefulWidget {
 }
 
 class _FullBottomSheetState extends State<FullBottomSheet> {
-
   final GlobalKey _childKey = GlobalKey(debugLabel: 'FullBottomSheet child');
 
   double get _childHeight {
@@ -114,23 +112,23 @@ class _FullBottomSheetState extends State<FullBottomSheet> {
     return renderBox.size.height;
   }
 
-  bool get _dismissUnderway => widget.animationController.status == AnimationStatus.reverse;
+  bool get _dismissUnderway =>
+      widget.animationController.status == AnimationStatus.reverse;
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    if (_dismissUnderway)
-      return;
-    widget.animationController.value -= details.primaryDelta / (_childHeight ?? details.primaryDelta);
+    if (_dismissUnderway) return;
+    widget.animationController.value -=
+        details.primaryDelta / (_childHeight ?? details.primaryDelta);
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    if (_dismissUnderway)
-      return;
+    if (_dismissUnderway) return;
     if (details.velocity.pixelsPerSecond.dy > _kMinFlingVelocity) {
-      final double flingVelocity = -details.velocity.pixelsPerSecond.dy / _childHeight;
+      final double flingVelocity =
+          -details.velocity.pixelsPerSecond.dy / _childHeight;
       if (widget.animationController.value > 0.0)
         widget.animationController.fling(velocity: flingVelocity);
-      if (flingVelocity < 0.0)
-        widget.onClosing();
+      if (flingVelocity < 0.0) widget.onClosing();
     } else if (widget.animationController.value < _kCloseProgressThreshold) {
       if (widget.animationController.value > 0.0)
         widget.animationController.fling(velocity: -1.0);
@@ -147,19 +145,20 @@ class _FullBottomSheetState extends State<FullBottomSheet> {
       elevation: widget.elevation,
       child: widget.builder(context),
     );
-    return !widget.enableDrag ? bottomSheet : GestureDetector(
-      onVerticalDragUpdate: _handleDragUpdate,
-      onVerticalDragEnd: _handleDragEnd,
-      child: bottomSheet,
-      excludeFromSemantics: true,
-    );
+    return !widget.enableDrag
+        ? bottomSheet
+        : GestureDetector(
+            onVerticalDragUpdate: _handleDragUpdate,
+            onVerticalDragEnd: _handleDragEnd,
+            child: bottomSheet,
+            excludeFromSemantics: true,
+          );
   }
 }
 
 // PERSISTENT BOTTOM SHEETS
 
 // See scaffold.dart
-
 
 // MODAL BOTTOM SHEETS
 
@@ -171,11 +170,10 @@ class _ModalFullBottomSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     return BoxConstraints(
-      minWidth: constraints.maxWidth,
-      maxWidth: constraints.maxWidth,
-      minHeight: 0.0,
-      maxHeight: constraints.maxHeight * 16.0 / 16.0
-    );
+        minWidth: constraints.maxWidth,
+        maxWidth: constraints.maxWidth,
+        minHeight: 0.0,
+        maxHeight: constraints.maxHeight * 16.0 / 16.0);
   }
 
   @override
@@ -190,19 +188,21 @@ class _ModalFullBottomSheetLayout extends SingleChildLayoutDelegate {
 }
 
 class _ModalFullBottomSheet<T> extends StatefulWidget {
-  const _ModalFullBottomSheet({ Key key, this.route }) : super(key: key);
+  const _ModalFullBottomSheet({Key key, this.route}) : super(key: key);
 
   final _ModalFullBottomSheetRoute<T> route;
 
   @override
-  _ModalFullBottomSheetState<T> createState() => _ModalFullBottomSheetState<T>();
+  _ModalFullBottomSheetState<T> createState() =>
+      _ModalFullBottomSheetState<T>();
 }
 
 class _ModalFullBottomSheetState<T> extends State<_ModalFullBottomSheet<T>> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
     String routeLabel;
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
@@ -212,36 +212,45 @@ class _ModalFullBottomSheetState<T> extends State<_ModalFullBottomSheet<T>> {
       case TargetPlatform.fuchsia:
         routeLabel = localizations.dialogLabel;
         break;
+      case TargetPlatform.linux:
+        routeLabel = 'linux';
+        break;
+      case TargetPlatform.macOS:
+        routeLabel = 'macos';
+        break;
+      case TargetPlatform.windows:
+        routeLabel = 'windows';
+        break;
     }
 
     return GestureDetector(
-      excludeFromSemantics: true,
-      onTap: () => Navigator.pop(context),
-      child: AnimatedBuilder(
-        animation: widget.route.animation,
-        builder: (BuildContext context, Widget child) {
-          // Disable the initial animation when accessible navigation is on so
-          // that the semantics are added to the tree at the correct time.
-          final double animationValue = mediaQuery.accessibleNavigation ? 1.0 : widget.route.animation.value;
-          return Semantics(
-            scopesRoute: true,
-            namesRoute: true,
-            label: routeLabel,
-            explicitChildNodes: true,
-            child: ClipRect(
-              child: CustomSingleChildLayout(
-                delegate: _ModalFullBottomSheetLayout(animationValue),
-                child: FullBottomSheet(
-                  animationController: widget.route._animationController,
-                  onClosing: () => Navigator.pop(context),
-                  builder: widget.route.builder,
+        excludeFromSemantics: true,
+        onTap: () => Navigator.pop(context),
+        child: AnimatedBuilder(
+            animation: widget.route.animation,
+            builder: (BuildContext context, Widget child) {
+              // Disable the initial animation when accessible navigation is on so
+              // that the semantics are added to the tree at the correct time.
+              final double animationValue = mediaQuery.accessibleNavigation
+                  ? 1.0
+                  : widget.route.animation.value;
+              return Semantics(
+                scopesRoute: true,
+                namesRoute: true,
+                label: routeLabel,
+                explicitChildNodes: true,
+                child: ClipRect(
+                  child: CustomSingleChildLayout(
+                    delegate: _ModalFullBottomSheetLayout(animationValue),
+                    child: FullBottomSheet(
+                      animationController: widget.route._animationController,
+                      onClosing: () => Navigator.pop(context),
+                      builder: widget.route.builder,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        }
-      )
-    );
+              );
+            }));
   }
 }
 
@@ -273,12 +282,14 @@ class _ModalFullBottomSheetRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController = FullBottomSheet.createAnimationController(navigator.overlay);
+    _animationController =
+        FullBottomSheet.createAnimationController(navigator.overlay);
     return _animationController;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     // By definition, the bottom sheet is aligned to the bottom of the page
     // and isn't exposed to the top padding of the MediaQuery.
     Widget bottomSheet = MediaQuery.removePadding(
@@ -286,8 +297,7 @@ class _ModalFullBottomSheetRoute<T> extends PopupRoute<T> {
       removeTop: true,
       child: _ModalFullBottomSheet<T>(route: this),
     );
-    if (theme != null)
-      bottomSheet = Theme(data: theme, child: bottomSheet);
+    if (theme != null) bottomSheet = Theme(data: theme, child: bottomSheet);
     return bottomSheet;
   }
 }
@@ -325,11 +335,14 @@ Future<T> showModalFullBottomSheet<T>({
   assert(context != null);
   assert(builder != null);
   assert(debugCheckHasMaterialLocalizations(context));
-  return Navigator.push(context, _ModalFullBottomSheetRoute<T>(
-    builder: builder,
-    theme: Theme.of(context),
-    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-  ));
+  return Navigator.push(
+      context,
+      _ModalFullBottomSheetRoute<T>(
+        builder: builder,
+        theme: Theme.of(context),
+        barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      ));
 }
 
 /// Shows a persistent material design bottom sheet in the nearest [Scaffold].
