@@ -184,32 +184,32 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Open BottomSheet with Key'),
               onPressed: _openBottomSheetWithKey,
             ),
             SizedBox(width: 16.0),
-            FlatButton(
+            TextButton(
               child: Text('Open BottomSheet no Key = error'),
               onPressed: _openBottomSheetNoKey,
             ),
             SizedBox(width: 16.0),
-            FlatButton(
+            TextButton(
               child: Text('Modal BottomSheet 系统 9/16'),
               onPressed: _openModalBottomSheet,
             ),
             SizedBox(width: 16.0),
-            FlatButton(
+            TextButton(
               child: Text('Full Modal BottomSheet 改写系统->全屏'),
               onPressed: _openFullModalBottomSheet,
             ),
             SizedBox(width: 16.0),
-            FlatButton(
+            TextButton(
               child: Text('Modal BottomSheet 全屏 别人写的'),
               onPressed: _showSignupModalSheet,
             ),
             SizedBox(width: 16.0),
-            FlatButton(
+            TextButton(
               child: Text('透明的 Route'),
               onPressed: () {
                 Navigator.push(

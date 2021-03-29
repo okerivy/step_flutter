@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:step_flutter/animation/animation_heart.dart';
+
 class AnimationDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,6 @@ class AnimationDemo extends StatelessWidget {
     );
   }
 }
-
 
 class AnimationDemoHome extends StatefulWidget {
   @override
@@ -33,13 +33,15 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
               Text('AnimationDemoHome 文本'),
             ],
           ),
-          FlatButton(
-            child: Text('FlatButton'),
+          TextButton(
+            child: Text(
+              'FlatButton',
+              style: TextStyle(color: Colors.orange),
+            ),
             onPressed: () {
               print('Button onPressed');
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AnimationHeart())
-              );
+                  MaterialPageRoute(builder: (context) => AnimationHeart()));
             },
           ),
         ],

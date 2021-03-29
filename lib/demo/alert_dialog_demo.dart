@@ -22,13 +22,13 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> {
           title: Text('AlertDialog'),
           content: Text('是否允许?'),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Cancle'),
               onPressed: () {
                 Navigator.pop(context, Action.Cancle);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text('OK'),
               onPressed: () {
                 Navigator.pop(context, Action.OK);
