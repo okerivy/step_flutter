@@ -2,15 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-/**
- * 按下 CounterActionButton 这个漂浮按钮, 可以通过 Sink的add 方法,往Stream 上添加一个数据
- * BLoC 会发布这个数据 到 指定的Stream上面
- * 
- * 界面上的这个 ActionChip 可以用 StreamBuilder 来生成 ,他会接收一个  Stream, 
- * 当Stream 上面的数据有变化的时候, 会重新构建这个小部件
- * 
- * 是两个类的结合 `stream_demo`  和  `state_manager_inherited_demo`
- */
+/// 按下 CounterActionButton 这个漂浮按钮, 可以通过 Sink的add 方法,往Stream 上添加一个数据
+/// BLoC 会发布这个数据 到 指定的Stream上面
+/// 
+/// 界面上的这个 ActionChip 可以用 StreamBuilder 来生成 ,他会接收一个  Stream, 
+/// 当Stream 上面的数据有变化的时候, 会重新构建这个小部件
+/// 
+/// 是两个类的结合 `stream_demo`  和  `state_manager_inherited_demo`
 class CounterHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -72,24 +70,22 @@ class CounterProvider extends InheritedWidget {
   }
 }
 
-/**
- * 现在在我们的 BLoC 里面可以接收到外面的输入数据
- * 下面我们可以把这个数据输出出去
- * 例如 那个计数用的小部件, 我们可以根据数据的变化重新构建一下
- * 
- * 流程如下
- * 1, 按下 按钮,会执行 `onpress` 方法中的  `_counterBloc.counter.add(1);`
- *   会使用 `counter` 这个 `sink` 往 `它的 stream`中添加数据
- * 2. 在我们的 `CounterBloc` 里面 `监听(listen)了 这个 stream  `
- *   [这个 sink 和 stream 同一个 StreamController]
- * 3. 有数据,就会执行这个  `onData` 方法
- * 4. 在 `onData` 这个方法里面, 我们`改变`了 计数器的 要显示的`数值`
- *   然后我们把`这个值`交给 了 `_counterController 控制的 stream`
- *   这个 `stream` 有个名字 `叫做  count`
- * 5. 在构建 `ActionChip` 时, 我们使用了 一个  `StreamBuilder`
- *   根据 `count` 这个 `stream` 的数据 构建了一个 小部件
- * 6. `count 这个  stream` 上面的`数据有变化`, 会`重新构建ActionChip `这个 小部件
- */
+/// 现在在我们的 BLoC 里面可以接收到外面的输入数据
+/// 下面我们可以把这个数据输出出去
+/// 例如 那个计数用的小部件, 我们可以根据数据的变化重新构建一下
+/// 
+/// 流程如下
+/// 1, 按下 按钮,会执行 `onpress` 方法中的  `_counterBloc.counter.add(1);`
+///   会使用 `counter` 这个 `sink` 往 `它的 stream`中添加数据
+/// 2. 在我们的 `CounterBloc` 里面 `监听(listen)了 这个 stream  `
+///   [这个 sink 和 stream 同一个 StreamController]
+/// 3. 有数据,就会执行这个  `onData` 方法
+/// 4. 在 `onData` 这个方法里面, 我们`改变`了 计数器的 要显示的`数值`
+///   然后我们把`这个值`交给 了 `_counterController 控制的 stream`
+///   这个 `stream` 有个名字 `叫做  count`
+/// 5. 在构建 `ActionChip` 时, 我们使用了 一个  `StreamBuilder`
+///   根据 `count` 这个 `stream` 的数据 构建了一个 小部件
+/// 6. `count 这个  stream` 上面的`数据有变化`, 会`重新构建ActionChip `这个 小部件
 class CounterBloc {
   int _count = 0;
   final _counterActionController = StreamController<int>();

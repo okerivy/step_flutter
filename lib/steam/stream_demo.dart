@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 
-/**
- * https://www.dartlang.org/tutorials/language/streams
- * 
- * 异步编程：流
- * Dart中的异步编程以Future和Stream类为特征 。
- * 
- * Future表示不立即完成的计算。在普通函数返回结果的地方，异步函数返回一个Future，最终将包含结果。未来将告诉您何时结果准备就绪。
- * 
- * 流是一系列异步事件。它就像一个异步的Iterable-where，而不是在你要求它时获得下一个事件，流会告诉你在它准备就绪时有一个事件。
- * 
- * Streams提供异步数据序列。
- * Streams提供了一种响应错误的方法。 
- * 有两种流：单一订阅或广播。
- * 
- */
+/// https://www.dartlang.org/tutorials/language/streams
+/// 
+/// 异步编程：流
+/// Dart中的异步编程以Future和Stream类为特征 。
+/// 
+/// Future表示不立即完成的计算。在普通函数返回结果的地方，异步函数返回一个Future，最终将包含结果。未来将告诉您何时结果准备就绪。
+/// 
+/// 流是一系列异步事件。它就像一个异步的Iterable-where，而不是在你要求它时获得下一个事件，流会告诉你在它准备就绪时有一个事件。
+/// 
+/// Streams提供异步数据序列。
+/// Streams提供了一种响应错误的方法。 
+/// 有两种流：单一订阅或广播。
+/// 
 
 class StreamDemo extends StatelessWidget {
   @override

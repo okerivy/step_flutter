@@ -9,9 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
  * 这样我们就能在小部件中得到 model 的数据了
  */
 
-/**
- * `ScopedModel` 通过 `ScopedModel` 传递数据
- */
+/// `ScopedModel` 通过 `ScopedModel` 传递数据
 class StateManagerScopedModelDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,9 +37,7 @@ class StateManagerScopedModelDemo extends StatelessWidget {
   }
 }
 
-/**
- * `ScopedModel` 通过 `ScopedModel` 传递数据
- */
+/// `ScopedModel` 通过 `ScopedModel` 传递数据
 class CounterWrapperDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -52,9 +48,7 @@ class CounterWrapperDemo extends StatelessWidget {
 }
 
 // Fixme: CounterDemo 类名重复 有影响吗
-/**
- * `ScopedModel` 通过 `ScopedModel` 传递数据
- */
+/// `ScopedModel` 通过 `ScopedModel` 传递数据
 class CounterDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

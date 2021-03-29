@@ -6,14 +6,12 @@ import 'package:step_flutter/state/state_manager_nomal_demo.dart';
 import 'package:step_flutter/state/state_manager_scoped_model_demo.dart';
 
 
-/**
- * state management 
- * state 状态, 就是小部件里面的数据
- * 小部件可以自己去管理所需要的数据
- * 这些数据也可以通过小部件的构造函数从它的父辈那里 传递过来
- * 
- * scoptedModel 更有效的把数据传给小部件
- */
+/// state management 
+/// state 状态, 就是小部件里面的数据
+/// 小部件可以自己去管理所需要的数据
+/// 这些数据也可以通过小部件的构造函数从它的父辈那里 传递过来
+/// 
+/// scoptedModel 更有效的把数据传给小部件
 
 class StateManagerDemo extends StatefulWidget {
   @override

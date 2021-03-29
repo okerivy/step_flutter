@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 
-/**
- * Rx 是指 Reactive Extensions
- * 加工处理数据的方法或者工具, 是响应式编程用的东西
- * 
- * RX 的 `Observable` 其实就是基于 `Stream` 创建出来的
- * 除了Stream 原有的功能, RX给 Observable 添加了一些额外的功能
- * 
- * RX 的 `Observable` 对应的 `Subject` 可以当成 `Stream` 对应的 `StreamControll`
- */
+/// Rx 是指 Reactive Extensions
+/// 加工处理数据的方法或者工具, 是响应式编程用的东西
+/// 
+/// RX 的 `Observable` 其实就是基于 `Stream` 创建出来的
+/// 除了Stream 原有的功能, RX给 Observable 添加了一些额外的功能
+/// 
+/// RX 的 `Observable` 对应的 `Subject` 可以当成 `Stream` 对应的 `StreamControll`
 
 class RxDartDemo extends StatelessWidget {
   @override

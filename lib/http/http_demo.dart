@@ -146,23 +146,21 @@ class Post {
   );
 
  
-  /**
-   *  // Fixme: 冒号 这是什么写法?
-   * http://wiki.jikexueyuan.com/project/dart-language-tour/classes.html
-   * 初始化列表
-   * 除了调用父类构造函数，你也可以在构造函数体运行之前初始化实例变量。用逗号隔开使其分别初始化。
-   * 
-   * http://nucode.cn/article/1543745957253?p=1&m=0
-   * 注意：在实例变量中只可以用 final 而非 const。必须在构造函数体之前初始化 final 变量
-   * 
-   * http://flycode.co/archives/280160
-   * 构造函数大括号前还可用冒号指明初始化字段表，常用来设置final字段
-   *
-   * 
-   * Post是一个默认的构造函数
-   * 使用命名构造函数可以为一个类声明多个构造函数，或者说是提供额外的声明
-   * Post.fromJson 是一个 命名的构造函数
-   */
+  ///  // Fixme: 冒号 这是什么写法?
+  /// http://wiki.jikexueyuan.com/project/dart-language-tour/classes.html
+  /// 初始化列表
+  /// 除了调用父类构造函数，你也可以在构造函数体运行之前初始化实例变量。用逗号隔开使其分别初始化。
+  /// 
+  /// http://nucode.cn/article/1543745957253?p=1&m=0
+  /// 注意：在实例变量中只可以用 final 而非 const。必须在构造函数体之前初始化 final 变量
+  /// 
+  /// http://flycode.co/archives/280160
+  /// 构造函数大括号前还可用冒号指明初始化字段表，常用来设置final字段
+  ///
+  /// 
+  /// Post是一个默认的构造函数
+  /// 使用命名构造函数可以为一个类声明多个构造函数，或者说是提供额外的声明
+  /// Post.fromJson 是一个 命名的构造函数
   //? 把json 转成 Model, 准备的说应该是把map 转成model,而不是服务器返回的原始json
   Post.fromJson(Map json)
     : title = json['title'],
